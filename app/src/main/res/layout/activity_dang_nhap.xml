@@ -3,21 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context="com.example.vankien.dating.DangNhapActivity">
+    tools:context="com.example.vankien.dating.controller.DangNhapActivity">
 
     <ImageView
         android:id="@+id/imgv_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="@dimen/edt_margin_bottom"
-        android:background="@drawable/logo" />
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/edt_email"
@@ -32,7 +31,6 @@
         android:textColor="@color/black"
         android:hint="@string/hint_email"
         android:textAlignment="center"
-        android:ems="10"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -47,8 +45,7 @@
         android:textColor="@color/black"
         android:hint="@string/hint_pass"
         android:textAlignment="center"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btn_login"

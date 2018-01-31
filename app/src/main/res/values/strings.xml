@@ -7,6 +7,8 @@
     <string name="text_login_Facebook">Facebook Log-In</string>
     <string name="text_hoi_dang_ki"> Do not have an account ? </string>
     <string name="text_sign_up"><u>Sign-Up</u></string>
+    <string name="text_sign_up2">Sign Up</string>
     <string name="text_quen_mat_khau">Forgot Password? </string>
     <string name="text_recover"><u>Recover it</u></string>
+    <string name="text_cancel">Cancel</string>
 </resources>

@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "266761207560",
-    "firebase_url": "https://dating-7dbc1.firebaseio.com",
-    "project_id": "dating-7dbc1",
-    "storage_bucket": "dating-7dbc1.appspot.com"
+    "project_number": "950094440674",
+    "firebase_url": "https://dating-753c2.firebaseio.com",
+    "project_id": "dating-753c2",
+    "storage_bucket": "dating-753c2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:266761207560:android:c336a3dd23bc4232",
+        "mobilesdk_app_id": "1:950094440674:android:c336a3dd23bc4232",
         "android_client_info": {
           "package_name": "com.example.vankien.dating"
         }
       },
       "oauth_client": [
         {
-          "client_id": "266761207560-a4ckeff3l8bgvkj02582s9fo582ese17.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.vankien.dating",
-            "certificate_hash": "4620bf5abd7f7a71c352995b8119083e8aaa1d69"
-          }
-        },
-        {
-          "client_id": "266761207560-c98mcs5jm03119efn3kog6gsiedqjdao.apps.googleusercontent.com",
+          "client_id": "950094440674-mcmeeuh068o2i1kj3aroe5foevmlic28.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB1XgxkFKazJpEW8Bzi5Yp8QmhZ87XhXzs"
+          "current_key": "AIzaSyB5a-dHOT1cRkXa5sjDXvhvox1_wVi8Siw"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "266761207560-c98mcs5jm03119efn3kog6gsiedqjdao.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
