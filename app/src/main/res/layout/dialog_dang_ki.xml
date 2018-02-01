@@ -4,17 +4,18 @@
     android:layout_height="match_parent"
     android:id="@+id/dialog_dang_ki"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.vankien.dating.controller.DangNhapActivity"
+    tools:context="com.example.vankien.dating.Views.DangNhapActivity"
     android:background="@color/white"
     >
 
     <ImageView
         android:id="@+id/imgv_logo2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/logo"
+        android:layout_width="80dp"
+        android:layout_height="93dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="60dp"
+        android:background="@drawable/logo"
+        android:scaleType="fitCenter" />
 
     <EditText
         android:id="@+id/edt_email_sign_up"

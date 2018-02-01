@@ -1,4 +1,4 @@
-package com.example.vankien.dating.controller;
+package com.example.vankien.dating.Views;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.vankien.dating.MainActivity;
 import com.example.vankien.dating.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,11 +28,11 @@ public class DangNhapActivity extends AppCompatActivity {
 
         // Khoi tao
         mAuth = FirebaseAuth.getInstance();
-        anhXa();
+        addControls();
         addEvents();
     }
 
-    private void anhXa() {
+    private void addControls() {
         edtEmailLogIn = findViewById(R.id.edt_email);
         edtPassLogIn = findViewById(R.id.edt_password);
         btnAccess = findViewById(R.id.btn_login);

@@ -7,15 +7,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context="com.example.vankien.dating.controller.DangNhapActivity">
+    tools:context="com.example.vankien.dating.Views.DangNhapActivity">
 
     <ImageView
         android:id="@+id/imgv_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
         android:layout_marginBottom="@dimen/edt_margin_bottom"
+        android:layout_marginTop="60dp"
+        android:adjustViewBounds="false"
+        android:scaleType="fitCenter"
         app:srcCompat="@drawable/logo" />
 
     <EditText
