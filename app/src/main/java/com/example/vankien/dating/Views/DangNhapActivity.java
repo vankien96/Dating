@@ -2,6 +2,7 @@ package com.example.vankien.dating.Views;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,9 +19,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class DangNhapActivity extends AppCompatActivity {
 
-    EditText edtEmailLogIn, edtPassLogIn, edtEmailSignUp, edtPassSignUp;
+    EditText edtEmailLogIn, edtPassLogIn;
     Button btnAccess, btnLogInWithFB, btnSignUp, btnAccessSignUp, btnCancel, btnRecover;
     private FirebaseAuth mAuth;
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +30,10 @@ public class DangNhapActivity extends AppCompatActivity {
 
         // Khoi tao
         mAuth = FirebaseAuth.getInstance();
+        sharedPreferences = getSharedPreferences("dataLogIn",MODE_PRIVATE);
         addControls();
         addEvents();
+        getSharedPreferences();
     }
 
     private void addControls() {
@@ -62,6 +66,7 @@ public class DangNhapActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private void dialog_DangKy() {
@@ -114,12 +119,14 @@ public class DangNhapActivity extends AppCompatActivity {
                 });
     }
 
-    protected  void dangNhap(String email, String password) {
+    protected  void dangNhap(final String email, final String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
+                            saveStatusLogIn(email,password);
+                            // Chuyen Qua Man Hinh Main
                             Intent intent = new Intent(DangNhapActivity.this, MainActivity.class);
                             startActivity(intent);
                         }
@@ -130,5 +137,16 @@ public class DangNhapActivity extends AppCompatActivity {
                 });
     }
 
+    protected void saveStatusLogIn(String email, String pass) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("emailLogIn", email);
+        editor.putString("passwordLogIn",pass);
+        editor.commit();
+    }
 
+    public void getSharedPreferences() {
+        edtEmailLogIn.setText(sharedPreferences.getString("emailLogIn",""));
+        edtPassLogIn.setText(sharedPreferences.getString("passwordLogIn",""));
+
+    }
 }
