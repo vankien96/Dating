@@ -1,9 +1,14 @@
-package com.example.vankien.dating.Views;
+package com.example.vankien.dating.Views.Adapter;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.example.vankien.dating.Views.Fragment.AroundFragment;
+import com.example.vankien.dating.Views.Fragment.ChatFragment;
+import com.example.vankien.dating.Views.Fragment.MapFragment;
+import com.example.vankien.dating.Views.Fragment.ProfileFragment;
 
 /**
  * Created by vanki on 2/1/2018.

@@ -1,4 +1,4 @@
-package com.example.vankien.dating.Views;
+package com.example.vankien.dating.Views.Fragment;
 
 import android.content.Context;
 import android.net.Uri;

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context="com.example.vankien.dating.Views.DangNhapActivity">
+    tools:context="com.example.vankien.dating.Views.Activity.DangNhapActivity">
 
     <ImageView
         android:id="@+id/imgv_logo"

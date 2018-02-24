@@ -1,4 +1,4 @@
-package com.example.vankien.dating.Views;
+package com.example.vankien.dating.Views.Activity;
 
 import android.app.Dialog;
 import android.content.Intent;
