@@ -12,6 +12,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        CheckThread checkThread = new CheckThread();
+        checkThread.start();
     }
 
     public class CheckThread extends Thread{
@@ -19,10 +21,12 @@ public class SplashActivity extends AppCompatActivity {
         public void run() {
             super.run();
             try {
-                sleep(1000);
-                Intent itent = new Intent(SplashActivity.this,DangNhapActivity.class);
-                startActivity(itent);
+                sleep(2000);
 
+                //Check login or not here
+
+                Intent itent = new Intent(SplashActivity.this,MainActivity.class);
+                startActivity(itent);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
