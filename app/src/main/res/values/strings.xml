@@ -17,4 +17,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="map_api">AIzaSyAQei2BFvV_5rZd91FYUAdirO2vuxcDcd8</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="textview.text.profile_title">Your Profile</string>
+    <string name="textview.text.profile_friend">Friend</string>
+    <string name="textview.text.profile_average">AVERAGE</string>
+    <string name="button.text.profile_discovery_setting">Discovery Settings</string>
+
 </resources>

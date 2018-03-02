@@ -1,9 +1,146 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.vankien.dating.Views.Fragment.ProfileFragment">
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/textview.text.profile_title"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"
+        android:padding="@dimen/text_padding"/>
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageButton
+        android:id="@+id/imgBtnSetting"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignBottom="@+id/tvTitle"
+        android:layout_marginLeft="45dp"
+        android:layout_marginBottom="15dp"
+        android:layout_toEndOf="@+id/tvTitle"
+        android:layout_toRightOf="@+id/tvTitle"
+        android:background="@drawable/ic_setting"/>
 
-</FrameLayout>
+    <ImageButton
+        android:id="@+id/imgBtnEdit"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignBottom="@+id/tvTitle"
+        android:layout_marginLeft="85dp"
+        android:layout_marginBottom="15dp"
+        android:layout_toEndOf="@+id/tvTitle"
+        android:layout_toRightOf="@+id/tvTitle"
+        android:background="@drawable/ic_edit"/>
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="370dp"
+                android:background="@drawable/img_avatar"/>
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgAvatar"
+                android:text="LINH KA, 23"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small"
+                android:padding="@dimen/text_padding"/>
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvName"
+                android:text="Viet Nam"
+                android:textColor="@color/black"
+                android:paddingLeft="@dimen/text_padding"
+                />
+            <TextView
+                android:id="@+id/tvDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvLocation"
+                android:text="Turn that trick to make a litle leeway beat that nic but not the way that we play Dog"
+                android:textColor="@color/black"
+                android:paddingLeft="@dimen/text_padding"
+                />
+            <LinearLayout
+                android:id="@+id/llFriend"
+                android:layout_below="@+id/tvDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/text_padding"
+                android:weightSum="5">
+                <TextView
+                    android:id="@+id/tvFriendLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview.text.profile_friend"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:id="@+id/tvFriendValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="47"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/text_padding"
+                    android:layout_weight="4"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llAverage"
+                android:layout_below="@+id/llFriend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/text_padding"
+                android:weightSum="5">
+                <TextView
+                    android:id="@+id/tvAverageLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview.text.profile_average"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:id="@+id/tvAverageValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="6.9"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/text_padding"
+                    android:layout_weight="4"
+                    />
+            </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_button"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:layout_below="@id/llAverage"
+                android:background="@drawable/shape_button_login"
+                android:text="@string/button.text.profile_discovery_setting"/>
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>
