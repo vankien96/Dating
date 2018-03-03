@@ -17,7 +17,9 @@ android {
         }
     }
 }
-
+repositories {
+    mavenCentral()
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -30,6 +32,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:design:27.0.2'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

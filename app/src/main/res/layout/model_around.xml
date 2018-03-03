@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whitedark">
+
+    <ImageView
+        android:id="@+id/imgAround"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:padding="@dimen/text_padding"
+       />
+    <Button
+        android:id="@+id/btnDel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgAround"
+        android:layout_marginLeft="80dp"
+        android:text="X"
+        android:textColor="@color/red"
+        android:textSize="40sp"
+        android:background="@drawable/shape_button_delete"
+        android:layout_marginTop="@dimen/edt_margin_top"
+
+        />
+    <Button
+        android:id="@+id/btnSee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/btnDel"
+        android:layout_below="@id/imgAround"
+        android:textSize="40sp"
+        android:text="✔"
+        android:textColor="@color/white"
+        android:layout_marginLeft="@dimen/edt_margin_left"
+        android:background="@drawable/shape_button_accept"
+        android:layout_marginTop="@dimen/edt_margin_top"
+        />
+
+</RelativeLayout>

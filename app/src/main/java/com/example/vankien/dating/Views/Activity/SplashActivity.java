@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 //Check login or not here
 
-                Intent itent = new Intent(SplashActivity.this,MainActivity.class);
+                Intent itent = new Intent(SplashActivity.this,DangNhapActivity.class);
                 startActivity(itent);
             } catch (InterruptedException e) {
                 e.printStackTrace();
