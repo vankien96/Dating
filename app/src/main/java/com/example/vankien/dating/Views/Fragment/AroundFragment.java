@@ -1,7 +1,5 @@
 package com.example.vankien.dating.Views.Fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,9 +9,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.vankien.dating.R;
-import com.example.vankien.dating.Views.Activity.MainActivity;
 import com.example.vankien.dating.Views.Adapter.AroundAdapter;
-import com.example.vankien.dating.model.AroundModel;
+import com.example.vankien.dating.Models.AroundModel;
 
 import java.util.ArrayList;
 
