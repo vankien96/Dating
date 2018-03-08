@@ -41,6 +41,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Views.Adapter.ChatActivity"></activity>
+        <activity android:name=".Views.Activity.EditProfileActivity"></activity>
     </application>
 
 </manifest>
