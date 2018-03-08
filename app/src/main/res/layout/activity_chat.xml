@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.vankien.dating.Views.Adapter.ChatActivity">
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Trương Văn Kiên"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="normal"
+        android:gravity="center"/>
+    <ListView
+        android:id="@+id/lvChat"
+        android:layout_below="@id/txtName"
+        android:layout_above="@id/viewChatTextField"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+    <RelativeLayout
+        android:id="@+id/viewChatTextField"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true">
+        <EditText
+            android:layout_marginRight="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Write your message"
+            />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_send_message"
+            android:background="@color/white"/>
+    </RelativeLayout>
+</RelativeLayout>
