@@ -24,4 +24,13 @@
     <string name="textview.text.profile_average">AVERAGE</string>
     <string name="button.text.profile_discovery_setting">Discovery Settings</string>
 
+    <!-- Edit Profile -->
+    <string name="textview.text.edit_profile_title">Edit Profile</string>
+    <string name="textview.text.edit_profile_name">NAME*</string>
+    <string name="textview.text.edit_profile_age">AGE*</string>
+    <string name="textview.text.edit_profile_sex">SEX*</string>
+    <string name="textview.text.edit_profile_about">ABOUT</string>
+    <string name="textview.text.edit_profile_photo">PHOTO</string>
+
+
 </resources>
