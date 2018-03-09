@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.vankien.dating.Views.Adapter.ChatActivity">
+    tools:context="com.example.vankien.dating.Views.Activity.ChatActivity">
     <TextView
         android:id="@+id/txtName"
         android:layout_width="match_parent"
@@ -16,6 +16,9 @@
         android:gravity="center"/>
     <ListView
         android:id="@+id/lvChat"
+        android:divider="@null"
+        android:dividerHeight="4dp"
+        android:stackFromBottom="true"
         android:layout_below="@id/txtName"
         android:layout_above="@id/viewChatTextField"
         android:layout_width="match_parent"
@@ -24,16 +27,18 @@
     <RelativeLayout
         android:id="@+id/viewChatTextField"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
         <EditText
+            android:id="@+id/txtMessage"
             android:layout_marginRight="60dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Write your message"
             />
 
         <ImageButton
+            android:id="@+id/btnSend"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"

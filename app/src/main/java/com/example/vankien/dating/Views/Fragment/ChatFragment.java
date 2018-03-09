@@ -1,23 +1,18 @@
 package com.example.vankien.dating.Views.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.vankien.dating.Controllers.FriendChatController;
 import com.example.vankien.dating.Models.FriendChatModel;
 import com.example.vankien.dating.R;
-import com.example.vankien.dating.Views.Activity.MainActivity;
-import com.example.vankien.dating.Views.Adapter.ChatActivity;
+import com.example.vankien.dating.Views.Activity.ChatActivity;
 import com.example.vankien.dating.Views.Adapter.FriendChatAdapter;
 
 import java.util.ArrayList;
@@ -42,9 +37,9 @@ public class ChatFragment extends Fragment {
         this.lvChat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 intent.putExtra("Name",mFriendChat.get(i).getName());
+                lvChat.setAdapter(adapter);
                 startActivity(intent);
             }
         });
