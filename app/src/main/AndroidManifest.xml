@@ -21,14 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Views.Activity.DangNhapActivity" />
-<<<<<<< HEAD
-        <activity android:name=".Views.Activity.SplashActivity" />
+        <activity android:name=".Views.Activity.DetailActivity" />
         <activity android:name=".Views.Activity.MainActivity"></activity>
-=======
-        <activity android:name=".Views.Activity.MainActivity" />
         <activity android:name=".Views.Activity.EditProfileActivity"/>
-
->>>>>>> 1e3210705d9a28affc561b0c2bc201698f6323ba
+        <activity android:name=".Views.Activity.ProfileActivity"/>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -39,7 +35,7 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".Views.Activity.DetailActivity">
+        <activity android:name=".Views.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
