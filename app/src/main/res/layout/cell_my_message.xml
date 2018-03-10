@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="208dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginRight="8dp">
+    android:id="@+id/viewContain"
+    android:gravity="end"
+    android:layout_gravity="end"
+    android:paddingLeft="100dp">
 
-    <TextView
-        android:id="@+id/txtMessage"
-        android:layout_width="160dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/imgAvatar"
-        android:layout_toStartOf="@+id/imgAvatar"
-        android:text="Chat message here"
-        android:gravity="end" />
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="8dp"
-        android:src="@drawable/thuhinh"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/imgAvatar" />
+        android:orientation="horizontal"
+        android:gravity="end|center_vertical"
+        android:padding="8dp"
+        android:background="@drawable/bg_cell_my_message">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/txtMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chat message here"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

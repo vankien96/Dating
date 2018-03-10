@@ -26,6 +26,8 @@ public class MessageController {
         arrayList.add(new MessageModel(false,"Tôi không biết"));
         arrayList.add(new MessageModel(false,"Anh đi ra đi"));
         arrayList.add(new MessageModel(true,"Đm em"));
+        arrayList.add(new MessageModel(false,"Khi mùa thu theo ta về trước cổng Có phải đã đến lúc ta chọn cho mình con đường để dệt ước mộng"));
+        arrayList.add(new MessageModel(true,"Khi mùa thu theo ta về trước cổng Có phải đã đến lúc ta chọn cho mình con đường để dệt ước mộng"));
         return arrayList;
     }
 }

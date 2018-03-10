@@ -40,22 +40,24 @@ public class MessageAdapter extends ArrayAdapter {
             viewHolder = new MessageHolder();
             if(messageModel.getMe()){
                 convertView = LayoutInflater.from(context).inflate(R.layout.cell_my_message,null);
+                viewHolder.txtMessage = convertView.findViewById(R.id.txtMessage);
             }else{
                 convertView = LayoutInflater.from(context).inflate(R.layout.cell_receive_message,null);
+                viewHolder.imgAvatar = convertView.findViewById(R.id.imgAvatar);
+                viewHolder.txtMessage = convertView.findViewById(R.id.txtMessage);
             }
-            viewHolder.imgAvatar = convertView.findViewById(R.id.imgAvatar);
-            viewHolder.txtMessage = convertView.findViewById(R.id.txtMessage);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (MessageHolder) convertView.getTag();
         }
-
-        if(position+1 < arrMessage.size()){
-            MessageModel nextMessage = arrMessage.get(position+1);
-            if (nextMessage.getMe() == messageModel.getMe()){
-                viewHolder.imgAvatar.setVisibility(View.INVISIBLE);
-            }else{
-                viewHolder.imgAvatar.setVisibility(View.VISIBLE);
+        if(!messageModel.getMe()){
+            if(position+1 < arrMessage.size()){
+                MessageModel nextMessage = arrMessage.get(position+1);
+                if (nextMessage.getMe() == messageModel.getMe()){
+                    viewHolder.imgAvatar.setVisibility(View.INVISIBLE);
+                }else{
+                    viewHolder.imgAvatar.setVisibility(View.VISIBLE);
+                }
             }
         }
         viewHolder.txtMessage.setText(messageModel.getMessage());

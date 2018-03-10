@@ -1,7 +1,7 @@
 package com.example.vankien.dating.Controllers;
 
 import com.example.vankien.dating.R;
-import com.example.vankien.dating.model.AroundModel;
+import com.example.vankien.dating.Models.AroundModel;
 
 import java.util.ArrayList;
 
