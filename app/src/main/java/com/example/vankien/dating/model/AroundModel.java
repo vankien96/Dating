@@ -7,38 +7,38 @@ import android.widget.Button;
  */
 
 public class AroundModel {
-    private Button btnDel;
-    private Button btnAccept;
-    private int Image;
+    private int imgYes;
+    private int imgNo;
+    private int imagePeople;
 
-
-    public AroundModel(Button btnDel, Button btnAccept, int image) {
-        this.btnDel = btnDel;
-        this.btnAccept = btnAccept;
-        Image = image;
+    public AroundModel(int imgYes, int imgNo, int imagePeople) {
+        this.imgYes = imgYes;
+        this.imgNo = imgNo;
+        this.imagePeople = imagePeople;
     }
 
-    public Button getBtnDel() {
-        return btnDel;
+    public int getImgYes() {
+        return imgYes;
     }
 
-    public void setBtnDel(Button btnDel) {
-        this.btnDel = btnDel;
+    public void setImgYes(int imgYes) {
+        this.imgYes = imgYes;
     }
 
-    public Button getBtnAccept() {
-        return btnAccept;
+    public int getImgNo() {
+        return imgNo;
     }
 
-    public void setBtnAccept(Button btnAccept) {
-        this.btnAccept = btnAccept;
+    public void setImgNo(int imgNo) {
+        this.imgNo = imgNo;
     }
 
-    public int getImage() {
-        return Image;
+    public int getImagePeople() {
+        return imagePeople;
     }
 
-    public void setImage(int image) {
-        Image = image;
+    public void setImagePeople(int imagePeople) {
+        this.imagePeople = imagePeople;
     }
 }
+

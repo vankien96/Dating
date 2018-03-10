@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.vankien.dating.R;
@@ -47,7 +48,7 @@ public class AroundAdapter extends BaseAdapter {
 
     public class ViewHolder {
         ImageView imgHinh;
-        Button btnDel, btnAccept;
+       ImageButton imgYes, imgNo;
     }
 
     @Override
@@ -59,15 +60,17 @@ public class AroundAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(layout,null);
 
             viewHolder.imgHinh = convertView.findViewById(R.id.imgAround);
-            viewHolder.btnAccept = convertView.findViewById(R.id.btnSee);
-            viewHolder.btnDel = convertView.findViewById(R.id.btnDel);
+            viewHolder.imgYes = convertView.findViewById(R.id.btnYes);
+            viewHolder.imgNo = convertView.findViewById(R.id.btnNo);
             convertView.setTag(viewHolder);
         }
         else  {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         AroundModel mAroundModel = aroundModelList.get(position);
-        viewHolder.imgHinh.setImageResource(mAroundModel.getImage());
+        viewHolder.imgHinh.setImageResource(mAroundModel.getImagePeople());
+        viewHolder.imgYes.setImageResource(mAroundModel.getImgYes());
+
         return convertView;
     }
 

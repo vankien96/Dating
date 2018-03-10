@@ -12,6 +12,8 @@
     <string name="text_quen_mat_khau">Forgot Password? </string>
     <string name="text_recover"><u>Recover it</u></string>
     <string name="text_cancel">Cancel</string>
+    <string name="text_friend">Friend</string>
+    <string name="text_average">Average</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
