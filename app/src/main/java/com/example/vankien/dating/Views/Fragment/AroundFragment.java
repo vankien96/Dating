@@ -1,8 +1,11 @@
 package com.example.vankien.dating.Views.Fragment;
 
+<<<<<<< HEAD
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+=======
+>>>>>>> 1e3210705d9a28affc561b0c2bc201698f6323ba
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,10 +20,13 @@ import android.widget.Toast;
 import com.example.vankien.dating.Controllers.AroundController;
 import com.example.vankien.dating.Controllers.PeopleAroundController;
 import com.example.vankien.dating.R;
+<<<<<<< HEAD
 import com.example.vankien.dating.Views.Activity.DetailActivity;
 import com.example.vankien.dating.Views.Activity.MainActivity;
+=======
+>>>>>>> 1e3210705d9a28affc561b0c2bc201698f6323ba
 import com.example.vankien.dating.Views.Adapter.AroundAdapter;
-import com.example.vankien.dating.model.AroundModel;
+import com.example.vankien.dating.Models.AroundModel;
 
 import java.util.ArrayList;
 

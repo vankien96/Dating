@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
+    buildToolsVersion "26.0.3"
     defaultConfig {
         applicationId "com.example.vankien.dating"
         minSdkVersion 15
@@ -31,8 +32,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+<<<<<<< HEAD
     implementation 'com.android.support:design:27.0.2'
 //    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
+=======
+    implementation 'com.android.support:design:26.1.0'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
+
+>>>>>>> 1e3210705d9a28affc561b0c2bc201698f6323ba
 }
 apply plugin: 'com.google.gms.google-services'

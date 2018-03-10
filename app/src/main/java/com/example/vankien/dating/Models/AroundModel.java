@@ -1,4 +1,4 @@
-package com.example.vankien.dating.model;
+package com.example.vankien.dating.Models;
 
 import android.widget.Button;
 

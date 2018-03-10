@@ -10,10 +10,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.vankien.dating.R;
-import com.example.vankien.dating.Views.Fragment.AroundFragment;
-import com.example.vankien.dating.model.AroundModel;
+import com.example.vankien.dating.Models.AroundModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
