@@ -6,21 +6,45 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.vankien.dating.Views.Activity.ChatActivity">
-    <LinearLayout
+
+    <RelativeLayout
         android:id="@+id/viewTop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="60dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:adjustViewBounds="true"
+            android:background="@color/white"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back" />
         <TextView
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_toRightOf="@+id/btnBack"
+            android:layout_toLeftOf="@+id/btnMenu"
             android:text="Trương Văn Kiên"
             android:textSize="@dimen/text_size_large"
             android:textStyle="normal"
             android:gravity="center"/>
-
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/btnMenu"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:adjustViewBounds="true"
+            android:background="@color/white"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_menu" />
+    </RelativeLayout>
     <ListView
         android:id="@+id/lvChat"
         android:divider="@null"
