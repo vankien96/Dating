@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +28,7 @@ public class ChatActivity extends AppCompatActivity {
     String name;
     ListView lvChat;
     EditText txtMessage;
-    ImageButton btnSend;
+    ImageButton btnSend,btnBack,btnMenu;
 
     ArrayList<MessageModel> arrMessage;
     MessageAdapter adapter;
@@ -55,6 +58,51 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopup(view);
+            }
+        });
+    }
+    public void showPopup(View v) {
+        PopupMenu popup = new PopupMenu(this,v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_chat_screen, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menuProfile:{
+                        showProfile();
+                        return true;
+                    }
+                    case R.id.menuBlock:{
+                        blcokUser();
+                        return true;
+                    }
+                    default:{
+                        return false;
+                    }
+                }
+            }
+        });
+        popup.show();
+    }
+
+    private void blcokUser() {
+
+    }
+
+    private void showProfile() {
+        Intent intent = new Intent(ChatActivity.this,DetailActivity.class);
+        startActivity(intent);
     }
 
     private void addControls() {
@@ -63,6 +111,8 @@ public class ChatActivity extends AppCompatActivity {
         lvChat = findViewById(R.id.lvChat);
         txtMessage = findViewById(R.id.txtMessage);
         btnSend = findViewById(R.id.btnSend);
+        btnBack = findViewById(R.id.btnBack);
+        btnMenu = findViewById(R.id.btnMenu);
 
         arrMessage = MessageController.getInstance().getExampleData();
         adapter = new MessageAdapter(this,R.layout.cell_my_message,arrMessage);
