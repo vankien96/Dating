@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.example.vankien.dating.Views.Fragment.ProfileFragment">
     <TextView
         android:id="@+id/tvTitle"
@@ -15,8 +16,8 @@
 
     <ImageButton
         android:id="@+id/imgBtnSetting"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignBottom="@+id/tvTitle"
         android:layout_marginLeft="45dp"
         android:layout_marginBottom="15dp"
@@ -26,10 +27,10 @@
 
     <ImageButton
         android:id="@+id/imgBtnEdit"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignBottom="@+id/tvTitle"
-        android:layout_marginLeft="85dp"
+        android:layout_marginLeft="80dp"
         android:layout_marginBottom="15dp"
         android:layout_toEndOf="@+id/tvTitle"
         android:layout_toRightOf="@+id/tvTitle"
@@ -50,10 +51,20 @@
                 android:background="@drawable/img_avatar"/>
             <TextView
                 android:id="@+id/tvName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imgAvatar"
-                android:text="LINH KA, 23"
+                android:text="LINH KA"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small"
+                android:padding="@dimen/text_padding"/>
+            <TextView
+                android:id="@+id/tvAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvName"
+                android:layout_alignBottom="@+id/tvName"
+                android:text="23"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_small"
                 android:padding="@dimen/text_padding"/>
@@ -67,7 +78,7 @@
                 android:paddingLeft="@dimen/text_padding"
                 />
             <TextView
-                android:id="@+id/tvDetail"
+                android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvLocation"
@@ -77,7 +88,7 @@
                 />
             <LinearLayout
                 android:id="@+id/llFriend"
-                android:layout_below="@+id/tvDetail"
+                android:layout_below="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
