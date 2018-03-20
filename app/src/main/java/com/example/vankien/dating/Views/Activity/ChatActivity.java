@@ -1,7 +1,6 @@
 package com.example.vankien.dating.Views.Activity;
 
 import android.content.Intent;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -9,23 +8,29 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.vankien.dating.Controllers.MessageController;
+import com.example.vankien.dating.Controllers.MessageControllerCallback;
+import com.example.vankien.dating.Models.FriendChatModel;
 import com.example.vankien.dating.Models.MessageModel;
 import com.example.vankien.dating.R;
-import com.example.vankien.dating.Utils.KeyboardUtils;
 import com.example.vankien.dating.Views.Adapter.MessageAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity implements MessageControllerCallback {
     TextView txtName;
     String name;
+    String idFriend;
+    String idUser;
+    String avatar;
+    MessageController controller;
+
     ListView lvChat;
     EditText txtMessage;
     ImageButton btnSend,btnBack,btnMenu;
@@ -37,10 +42,22 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         Intent intent = getIntent();
-        name = intent.getStringExtra("Name");
+        Bundle b = intent.getExtras();
+        FriendChatModel model = (FriendChatModel) b.getSerializable("FriendData");
+        name = model.getName();
+        idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        idFriend = model.getId();
+        avatar = model.getUrlAvatar();
+        controller = MessageController.getInstance();
+        controller.callback = this;
 
         addControls();
         addEvents();
+        requestData();
+    }
+
+    private void requestData() {
+        MessageController.getInstance().requestMessage(ChatActivity.this, idFriend,idUser);
     }
 
     private void addEvents() {
@@ -55,6 +72,7 @@ public class ChatActivity extends AppCompatActivity {
                     txtMessage.setText("");
                     Log.e("Error message",model.getMessage());
                     lvChat.setAdapter(adapter);
+                    MessageController.getInstance().sendMessage(idUser,idFriend,message);
                 }
             }
         });
@@ -84,7 +102,7 @@ public class ChatActivity extends AppCompatActivity {
                         return true;
                     }
                     case R.id.menuBlock:{
-                        blcokUser();
+                        blockUser();
                         return true;
                     }
                     default:{
@@ -96,7 +114,7 @@ public class ChatActivity extends AppCompatActivity {
         popup.show();
     }
 
-    private void blcokUser() {
+    private void blockUser() {
 
     }
 
@@ -114,10 +132,31 @@ public class ChatActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         btnMenu = findViewById(R.id.btnMenu);
 
-        arrMessage = MessageController.getInstance().getExampleData();
-        adapter = new MessageAdapter(this,R.layout.cell_my_message,arrMessage);
+        arrMessage = new ArrayList<>();
+        adapter = new MessageAdapter(ChatActivity.this,R.layout.cell_my_message,arrMessage,avatar);
         lvChat.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+    }
 
+    @Override
+    public void getAllMessageSuccess(ArrayList<MessageModel> messageDatas) {
+        Log.e("Message screen","callback");
+        this.arrMessage.clear();
+        this.arrMessage.addAll(messageDatas);
+        if (adapter != null){
+            adapter.notifyDataSetChanged();
+        }else{
+            adapter = new MessageAdapter(this,R.layout.cell_my_message,arrMessage,avatar);
+            lvChat.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void newMessageAdded(MessageModel message) {
+        Log.e("MessageScreen","new message come");
+        Log.e("MessageScreen",message.getMessage());
+        arrMessage.add(message);
+        adapter.notifyDataSetChanged();
     }
 }

@@ -12,6 +12,7 @@ public class MessageModel {
         this.isMe = isMe;
         this.message = message;
     }
+    public MessageModel() {}
 
     public Boolean getMe() {
         return isMe;
@@ -28,4 +29,5 @@ public class MessageModel {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

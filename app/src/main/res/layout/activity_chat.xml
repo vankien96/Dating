@@ -20,7 +20,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:adjustViewBounds="true"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:scaleType="centerInside"
             android:src="@drawable/ic_back" />
         <TextView
@@ -41,7 +41,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:adjustViewBounds="true"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:scaleType="centerInside"
             android:src="@drawable/ic_menu" />
     </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.vankien.dating.Views.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.vankien.dating.Models.MessageModel;
 import com.example.vankien.dating.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -23,11 +25,13 @@ public class MessageAdapter extends ArrayAdapter {
     private Context context;
     private int resource;
     private ArrayList<MessageModel> arrMessage;
-    public MessageAdapter(@NonNull Context context, int resource, @NonNull ArrayList<MessageModel> objects) {
+    private String avatar;
+    public MessageAdapter(@NonNull Context context, int resource, @NonNull ArrayList<MessageModel> objects,String avatar) {
         super(context, resource, objects);
         this.context = context;
         this.arrMessage = objects;
         this.resource = resource;
+        this.avatar = avatar;
     }
 
     @NonNull
@@ -59,6 +63,8 @@ public class MessageAdapter extends ArrayAdapter {
                     viewHolder.imgAvatar.setVisibility(View.VISIBLE);
                 }
             }
+            Uri uriAvatar = Uri.parse(avatar);
+            Picasso.with(context).load(uriAvatar).into(viewHolder.imgAvatar);
         }
         viewHolder.txtMessage.setText(messageModel.getMessage());
         return convertView;

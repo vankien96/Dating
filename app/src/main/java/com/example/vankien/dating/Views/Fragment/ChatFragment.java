@@ -3,6 +3,7 @@ package com.example.vankien.dating.Views.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,27 +11,39 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.vankien.dating.Controllers.FriendChatController;
+import com.example.vankien.dating.Controllers.FriendChatControllerCallback;
+import com.example.vankien.dating.Controllers.MessageController;
 import com.example.vankien.dating.Models.FriendChatModel;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Views.Activity.ChatActivity;
 import com.example.vankien.dating.Views.Adapter.FriendChatAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment implements FriendChatControllerCallback {
     ListView lvChat;
     FriendChatAdapter adapter;
     ArrayList<FriendChatModel> mFriendChat;
     View rootView;
+    String id;
+    FriendChatController controller;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView =  inflater.inflate(R.layout.fragment_chat, container, false);
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        controller = FriendChatController.getInstance();
+        controller.callback = this;
         this.addControls();
         addEvents();
-
+        requestData();
         return rootView;
+    }
+
+    private void requestData() {
+        controller.getAllFriend(id);
     }
 
     private void addEvents() {
@@ -38,7 +51,9 @@ public class ChatFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
-                intent.putExtra("Name",mFriendChat.get(i).getName());
+                Bundle b = new Bundle();
+                b.putSerializable("FriendData",mFriendChat.get(i));
+                intent.putExtras(b);
                 lvChat.setAdapter(adapter);
                 startActivity(intent);
             }
@@ -48,9 +63,30 @@ public class ChatFragment extends Fragment {
     private void addControls() {
         lvChat = rootView.findViewById(R.id.lvChat);
 
-        mFriendChat = FriendChatController.getInstance().getExampleData();
+        mFriendChat = new ArrayList<>();
         adapter = new FriendChatAdapter(getActivity(),R.layout.cell_friend_chat,mFriendChat);
         lvChat.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getAllFriendSuccess(ArrayList<FriendChatModel> dataFriends) {
+        this.mFriendChat.clear();
+        this.mFriendChat.addAll(dataFriends);
+        Log.e("FriendChat Screen",""+mFriendChat.size());
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getFullInformationSuccess(FriendChatModel friendChatModel) {
+        for (FriendChatModel model: mFriendChat){
+            if (model.getId().equals(friendChatModel.getId())){
+                model.setName(friendChatModel.getName());
+                model.setUrlAvatar(friendChatModel.getUrlAvatar());
+                break;
+            }
+        }
+        Log.e("FriendChat Screen",""+mFriendChat.size());
         adapter.notifyDataSetChanged();
     }
 }
