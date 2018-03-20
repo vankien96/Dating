@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,12 +16,15 @@ import android.widget.TextView;
 import com.example.vankien.dating.Controllers.ProfileController;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
+import com.example.vankien.dating.Views.Activity.DangNhapActivity;
 import com.example.vankien.dating.Views.Activity.EditProfileActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     private TextView tvName,tvAge,tvDescription;
-    private ImageButton imgBtnEdit,imgBtnSetting;
+    private ImageButton imgBtnEdit,imgBtnLogout;
     private ImageView imgAvatar;
+    private Button btnDiscoverySetting;
     Profile profile;
     @Nullable
     @Override
@@ -40,17 +44,20 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
     public void initControls(View view){
         imgBtnEdit = (ImageButton) view.findViewById(R.id.imgBtnEdit);
-        imgBtnSetting = (ImageButton) view.findViewById(R.id.imgBtnSetting);
+        imgBtnLogout = (ImageButton) view.findViewById(R.id.imgBtnLogout);
         imgAvatar = (ImageView) view.findViewById(R.id.imgAvatar);
         tvName = (TextView) view.findViewById(R.id.tvName);
         tvAge = (TextView) view.findViewById(R.id.tvAge);
         tvDescription = (TextView) view.findViewById(R.id.tvDescription);
+        btnDiscoverySetting = (Button) view.findViewById(R.id.btnDiscoverySetting);
         profile = ProfileController.getsInstance().getProfile();
+
     }
 
     public void addEvents(){
         imgBtnEdit.setOnClickListener(this);
-        imgBtnSetting.setOnClickListener(this);
+        imgBtnLogout.setOnClickListener(this);
+        btnDiscoverySetting.setOnClickListener(this);
     }
     @Override
     public void onClick(View view) {
@@ -59,7 +66,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 Intent intentToEdit = new Intent(getActivity(),EditProfileActivity.class);
                 startActivity(intentToEdit);
                 break;
-            case R.id.imgBtnSetting:
+            case R.id.imgBtnLogout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getActivity(), DangNhapActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+                break;
+            case R.id.btnDiscoverySetting:
                 Intent intentToSetting = new Intent(getActivity(),EditProfileActivity.class);
                 startActivity(intentToSetting);
                 break;
