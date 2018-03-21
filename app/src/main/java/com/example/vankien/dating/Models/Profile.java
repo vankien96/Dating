@@ -11,13 +11,34 @@ public class Profile {
     private int mSex;
     private String mDescription;
     private String mImage;
+    private String mLatitude;
+    private String mLongitude;
+    private int mNumOfFriends;
+    private String mRegion;
+    private String mAddress;
 
-    public Profile(String mName, int mAge, int mSex, String mDescription, String mImage) {
+    public Profile() {
+    }
+
+    public Profile(String mName, int mAge, int mSex, String mDescription, String mImage, String mLatitude, String mLongitude, int mNumOfFriends, String mRegion, String mAddress) {
         this.mName = mName;
         this.mAge = mAge;
         this.mSex = mSex;
         this.mDescription = mDescription;
         this.mImage = mImage;
+        this.mLatitude = mLatitude;
+        this.mLongitude = mLongitude;
+        this.mNumOfFriends = mNumOfFriends;
+        this.mRegion = mRegion;
+        this.mAddress = mAddress;
+    }
+
+    public String getmAddress() {
+        return mAddress;
+    }
+
+    public void setmAddress(String mAddress) {
+        this.mAddress = mAddress;
     }
 
     public String getmName() {
@@ -60,8 +81,35 @@ public class Profile {
         this.mImage = mImage;
     }
 
-    @Override
-    public String toString() {
-        return "Profile{" + "mName='" + mName + '\'' + ", mAge=" + mAge + ", mSex=" + mSex + ", mDescription='" + mDescription + '\'' + ", mImage='" + mImage + '\'' + '}';
+    public String getmLatitude() {
+        return mLatitude;
+    }
+
+    public void setmLatitude(String mLatitude) {
+        this.mLatitude = mLatitude;
+    }
+
+    public String getmLongitude() {
+        return mLongitude;
+    }
+
+    public void setmLongitude(String mLongitude) {
+        this.mLongitude = mLongitude;
+    }
+
+    public int getmNumOfFriends() {
+        return mNumOfFriends;
+    }
+
+    public void setmNumOfFriends(int mNumOfFriends) {
+        this.mNumOfFriends = mNumOfFriends;
+    }
+
+    public String getmRegion() {
+        return mRegion;
+    }
+
+    public void setmRegion(String mRegion) {
+        this.mRegion = mRegion;
     }
 }

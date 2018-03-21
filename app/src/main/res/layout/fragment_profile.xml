@@ -32,7 +32,7 @@
         <ImageButton
             android:id="@+id/imgBtnLogout"
             android:layout_width="30dp"
-            android:layout_height="48dp"
+            android:layout_height="35dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
@@ -53,13 +53,15 @@
                 android:id="@+id/imgAvatar"
                 android:layout_width="match_parent"
                 android:layout_height="370dp"
-                android:background="@drawable/img_avatar"/>
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/img_avatar"
+                android:scaleType="fitXY"/>
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imgAvatar"
-                android:text="LINH KA"
+                android:hint="Your name"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_small"
                 android:padding="@dimen/text_padding"/>
@@ -69,31 +71,42 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tvName"
                 android:layout_alignBottom="@+id/tvName"
-                android:text="23"
+                android:hint="Age"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_small"
                 android:padding="@dimen/text_padding"/>
             <TextView
-                android:id="@+id/tvLocation"
-                android:layout_width="match_parent"
+                android:id="@+id/tvAddress"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvName"
-                android:text="Viet Nam"
+                android:hint="Da Nang"
                 android:textColor="@color/black"
                 android:paddingLeft="@dimen/text_padding"
                 />
             <TextView
-                android:id="@+id/tvDescription"
+                android:id="@+id/tvRegion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvAddress"
+                android:layout_alignBottom="@+id/tvAddress"
+                android:hint="Viet Nam"
+                android:textColor="@color/black"
+                android:paddingLeft="@dimen/text_padding"
+                />
+            <TextView
+                android:id="@+id/tvAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvLocation"
-                android:text="Turn that trick to make a litle leeway beat that nic but not the way that we play Dog"
+                android:layout_below="@id/tvAddress"
+                android:layout_marginTop="10dp"
+                android:hint="This is describle of you!!!"
                 android:textColor="@color/black"
                 android:paddingLeft="@dimen/text_padding"
                 />
             <LinearLayout
                 android:id="@+id/llFriend"
-                android:layout_below="@+id/tvDescription"
+                android:layout_below="@+id/tvAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -108,11 +121,11 @@
                     android:layout_weight="1"
                     />
                 <TextView
-                    android:id="@+id/tvFriendValue"
+                    android:id="@+id/tvNumOfFriend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:text="47"
+                    android:hint="0"
                     android:textColor="@color/black"
                     android:padding="@dimen/text_padding"
                     android:layout_weight="4"
@@ -139,7 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:text="6.9"
+                    android:hint="6.9"
                     android:textColor="@color/black"
                     android:padding="@dimen/text_padding"
                     android:layout_weight="4"
