@@ -66,11 +66,8 @@ public class ChatActivity extends AppCompatActivity implements MessageController
             public void onClick(View view) {
                 String message = txtMessage.getText().toString().trim();
                 if (!message.equals("")){
-                    MessageModel model = new MessageModel(true,message);
-                    arrMessage.add(model);
                     adapter.notifyDataSetChanged();
                     txtMessage.setText("");
-                    Log.e("Error message",model.getMessage());
                     lvChat.setAdapter(adapter);
                     MessageController.getInstance().sendMessage(idUser,idFriend,message);
                 }
@@ -144,6 +141,7 @@ public class ChatActivity extends AppCompatActivity implements MessageController
         this.arrMessage.clear();
         this.arrMessage.addAll(messageDatas);
         if (adapter != null){
+            lvChat.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }else{
             adapter = new MessageAdapter(this,R.layout.cell_my_message,arrMessage,avatar);
@@ -154,9 +152,11 @@ public class ChatActivity extends AppCompatActivity implements MessageController
 
     @Override
     public void newMessageAdded(MessageModel message) {
-        Log.e("MessageScreen","new message come");
-        Log.e("MessageScreen",message.getMessage());
-        arrMessage.add(message);
-        adapter.notifyDataSetChanged();
+        if (message.getMessage() != null){
+            Log.e("MessageScreen","new message come");
+            arrMessage.add(message);
+            lvChat.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

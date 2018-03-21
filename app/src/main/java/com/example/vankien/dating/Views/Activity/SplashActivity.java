@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.vankien.dating.Controllers.LoginController;
 import com.example.vankien.dating.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -22,11 +23,13 @@ public class SplashActivity extends AppCompatActivity {
             super.run();
             try {
                 sleep(2000);
-
-                //Check login or not here
-
-                Intent itent = new Intent(SplashActivity.this,DangNhapActivity.class);
-                startActivity(itent);
+                if (LoginController.getShareInstance().checkLogin()){
+                    Intent itent = new Intent(SplashActivity.this,MainActivity.class);
+                    startActivity(itent);
+                }else{
+                    Intent itent = new Intent(SplashActivity.this,DangNhapActivity.class);
+                    startActivity(itent);
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

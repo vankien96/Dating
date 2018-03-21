@@ -79,6 +79,6 @@
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_send_message"
-            android:background="@color/white"/>
+            android:background="@android:color/transparent"/>
     </RelativeLayout>
 </RelativeLayout>
