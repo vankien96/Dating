@@ -21,7 +21,7 @@ import com.example.vankien.dating.Controllers.ProfileController;
 import com.example.vankien.dating.Controllers.ProfileControllerCallback;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
-import com.example.vankien.dating.Views.Activity.DangNhapActivity;
+import com.example.vankien.dating.Views.Activity.LogInActivity;
 import com.example.vankien.dating.Views.Activity.EditProfileActivity;
 import com.example.vankien.dating.Views.Setting.SettingsActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -87,7 +87,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FirebaseAuth.getInstance().signOut();
-                        Intent intent = new Intent(getActivity(), DangNhapActivity.class);
+                        Intent intent = new Intent(getActivity(), LogInActivity.class);
                         startActivity(intent);
                         getActivity().finish();
                     }
