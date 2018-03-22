@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Views.Activity.DangNhapActivity" />
+        <activity android:name=".Views.Activity.LogInActivity" />
         <activity android:name=".Views.Activity.DetailActivity" />
         <activity android:name=".Views.Activity.MainActivity" />
         <activity android:name=".Views.Activity.EditProfileActivity" />
@@ -42,7 +42,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.Activity.ChatActivity" />
+        <activity android:name=".Views.Activity.ChatActivity"/>
+        <activity
+            android:name=".Views.Setting.SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".Views.Activity.SignUpActivity"
+            android:label="@string/title_activity_sign_up"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

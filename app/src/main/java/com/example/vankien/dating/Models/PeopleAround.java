@@ -7,12 +7,21 @@ import com.google.android.gms.maps.model.LatLng;
  */
 
 public class PeopleAround {
+    private String id;
     private String name;
     private int age;
     private int gender;
     private String avatarUrl;
     private String address;
     private LatLng addressLatLng;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -62,12 +71,15 @@ public class PeopleAround {
         this.addressLatLng = addressLatLng;
     }
 
-    public PeopleAround(String name, int age, int gender, String avatarUrl, String address, LatLng addressLatLng) {
+    public PeopleAround(String id,String name, int age, int gender, String avatarUrl, String address, LatLng addressLatLng) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.avatarUrl = avatarUrl;
         this.address = address;
         this.addressLatLng = addressLatLng;
+    }
+    public PeopleAround() {
     }
 }

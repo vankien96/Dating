@@ -1,36 +1,30 @@
 package com.example.vankien.dating.Views.Fragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.ListView;
 
-import com.example.vankien.dating.Controllers.AroundController;
-import com.example.vankien.dating.Controllers.PeopleAroundController;
+import com.example.vankien.dating.Controllers.MapController;
+import com.example.vankien.dating.Controllers.MapControllerCallback;
+import com.example.vankien.dating.Models.PeopleAround;
 import com.example.vankien.dating.R;
-import com.example.vankien.dating.Views.Activity.DetailActivity;
-import com.example.vankien.dating.Views.Activity.MainActivity;
 import com.example.vankien.dating.Views.Adapter.AroundAdapter;
-import com.example.vankien.dating.Models.AroundModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class AroundFragment extends Fragment {
+public class AroundFragment extends Fragment implements MapControllerCallback{
     ListView listViewAround;
-    ImageButton btnYes, btnNo;
-    ArrayList<AroundModel> aroundModelArrayList;
+    ArrayList<PeopleAround> aroundModelArrayList;
     AroundAdapter aroundAdapter;
     View rootView;
-    AroundController aroundController;
+    MapController controller;
+    String id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,22 +32,36 @@ public class AroundFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_around, container, false);
         addControls();
+        aroundModelArrayList = new ArrayList<>();
         aroundAdapter = new AroundAdapter(getActivity(), R.layout.model_around, aroundModelArrayList);
         listViewAround.setAdapter(aroundAdapter);
         aroundAdapter.notifyDataSetChanged();
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        controller = MapController.getShareInstance();
+        controller.callback = this;
+
         addEvents();
+        requestData();
         return rootView;
+    }
+
+    private void requestData() {
+        controller.requestPeopleAround(id);
     }
 
     private void addControls() {
         listViewAround = rootView.findViewById(R.id.lvAround);
-        btnYes = rootView.findViewById(R.id.btnYes);
-        btnNo = rootView.findViewById(R.id.btnNo);
-        aroundController = AroundController.getsInstance();
-        aroundModelArrayList = aroundController.getmAroundModel();
     }
 
     private void addEvents() {
 
+    }
+
+    @Override
+    public void getAroundPeopleSuccess(ArrayList<PeopleAround> peopleArounds) {
+        this.aroundModelArrayList.clear();
+        this.aroundModelArrayList.addAll(peopleArounds);
+        aroundAdapter.notifyDataSetChanged();
     }
 }

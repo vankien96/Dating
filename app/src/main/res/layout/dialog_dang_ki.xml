@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/dialog_dang_ki"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.vankien.dating.Views.Activity.DangNhapActivity"
+    tools:context="com.example.vankien.dating.Views.Activity.LogInActivity"
     android:background="@color/white"
     >
 
