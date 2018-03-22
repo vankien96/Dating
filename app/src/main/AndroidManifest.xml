@@ -44,7 +44,7 @@
         </activity>
         <activity android:name=".Views.Activity.ChatActivity"/>
         <activity
-            android:name=".Views.Setting.SettingsActivity"
+            android:name=".Views.Activity.SettingActivity"
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".Views.Activity.SignUpActivity"
