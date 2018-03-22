@@ -1,24 +1,15 @@
 package com.example.vankien.dating.Views.Fragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.vankien.dating.Controllers.AroundController;
-import com.example.vankien.dating.Controllers.PeopleAroundController;
 import com.example.vankien.dating.R;
-import com.example.vankien.dating.Views.Activity.DetailActivity;
-import com.example.vankien.dating.Views.Activity.MainActivity;
 import com.example.vankien.dating.Views.Adapter.AroundAdapter;
 import com.example.vankien.dating.Models.AroundModel;
 
