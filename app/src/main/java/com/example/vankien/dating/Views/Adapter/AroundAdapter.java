@@ -1,16 +1,17 @@
 package com.example.vankien.dating.Views.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.example.vankien.dating.Models.PeopleAround;
 import com.example.vankien.dating.R;
-import com.example.vankien.dating.Models.AroundModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -21,9 +22,9 @@ import java.util.List;
 public class AroundAdapter extends BaseAdapter {
     private Context context;
     private int layout;
-    private List<AroundModel> aroundModelList;
+    private List<PeopleAround> aroundModelList;
 
-    public AroundAdapter(Context context, int layout, List<AroundModel> mAroundModel) {
+    public AroundAdapter(Context context, int layout, List<PeopleAround> mAroundModel) {
         this.context = context;
         this.layout = layout;
         this.aroundModelList = mAroundModel;
@@ -46,7 +47,7 @@ public class AroundAdapter extends BaseAdapter {
 
     public class ViewHolder {
         ImageView imgHinh;
-       ImageButton imgYes, imgNo;
+        ImageButton btnYes,btnNo;
     }
 
     @Override
@@ -58,16 +59,17 @@ public class AroundAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(layout,null);
 
             viewHolder.imgHinh = convertView.findViewById(R.id.imgAround);
-            viewHolder.imgYes = convertView.findViewById(R.id.btnYes);
-            viewHolder.imgNo = convertView.findViewById(R.id.btnNo);
+            viewHolder.btnYes = convertView.findViewById(R.id.btnYes);
+            viewHolder.btnNo = convertView.findViewById(R.id.btnNo);
             convertView.setTag(viewHolder);
         }
         else  {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        AroundModel mAroundModel = aroundModelList.get(position);
-        viewHolder.imgHinh.setImageResource(mAroundModel.getImagePeople());
-        viewHolder.imgYes.setImageResource(mAroundModel.getImgYes());
+        PeopleAround mAroundModel = aroundModelList.get(position);
+        String avatar = mAroundModel.getAvatarUrl();
+        Uri uri = Uri.parse(avatar);
+        Picasso.with(context).load(uri).into(viewHolder.imgHinh);
 
         return convertView;
     }

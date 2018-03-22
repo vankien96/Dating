@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.example.vankien.dating.Models.PeopleAround;
 import com.example.vankien.dating.R;
-import com.example.vankien.dating.Models.AroundModel;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
