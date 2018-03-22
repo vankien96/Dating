@@ -21,7 +21,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private SeekBar seekBarDistance;
     private TextView tvDistance,tvAgeFrom, tvAgeTo;
     private RelativeLayout rlAgeFrom, rlAgeTo;
-    private boolean isPrivacy, isLookingMen, isLookingWomen;
+    private boolean isPrivacy, isLookingMen, isLookingWomen,isClickOnItemFrom,isClickOnItemTo;
     private int distance, ageFrom, ageTo;
 
 
@@ -71,12 +71,16 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         rlAgeFrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showChooseDialog();
+                isClickOnItemFrom = true;
+                isClickOnItemTo = false;
+               showChooseDialog();
             }
         });
         rlAgeTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isClickOnItemFrom = false;
+                isClickOnItemTo = true;
                 showChooseDialog();
             }
         });
@@ -85,14 +89,18 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private void showChooseDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Please choose age");
-        final String[] ages = {"15","20","25","30"};
+        final String[] ages = {"18","20","25","30","35","40","45"};
         builder.setItems(ages, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
                 String selectedItem = ages[item].toString();
-                tvAgeFrom.setText(selectedItem);
-                ageFrom = Integer.parseInt(selectedItem);
-                Toast.makeText(getApplicationContext(),selectedItem,Toast.LENGTH_SHORT).show();
+                if(isClickOnItemFrom){
+                    tvAgeFrom.setText(selectedItem);
+                    ageFrom = Integer.parseInt(selectedItem);
+                } else {
+                    tvAgeTo.setText(selectedItem);
+                    ageTo = Integer.parseInt(selectedItem);
+                }
             }
         });
         builder.show();
@@ -106,6 +114,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         editor.putBoolean("isLookingWomen",swWomen.isChecked());
         editor.putInt("distance",distance);
         editor.putInt("age_from",ageFrom);
+        editor.putInt("age_to",ageTo);
         editor.commit();
     }
     public void getDataFromSharedPreference(){
@@ -115,6 +124,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         isLookingWomen = sharedPreferences.getBoolean("isLookingWomen",false);
         distance = sharedPreferences.getInt("distance",0);
         ageFrom =sharedPreferences.getInt("age_from",0);
+        ageTo = sharedPreferences.getInt("age_to",0);
     }
 
     public void settingView(){
@@ -125,6 +135,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         seekBarDistance.setProgress(distance);
         tvDistance.setText(distance+" km");
         tvAgeFrom.setText(ageFrom+"");
+        tvAgeTo.setText(ageTo+"");
     }
     @Override
     public void onClick(View v) {
@@ -134,7 +145,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.imgBtnSave:
                 putDataToSharedPreferences();
-                Toast.makeText(this,"Save to preference success!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Save your Setting successfull!",Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }
