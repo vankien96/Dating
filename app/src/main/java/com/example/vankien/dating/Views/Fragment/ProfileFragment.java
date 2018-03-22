@@ -21,8 +21,9 @@ import com.example.vankien.dating.Controllers.ProfileController;
 import com.example.vankien.dating.Controllers.ProfileControllerCallback;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
-import com.example.vankien.dating.Views.Activity.LogInActivity;
 import com.example.vankien.dating.Views.Activity.EditProfileActivity;
+import com.example.vankien.dating.Views.Activity.LogInActivity;
+import com.example.vankien.dating.Views.Activity.SettingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
@@ -101,8 +102,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
 
                 break;
             case R.id.btnDiscoverySetting:
-                //Intent intentToSetting = new Intent(getActivity(),SettingsActivity.class);
-                //startActivity(intentToSetting);
+                Intent intentToSetting = new Intent(getActivity(),SettingActivity.class);
+                startActivity(intentToSetting);
                 break;
         }
 
