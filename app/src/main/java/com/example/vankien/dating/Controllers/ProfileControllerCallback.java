@@ -1,0 +1,13 @@
+package com.example.vankien.dating.Controllers;
+
+
+import com.example.vankien.dating.Models.Profile;
+
+/**
+ * Created by Luu Ngoc Lan on 21-Mar-18.
+ */
+
+public interface ProfileControllerCallback {
+    void getProfileSuccess(Profile data);
+
+}

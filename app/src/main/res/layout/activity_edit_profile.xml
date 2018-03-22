@@ -57,6 +57,19 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imvAvatar"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/img_avatar"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
+                    />
+            </RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,47 +118,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Love pink color, hating betrayl. I'm a fan of Son Tung MTP, a responsibility skyer. I can sing, dance, speak everywhere, everything..."/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:text="@string/textview.text.edit_profile_photo"
-                android:textSize="@dimen/text_size_small"
-                android:textColor="@color/black"/>
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:numColumns="3">
-                <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:padding="45dp"
-                    android:src="@drawable/ic_add"
-                    android:layout_column="1"
-                    android:background="#f1f1bc"
-                    />
-                <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:background="@drawable/img_avatar"
-                    android:layout_column="2"/>
-                <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:background="@drawable/img_avatar"
-                    android:layout_column="3"/>
-                <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:background="@drawable/img_avatar"
-                    />
-                <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:background="@drawable/img_avatar"
-                    />
-            </GridLayout>
 
         </LinearLayout>
     </ScrollView>
