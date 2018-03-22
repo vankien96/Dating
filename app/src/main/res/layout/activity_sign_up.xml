@@ -5,8 +5,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
     tools:context="com.example.vankien.dating.Views.Activity.SignUpActivity">
 
 
+        <ImageView
+            android:id="@+id/imgv_logo"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/edt_margin_bottom"
+            android:layout_marginTop="60dp"
+            android:adjustViewBounds="false"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgv_logo"
+            android:layout_marginLeft="@dimen/edt_margin_left"
+            android:layout_marginRight="@dimen/edt_margin_right"
+            android:layout_marginTop="@dimen/edt_margin_top"
+            android:layout_marginBottom="@dimen/edt_margin_bottom"
+            android:padding="@dimen/text_padding"
+            android:textColor="@color/black"
+            android:hint="@string/hint_email"
+            android:textAlignment="center"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edt_email"
+            android:layout_marginLeft="@dimen/edt_margin_left"
+            android:layout_marginRight="@dimen/edt_margin_right"
+            android:layout_marginBottom="@dimen/edt_margin_bottom"
+            android:padding="@dimen/text_padding"
+            android:textColor="@color/black"
+            android:hint="@string/hint_pass"
+            android:textAlignment="center"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/btn_create_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edt_password"
+            android:layout_marginLeft="@dimen/edt_margin_left"
+            android:layout_marginRight="@dimen/edt_margin_right"
+            android:layout_marginTop="@dimen/edt_margin_top"
+            android:background="@drawable/shape_button_login"
+            android:text="@string/text_create_accout"
+            android:textAllCaps="false"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/text_size_large"
+            />
+
+        <Button
+            android:id="@+id/btn_login_fb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_create_account"
+            android:layout_marginLeft="@dimen/edt_margin_left"
+            android:layout_marginRight="@dimen/edt_margin_right"
+            android:layout_marginTop="@dimen/edt_margin_top"
+            android:background="@drawable/shape_button_login_fb"
+            android:text="@string/text_login_Facebook"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large"
+            />
+
+        <TextView
+            android:id="@+id/txt_a_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_login_fb"
+            android:layout_marginTop="@dimen/edt_margin_top"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="@dimen/text_padding"
+            android:textColor="@color/black"
+            android:hint="@string/text_a_member"
+            android:textSize="@dimen/text_size_small"
+            />
+        <Button
+            android:id="@+id/btn_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txt_a_member"
+            android:layout_toRightOf="@id/txt_a_member"
+            android:background="@android:color/transparent"
+            android:text="@string/text_sign_in"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/text_size_small"
+            android:textAllCaps="false"
+            />
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            style="@style/AVLoadingIndicatorView"
+            android:visibility="invisible"
+            app:indicatorName="PacmanIndicator"
+            app:indicatorColor="@color/yellow"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>

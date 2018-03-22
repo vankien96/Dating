@@ -13,6 +13,7 @@ import com.example.vankien.dating.Controllers.LoginController;
 import com.example.vankien.dating.Controllers.LoginControllerCallback;
 import com.example.vankien.dating.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.wang.avi.AVLoadingIndicatorView;
 
 public class LogInActivity extends AppCompatActivity implements LoginControllerCallback{
 
@@ -20,6 +21,7 @@ public class LogInActivity extends AppCompatActivity implements LoginControllerC
     Button btnAccess, btnLogInWithFB, btnSignUp, btnAccessSignUp, btnCancel, btnRecover;
     private FirebaseAuth mAuth;
     SharedPreferences sharedPreferences;
+    AVLoadingIndicatorView indicatorView;
 
     LoginController controller;
     @Override
@@ -45,6 +47,7 @@ public class LogInActivity extends AppCompatActivity implements LoginControllerC
         btnLogInWithFB = findViewById(R.id.btn_login_fb);
         btnSignUp = findViewById(R.id.btn_sign_up);
         btnRecover = findViewById(R.id.btn_recover);
+        indicatorView = findViewById(R.id.avi);
     }
 
     private void addEvents() {
@@ -59,6 +62,7 @@ public class LogInActivity extends AppCompatActivity implements LoginControllerC
         btnAccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                indicatorView.show();
                 String email = edtEmailLogIn.getText().toString();
                 String pass =edtPassLogIn.getText().toString();
                 if(email.isEmpty()|| pass.isEmpty()) {
@@ -144,6 +148,7 @@ public class LogInActivity extends AppCompatActivity implements LoginControllerC
     public void loginSuccess(String email, String password) {
         saveStatusLogIn(email,password);
         Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+        indicatorView.hide();
         startActivity(intent);
     }
 

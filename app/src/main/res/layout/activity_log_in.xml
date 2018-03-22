@@ -80,7 +80,7 @@
         />
 
     <TextView
-        android:id="@+id/txt_dang_ki"
+        android:id="@+id/txt_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_login_fb"
@@ -89,15 +89,15 @@
         android:gravity="center"
         android:padding="@dimen/text_padding"
         android:textColor="@color/black"
-        android:hint="@string/text_hoi_dang_ki"
+        android:hint="@string/text_not_account"
         android:textSize="@dimen/text_size_small"
         />
     <Button
         android:id="@+id/btn_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txt_dang_ki"
-        android:layout_toRightOf="@id/txt_dang_ki"
+        android:layout_alignBaseline="@+id/txt_sign_up"
+        android:layout_toRightOf="@id/txt_sign_up"
         android:background="@android:color/transparent"
         android:text="@string/text_sign_up"
         android:textColor="@color/blue"
@@ -107,7 +107,7 @@
         />
 
     <TextView
-        android:id="@+id/txt_quen_pass"
+        android:id="@+id/txt_forgot_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -115,7 +115,7 @@
         android:gravity="center"
         android:padding="@dimen/text_padding"
         android:textColor="@color/black"
-        android:hint="@string/text_quen_mat_khau"
+        android:hint="@string/text_forgot_password"
         android:textSize="@dimen/text_size_small"
         />
 
@@ -123,13 +123,23 @@
         android:id="@+id/btn_recover"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txt_quen_pass"
-        android:layout_toRightOf="@id/txt_quen_pass"
+        android:layout_alignBaseline="@+id/txt_forgot_pass"
+        android:layout_toRightOf="@id/txt_forgot_pass"
         android:background="@android:color/transparent"
         android:text="@string/text_recover"
         android:textColor="@color/blue"
         android:textSize="@dimen/text_size_small"
         android:textAllCaps="false"
         />
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_width="100dp"
+         android:layout_height="100dp"
+        style="@style/AVLoadingIndicatorView"
+        android:visibility="invisible"
+        app:indicatorName="PacmanIndicator"
+        app:indicatorColor="@color/yellow"
+        android:layout_centerInParent="true"
+    />
 
 </RelativeLayout>
