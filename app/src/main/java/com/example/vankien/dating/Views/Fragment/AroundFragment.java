@@ -5,18 +5,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
 import android.widget.ImageButton;
 import android.widget.ListView;
-
-import com.example.vankien.dating.Controllers.AroundController;
-=======
 import android.widget.ListView;
 
 import com.example.vankien.dating.Controllers.MapController;
 import com.example.vankien.dating.Controllers.MapControllerCallback;
 import com.example.vankien.dating.Models.PeopleAround;
->>>>>>> c396a7c0d9fd011e1b925c60d4f02a77cf4a9c4a
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Views.Adapter.AroundAdapter;
 import com.google.firebase.auth.FirebaseAuth;
