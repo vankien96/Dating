@@ -2,11 +2,13 @@ package com.example.vankien.dating.Models;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.Serializable;
+
 /**
  * Created by vankien on 3/1/18.
  */
 
-public class PeopleAround {
+public class PeopleAround implements Serializable{
     private String id;
     private String name;
     private int age;
