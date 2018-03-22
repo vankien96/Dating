@@ -15,7 +15,6 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         addControls();
-        fakeData();
 
     }
 
@@ -27,12 +26,5 @@ public class DetailActivity extends AppCompatActivity {
         txtFriend = findViewById(R.id.txtFriend);
         txtAverage = findViewById(R.id.txtAverage);
     }
-    private void fakeData() {
-        imgDetail.setImageResource(R.drawable.testimage4);
-        txtName.setText("An Vy, 20");
-        txtAdress.setText("Thanh Pho Ho Chi Minh");
-        txtInformation.setText("Xinh đẹp, dễ thương. Đang kiếm chồng, đặc biệt phải giàu cơ sáu múi. An Vy cuc ky de thuong.");
-        txtFriend.setText("5000");
-        txtAverage.setText("9.0");
-    }
+
 }
