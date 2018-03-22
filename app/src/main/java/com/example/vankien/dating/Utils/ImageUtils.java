@@ -4,6 +4,14 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Shader;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Base64;
@@ -23,18 +31,36 @@ public class ImageUtils {
 
     /**
      * Bo tròn ảnh avatar
-     * @param context
-     * @param src ảnh dạng bitmap
+     * @param bitmap ảnh dạng bitmap
+     * @param border co them border hay ko
      * @return RoundedBitmapDrawable là đầu vào cho hàm setImageDrawable()
      */
-    public static RoundedBitmapDrawable roundedImage(Context context, Bitmap src){
-        /*Bo tròn avatar*/
-        Resources res = context.getResources();
-        RoundedBitmapDrawable dr =
-                RoundedBitmapDrawableFactory.create(res, src);
-        dr.setCornerRadius(Math.max(src.getWidth(), src.getHeight()) / 2.0f);
+    public static Bitmap getCircleBitmap(Bitmap bitmap, boolean border) {
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
 
-        return dr;
+        int radius = Math.min(h / 2, w / 2);
+        Bitmap output = Bitmap.createBitmap(w + 8, h + 8, Bitmap.Config.ARGB_8888);
+
+        Paint p = new Paint();
+        p.setAntiAlias(true);
+
+        Canvas c = new Canvas(output);
+        c.drawARGB(0, 0, 0, 0);
+        p.setStyle(Paint.Style.FILL);
+
+        c.drawCircle((w / 2) + 4, (h / 2) + 4, radius, p);
+
+        p.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+
+        c.drawBitmap(bitmap, 4, 4, p);
+        p.setXfermode(null);
+        p.setStyle(Paint.Style.STROKE);
+        p.setColor(Color.WHITE);
+        p.setStrokeWidth(3);
+        c.drawCircle((w / 2) + 4, (h / 2) + 4, radius, p);
+
+        return output;
     }
 
     /**
@@ -119,6 +145,31 @@ public class ImageUtils {
         byte[] bitmapdata = bos.toByteArray();
         ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
         return bs;
+    }
+
+
+    /**
+     * Resize bitmap(Dùng khi load image với piccaso)
+     * @param bm anh dau vao
+     * @param newWidth kích thước chiều rộng sau khi resize
+     * @param newHeight kích thước chiều cao sau khi resize
+     * @return
+     */
+    public static Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
     }
 
 }

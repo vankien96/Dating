@@ -18,7 +18,7 @@ import com.wang.avi.AVLoadingIndicatorView;
 public class LogInActivity extends AppCompatActivity implements LoginControllerCallback{
 
     EditText edtEmailLogIn, edtPassLogIn;
-    Button btnAccess, btnLogInWithFB, btnSignUp, btnAccessSignUp, btnCancel, btnRecover;
+    Button btnAccess, btnLogInWithFB, btnSignUp, btnRecover;
     private FirebaseAuth mAuth;
     SharedPreferences sharedPreferences;
     AVLoadingIndicatorView indicatorView;
@@ -75,56 +75,6 @@ public class LogInActivity extends AppCompatActivity implements LoginControllerC
         });
 
     }
-
-//    private void dialog_DangKy() {
-//        final Dialog dialog = new Dialog(this);
-//        dialog.setContentView(R.layout.dialog_dang_ki);
-//        dialog.setCanceledOnTouchOutside(false);
-//        // Anh Xa
-//        final EditText edtEmailSignUp= dialog.findViewById(R.id.edt_email_sign_up);
-//        final EditText edtPassSignUp= dialog.findViewById(R.id.edt_password_sign_up);
-//        btnAccessSignUp = dialog.findViewById(R.id.btn_sign_up2);
-//        btnCancel = dialog.findViewById(R.id.btn_cancel);
-//
-//        // Event Dang Ky
-//        btnAccessSignUp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String email = edtEmailSignUp.getText().toString();
-//                String password = edtPassSignUp.getText().toString();
-//                if(email.isEmpty()|| password.isEmpty()) {
-//                    Toast.makeText(LogInActivity.this, "Email or Password wrong ! Please try again !", Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    dangKy(email,password);
-//                }
-//            }
-//        });
-//
-//        btnCancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
-//        dialog.show();
-//    }
-
-//    protected void dangKy(String email, String password) {
-//        mAuth.createUserWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if(task.isSuccessful()) {
-//                            Toast.makeText(LogInActivity.this,"SignUp Successful !",Toast.LENGTH_SHORT).show();
-//
-//                        }
-//                        else {
-//                            Toast.makeText(LogInActivity.this,"SignUp Error !",Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
 
     protected void saveStatusLogIn(String email, String pass) {
         SharedPreferences.Editor editor = sharedPreferences.edit();

@@ -1,7 +1,9 @@
 package com.example.vankien.dating.Views.Fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,12 +40,21 @@ public class AroundFragment extends Fragment implements MapControllerCallback{
         aroundAdapter.notifyDataSetChanged();
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        controller = MapController.getShareInstance();
-        controller.callback = this;
 
         addEvents();
-        requestData();
         return rootView;
+    }
+
+    @Override
+    public void setMenuVisibility(final boolean menuVisible) {
+        super.setMenuVisibility(menuVisible);
+        controller = MapController.getShareInstance();
+        if (menuVisible){
+            controller.callback = this;
+            requestData();
+        }else{
+            controller.callback = null;
+        }
     }
 
     private void requestData() {
@@ -60,6 +71,7 @@ public class AroundFragment extends Fragment implements MapControllerCallback{
 
     @Override
     public void getAroundPeopleSuccess(ArrayList<PeopleAround> peopleArounds) {
+        Log.e("Around Screen","callback");
         this.aroundModelArrayList.clear();
         this.aroundModelArrayList.addAll(peopleArounds);
         aroundAdapter.notifyDataSetChanged();
