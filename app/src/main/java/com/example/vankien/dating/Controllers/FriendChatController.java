@@ -3,6 +3,7 @@ package com.example.vankien.dating.Controllers;
 import com.example.vankien.dating.Models.FriendChatModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -15,7 +16,10 @@ import java.util.HashMap;
 
 public class FriendChatController {
     private static FriendChatController shareInstance = new FriendChatController();
-    public static FriendChatControllerCallback callback;
+    public FriendChatControllerCallback callback;
+    private DatabaseReference mRef;
+    private ValueEventListener listener;
+
 
     public static FriendChatController getInstance( ) {
         return shareInstance;
@@ -34,10 +38,17 @@ public class FriendChatController {
         return arrayList;
     }
 
+    public void removeListener(){
+        if(mRef != null && listener != null){
+            mRef.removeEventListener(listener);
+        }
+    }
+
     public void getAllFriend(String id){
         final ArrayList<FriendChatModel> arrayList = new ArrayList<>();
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        mDatabase.getReference().child("Friend").child(id).addValueEventListener(new ValueEventListener() {
+        mRef = mDatabase.getReference().child("Friend").child(id);
+        listener = mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 arrayList.clear();
