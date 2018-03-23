@@ -14,24 +14,35 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.vankien.dating.Controllers.ProfileController;
+import com.example.vankien.dating.Controllers.UploadImageCallback;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
+import com.example.vankien.dating.Utils.FirebaseUtils;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity implements UploadImageCallback{
     private static final int REQUEST_IMAGE = 200;
     private ImageButton imgBtnBack,imgBtnSave;
     private EditText edtName, edtAge, edtSex, edtAbout;
     private ImageView imvAvatar;
     Profile profile;
+    Bitmap avatarBitmap;
+    String id;
+    FirebaseUtils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        utils = FirebaseUtils.getShareInstance();
+        utils.callback = this;
+
 
         initControls();
         loadData();
@@ -86,6 +97,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     inputStream = getContentResolver().openInputStream(imageUri);
                     Bitmap imageAvatar = BitmapFactory.decodeStream(inputStream);
                     imvAvatar.setImageBitmap(imageAvatar);
+                    avatarBitmap = imageAvatar;
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(),"Image not found",Toast.LENGTH_SHORT).show();
@@ -101,7 +113,19 @@ public class EditProfileActivity extends AppCompatActivity {
         edtAbout.setText(profile.getmDescription());
     }
     private void saveYourProfile() {
-        Toast.makeText(this, "Save successfully!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Save successfully!", Toast.LENGTH_SHORT).show();
+        if(avatarBitmap != null){
+            utils.uploadImage(avatarBitmap,id);
+        }
     }
 
+    @Override
+    public void uploadImageSuccess(String avatarUrl) {
+        
+    }
+
+    @Override
+    public void uploadImageFailed() {
+
+    }
 }

@@ -15,10 +15,10 @@ import com.example.vankien.dating.Views.Fragment.ProfileFragment;
  */
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+    private static int NUM_ITEMS = 4;
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
-
     @Override
     public Fragment getItem(int position) {
         switch (position){
@@ -37,6 +37,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
+
         switch (position){
             case 0:
                 return "Around";
@@ -53,6 +54,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return NUM_ITEMS;
     }
 }

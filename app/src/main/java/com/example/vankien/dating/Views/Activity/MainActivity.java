@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(chatTab,2);
         tabLayout.addTab(profileTab,3);
 
+        viewPager.setOffscreenPageLimit(0);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

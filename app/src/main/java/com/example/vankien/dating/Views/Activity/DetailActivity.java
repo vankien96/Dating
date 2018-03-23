@@ -22,9 +22,8 @@ public class DetailActivity extends AppCompatActivity {
         addControls();
         peopleAround = new PeopleAround();
         Intent intent = getIntent();
-        Bundle b = intent.getExtras();
-        peopleAround = (PeopleAround) b.getSerializable("Detail");
-        setData();
+        String id = intent.getStringExtra("UserID");
+        //setData();
     }
 
     private void setData() {

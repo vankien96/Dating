@@ -74,9 +74,7 @@ public class AroundAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailActivity.class);
                 PeopleAround people = aroundModelList.get(position);
-                Bundle b = new Bundle();
-                b.putSerializable("Detail",people);
-                intent.putExtras(b);
+                intent.putExtra("UserID",people.getId());
                 context.startActivity(intent);
             }
         });
