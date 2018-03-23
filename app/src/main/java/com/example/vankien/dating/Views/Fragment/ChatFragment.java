@@ -89,4 +89,11 @@ public class ChatFragment extends Fragment implements FriendChatControllerCallba
         Log.e("FriendChat Screen",""+mFriendChat.size());
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        controller.callback = null;
+        controller.removeListener();
+    }
 }
