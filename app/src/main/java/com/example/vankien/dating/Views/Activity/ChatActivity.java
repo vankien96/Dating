@@ -159,4 +159,11 @@ public class ChatActivity extends AppCompatActivity implements MessageController
             adapter.notifyDataSetChanged();
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        controller.callback = null;
+        controller.removeListener();
+    }
 }
