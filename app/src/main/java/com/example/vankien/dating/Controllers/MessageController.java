@@ -10,6 +10,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,8 +18,9 @@ import java.util.HashMap;
 
 public class MessageController {
     private static MessageController shareInstance = new MessageController();
-    public static MessageControllerCallback callback;
-
+    public MessageControllerCallback callback;
+    private ChildEventListener listener;
+    private DatabaseReference mRef;
     public static MessageController getInstance( ) {
         return shareInstance;
     }
@@ -37,13 +39,18 @@ public class MessageController {
 //        arrayList.add(new MessageModel(true,"Khi mùa thu theo ta về trước cổng Có phải đã đến lúc ta chọn cho mình con đường để dệt ước mộng"));
 //        return arrayList;
 //    }
+    public void removeListener(){
+        if (listener != null && mRef != null){
+            mRef.removeEventListener(listener);
+        }
+    }
 
     public void requestMessage(Activity activity, final String idFriend, final String idMe) {
         Log.e("Message screen", "request");
         String roomID = this.createRoomID(idMe, idFriend);
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        final DatabaseReference mRef = mDatabase.getReference().child("Chat").child(roomID);
-        mRef.addChildEventListener(new ChildEventListener() {
+        mRef = mDatabase.getReference().child("Chat").child(roomID);
+        listener = mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 MessageModel messageModel = new MessageModel();
