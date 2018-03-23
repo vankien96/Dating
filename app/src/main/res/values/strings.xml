@@ -48,4 +48,8 @@
     <string name="textview.text.setting_age_range">Age Range</string>
     <string name="textview.text.setting_age_from">From</string>
     <string name="textview.text.setting_age_to">To</string>
+
+    <!-- replace ^^^ = & before use -->
+    <string name="default_avatar">https://firebasestorage.googleapis.com/v0/b/dating-8e616.appspot.com/o/avatar%2F112906retath5h9lxn0roi.jpg?alt=media^^^token=2389ec92-4979-48d8-966b-0b7391bbd05c</string>
+
 </resources>
