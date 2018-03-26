@@ -41,7 +41,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         utils = FirebaseUtils.getShareInstance();
-        utils.callback = this;
+        utils.delegate = this;
 
 
         initControls();
