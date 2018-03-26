@@ -49,7 +49,7 @@ public class MapFragment extends Fragment implements MapDelegate {
     GoogleMap googleMap;
     Location myLocation;
     LocationManager mLocationManager;
-    HashMap<MarkerOptions,String> markerOptions;
+    HashMap<Marker,String> markers;
 
     MapController controller;
     String id;
@@ -66,7 +66,7 @@ public class MapFragment extends Fragment implements MapDelegate {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_map, container, false);
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        markerOptions = new HashMap<>();
+        markers = new HashMap<>();
         peopleArounds = new ArrayList<>();
 
         initMap(savedInstanceState);
@@ -100,6 +100,7 @@ public class MapFragment extends Fragment implements MapDelegate {
             @Override
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
+                addActionWhenTapOnMarker();
                 if(myLocation != null){
                     addMarkerMyLocationOnMap();
 
@@ -225,9 +226,10 @@ public class MapFragment extends Fragment implements MapDelegate {
                     Bitmap resized = Bitmap.createScaledBitmap(squareBitmap, 50, 50, true);
                     Bitmap circle = ImageUtils.getCircleBitmap(resized,true);
                     BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(circle);
-                    MarkerOptions marker = new MarkerOptions().icon(bitmapDescriptor).position(mylatlng).title(people.getName()).snippet(people.getAddress());
-                    markerOptions.put(marker,people.getId());
-                    googleMap.addMarker(marker);
+                    MarkerOptions markerOption = new MarkerOptions().icon(bitmapDescriptor).position(mylatlng).title(people.getName()).snippet(people.getAddress());
+                    Log.e("Map Screen: id",people.getId());
+                    Marker marker = googleMap.addMarker(markerOption);
+                    markers.put(marker,people.getId());
                 }
                 @Override
                 public void onBitmapFailed(Drawable errorDrawable) {
@@ -257,9 +259,11 @@ public class MapFragment extends Fragment implements MapDelegate {
             googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                 @Override
                 public void onInfoWindowClick(Marker marker) {
-                    String id = markerOptions.get(marker);
+                    String id = markers.get(marker);
                     Intent intent = new Intent(getActivity(),DetailActivity.class);
                     Log.e("Map Screen",id);
+                    intent.putExtra("UserID",id);
+                    startActivity(intent);
                 }
             });
         }

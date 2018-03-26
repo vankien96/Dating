@@ -41,7 +41,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         View view = inflater.inflate(R.layout.fragment_profile,container,false);
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         controller = ProfileController.getsInstance();
-        controller.callback = this;
+        controller.delegate = this;
         initControls(view);
         addEvents();
         loadData();

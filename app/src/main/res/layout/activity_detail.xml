@@ -6,12 +6,32 @@
     android:layout_height="match_parent"
     tools:context="com.example.vankien.dating.Views.Activity.DetailActivity">
 
+    <RelativeLayout
+        android:id="@+id/viewTop"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Detail"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
     <ImageView
         android:id="@+id/imgDetail"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:src="@color/green"
-       />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/viewTop"
+        android:src="@drawable/img_avatar"
+        android:scaleType="centerCrop"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,6 +49,7 @@
             android:layout_marginRight="16dp"
             android:src="@drawable/ic_delete"
             android:scaleType="centerInside"
+            android:tint="@color/red"
             android:background="@android:color/transparent"/>
 
         <ImageButton
@@ -79,7 +100,7 @@
         android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_large"
+        android:textSize="16sp"
         android:text="@string/text_average"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="@dimen/edt_margin_left"
@@ -89,7 +110,7 @@
         android:id="@id/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_large"
+        android:textSize="16sp"
         android:text="@string/text_friend"
         android:layout_marginLeft="@dimen/edt_margin_left"
         android:layout_marginBottom="@dimen/edt_margin_bottom"
@@ -99,7 +120,7 @@
         android:id="@+id/txtAverage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_large"
+        android:textSize="16sp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="@dimen/edt_margin_right"
@@ -109,7 +130,7 @@
         android:id="@+id/txtFriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_large"
+        android:textSize="16sp"
         android:layout_alignParentRight="true"
         android:layout_above="@+id/txtAverage"
         android:layout_marginRight="@dimen/edt_margin_right"

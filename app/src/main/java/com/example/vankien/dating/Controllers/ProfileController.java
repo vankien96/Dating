@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class ProfileController {
     private static ProfileController sInstance = new ProfileController();
-    public ProfileDelegate callback;
+    public ProfileDelegate delegate;
     public static ProfileController getsInstance (){ return sInstance;}
 
     public Profile getProfile(){
@@ -37,8 +37,9 @@ public class ProfileController {
  //               float latitude = (float) data.get("latitude");
 //                float longitude = (float) data.get("longitude");
                 String name = (String) data.get("name");
-//                Long numOfFriend = (Long) data.get("numOfFriend");
-//                String numOfFriendString = numOfFriend+"";
+                Long numOfFriend = (Long) data.get("numberOfFriend");
+                String numOfFriendString = numOfFriend+"";
+
                 String region = (String) data.get("region");
                 Long sex = (Long) data.get("sex");
                 String sexString = sex+"";
@@ -50,11 +51,11 @@ public class ProfileController {
 //                profile.setmLongitude(longitude);
                 profile.setmName(name);
                 profile.setmRegion(region);
-//                profile.setmNumOfFriends(Integer.parseInt(numOfFriendString));
+                profile.setmNumOfFriends(Integer.parseInt(numOfFriendString));
                 profile.setmSex(Integer.parseInt(sexString));
                 profile.setmAddress(address);
 
-                callback.getProfileSuccess(profile);
+                delegate.getProfileSuccess(profile);
             }
 
             @Override

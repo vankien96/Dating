@@ -78,6 +78,15 @@ public class AroundAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
+        viewHolder.imgHinh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailActivity.class);
+                PeopleAround people = aroundModelList.get(position);
+                intent.putExtra("UserID",people.getId());
+                context.startActivity(intent);
+            }
+        });
         PeopleAround mAroundModel = aroundModelList.get(position);
         String avatar = mAroundModel.getAvatarUrl();
         Uri uri = Uri.parse(avatar);

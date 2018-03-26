@@ -40,7 +40,7 @@ public class MapController {
                         HashMap hashMap = (HashMap) snapshot.getValue();
                         PeopleAround model = new PeopleAround();
 
-                        model.setId(dataSnapshot.getKey());
+                        model.setId(snapshot.getKey());
                         model.setAddress((String) hashMap.get("address"));
                         model.setAvatarUrl((String) hashMap.get("avatar"));
                         model.setName((String) hashMap.get("name"));
