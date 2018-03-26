@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.vankien.dating.Controllers.MessageController;
-import com.example.vankien.dating.Controllers.MessageControllerCallback;
+import com.example.vankien.dating.Controllers.MessageDelegate;
 import com.example.vankien.dating.Models.FriendChatModel;
 import com.example.vankien.dating.Models.MessageModel;
 import com.example.vankien.dating.R;
@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class ChatActivity extends AppCompatActivity implements MessageControllerCallback {
+public class ChatActivity extends AppCompatActivity implements MessageDelegate {
     TextView txtName;
     String name;
     String idFriend;
@@ -49,7 +49,7 @@ public class ChatActivity extends AppCompatActivity implements MessageController
         idFriend = model.getId();
         avatar = model.getUrlAvatar();
         controller = MessageController.getInstance();
-        controller.callback = this;
+        controller.delegate = this;
 
         addControls();
         addEvents();
@@ -137,7 +137,7 @@ public class ChatActivity extends AppCompatActivity implements MessageController
 
     @Override
     public void getAllMessageSuccess(ArrayList<MessageModel> messageDatas) {
-        Log.e("Message screen","callback");
+        Log.e("Message screen","delegate");
         this.arrMessage.clear();
         this.arrMessage.addAll(messageDatas);
         if (adapter != null){
@@ -163,7 +163,7 @@ public class ChatActivity extends AppCompatActivity implements MessageController
     @Override
     protected void onStop() {
         super.onStop();
-        controller.callback = null;
+        controller.delegate = null;
         controller.removeListener();
     }
 }

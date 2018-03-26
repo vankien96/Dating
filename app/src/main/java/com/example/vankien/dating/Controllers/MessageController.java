@@ -10,15 +10,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 public class MessageController {
     private static MessageController shareInstance = new MessageController();
-    public MessageControllerCallback callback;
+    public MessageDelegate delegate;
     private ChildEventListener listener;
     private DatabaseReference mRef;
     public static MessageController getInstance( ) {
@@ -65,7 +63,7 @@ public class MessageController {
                         messageModel.setMe(false);
                     }
                     messageModel.setMessage(message);
-                    callback.newMessageAdded(messageModel);
+                    delegate.newMessageAdded(messageModel);
                 }
             }
 

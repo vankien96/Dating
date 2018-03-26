@@ -10,12 +10,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.vankien.dating.Controllers.LoginController;
-import com.example.vankien.dating.Controllers.LoginControllerCallback;
+import com.example.vankien.dating.Controllers.LoginDelegate;
 import com.example.vankien.dating.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.wang.avi.AVLoadingIndicatorView;
 
-public class LogInActivity extends AppCompatActivity implements LoginControllerCallback{
+public class LogInActivity extends AppCompatActivity implements LoginDelegate {
 
     EditText edtEmailLogIn, edtPassLogIn;
     Button btnAccess, btnLogInWithFB, btnSignUp, btnRecover;
@@ -33,7 +33,7 @@ public class LogInActivity extends AppCompatActivity implements LoginControllerC
         mAuth = FirebaseAuth.getInstance();
         sharedPreferences = getSharedPreferences("dataLogIn",MODE_PRIVATE);
         controller = LoginController.getShareInstance();
-        controller.callback = this;
+        controller.delegate = this;
 
         addControls();
         addEvents();

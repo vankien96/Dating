@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by vanki on 3/8/2018.
  */
 
-public interface MessageControllerCallback{
+public interface MessageDelegate {
     void getAllMessageSuccess(ArrayList<MessageModel> messageDatas);
     void newMessageAdded(MessageModel message);
 }

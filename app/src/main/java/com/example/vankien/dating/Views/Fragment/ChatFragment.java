@@ -11,8 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.vankien.dating.Controllers.FriendChatController;
-import com.example.vankien.dating.Controllers.FriendChatControllerCallback;
-import com.example.vankien.dating.Controllers.MessageController;
+import com.example.vankien.dating.Controllers.FriendChatDelegate;
 import com.example.vankien.dating.Models.FriendChatModel;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Views.Activity.ChatActivity;
@@ -21,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class ChatFragment extends Fragment implements FriendChatControllerCallback {
+public class ChatFragment extends Fragment implements FriendChatDelegate {
     ListView lvChat;
     FriendChatAdapter adapter;
     ArrayList<FriendChatModel> mFriendChat;
@@ -35,7 +34,7 @@ public class ChatFragment extends Fragment implements FriendChatControllerCallba
         rootView =  inflater.inflate(R.layout.fragment_chat, container, false);
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         controller = FriendChatController.getInstance();
-        controller.callback = this;
+        controller.delegate = this;
         this.addControls();
         addEvents();
         requestData();
@@ -93,7 +92,7 @@ public class ChatFragment extends Fragment implements FriendChatControllerCallba
     @Override
     public void onStop() {
         super.onStop();
-        controller.callback = null;
+        controller.delegate = null;
         controller.removeListener();
     }
 }

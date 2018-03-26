@@ -20,7 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vankien.dating.Controllers.MapController;
-import com.example.vankien.dating.Controllers.MapControllerCallback;
+import com.example.vankien.dating.Controllers.MapDelegate;
 import com.example.vankien.dating.Models.PeopleAround;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Utils.ImageUtils;
@@ -44,7 +44,7 @@ import com.squareup.picasso.Target;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MapFragment extends Fragment implements MapControllerCallback {
+public class MapFragment extends Fragment implements MapDelegate {
     MapView mMapView;
     GoogleMap googleMap;
     Location myLocation;
@@ -79,10 +79,10 @@ public class MapFragment extends Fragment implements MapControllerCallback {
         controller = MapController.getShareInstance();
         if (visible) {
             Log.e("Map Screen","load data");
-            controller.callback = this;
+            controller.delegate = this;
             controller.requestPeopleAround(id);
         }else{
-            controller.callback = null;
+            controller.delegate = null;
         }
     }
 
@@ -196,7 +196,7 @@ public class MapFragment extends Fragment implements MapControllerCallback {
     public void getAroundPeopleSuccess(ArrayList<PeopleAround> peopleArounds) {
         this.peopleArounds.clear();
         this.peopleArounds.addAll(peopleArounds);
-        Log.e("Map Screen","callback");
+        Log.e("Map Screen","delegate");
         loadImageIntoMap();
     }
 
@@ -249,5 +249,19 @@ public class MapFragment extends Fragment implements MapControllerCallback {
     private void updateMyLocationIntoFirebase(){
         FirebaseDatabase.getInstance().getReference().child("Profile").child(id).child("latitude").setValue(myLocation.getLatitude());
         FirebaseDatabase.getInstance().getReference().child("Profile").child(id).child("longitude").setValue(myLocation.getLongitude());
+    }
+
+
+    private void addActionWhenTapOnMarker(){
+        if(googleMap != null){
+            googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+                    String id = markerOptions.get(marker);
+                    Intent intent = new Intent(getActivity(),DetailActivity.class);
+                    Log.e("Map Screen",id);
+                }
+            });
+        }
     }
 }

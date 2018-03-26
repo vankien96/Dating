@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class ProfileController {
     private static ProfileController sInstance = new ProfileController();
-    public static ProfileControllerCallback callback;
+    public ProfileDelegate callback;
     public static ProfileController getsInstance (){ return sInstance;}
 
     public Profile getProfile(){

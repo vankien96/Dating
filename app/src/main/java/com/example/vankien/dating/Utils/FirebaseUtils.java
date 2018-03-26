@@ -4,10 +4,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import com.example.vankien.dating.Controllers.UploadImageCallback;
+import com.example.vankien.dating.Controllers.UploadImageDelegate;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -20,7 +19,7 @@ import java.io.ByteArrayOutputStream;
 
 public class FirebaseUtils {
     private static FirebaseUtils shareInstance = new FirebaseUtils();
-    public static UploadImageCallback callback;
+    public static UploadImageDelegate delegate;
     public static FirebaseUtils getShareInstance(){
         return shareInstance;
     }
@@ -40,14 +39,14 @@ public class FirebaseUtils {
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
                 exception.printStackTrace();
-                callback.uploadImageFailed();
+                delegate.uploadImageFailed();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                callback.uploadImageSuccess(downloadUrl.toString());
+                delegate.uploadImageSuccess(downloadUrl.toString());
             }
         });
     }

@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vankien.dating.Controllers.ProfileController;
-import com.example.vankien.dating.Controllers.ProfileControllerCallback;
+import com.example.vankien.dating.Controllers.ProfileDelegate;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Views.Activity.EditProfileActivity;
@@ -27,7 +27,7 @@ import com.example.vankien.dating.Views.Activity.SettingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener,ProfileControllerCallback{
+public class ProfileFragment extends Fragment implements View.OnClickListener,ProfileDelegate {
     private TextView tvName,tvAge,tvAbout,tvAddress,tvRegion,tvNumOfFriend;
     private ImageButton imgBtnEdit,imgBtnLogout;
     private ImageView imgAvatar;
@@ -111,7 +111,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
 
     @Override
     public void getProfileSuccess(Profile data) {
-        Log.e("Profile Screen","callback");
+        Log.e("Profile Screen","delegate");
         tvAge.setText(data.getmAge()+"");
         tvNumOfFriend.setText(data.getmNumOfFriends()+"");
         tvName.setText(data.getmName());

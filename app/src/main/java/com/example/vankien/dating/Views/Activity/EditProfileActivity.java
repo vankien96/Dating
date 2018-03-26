@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.vankien.dating.Controllers.ProfileController;
-import com.example.vankien.dating.Controllers.UploadImageCallback;
+import com.example.vankien.dating.Controllers.UploadImageDelegate;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Utils.FirebaseUtils;
@@ -24,7 +24,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class EditProfileActivity extends AppCompatActivity implements UploadImageCallback{
+public class EditProfileActivity extends AppCompatActivity implements UploadImageDelegate {
     private static final int REQUEST_IMAGE = 200;
     private ImageButton imgBtnBack,imgBtnSave;
     private EditText edtName, edtAge, edtSex, edtAbout;

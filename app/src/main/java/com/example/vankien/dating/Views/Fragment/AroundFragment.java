@@ -1,18 +1,15 @@
 package com.example.vankien.dating.Views.Fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.ListView;
 
 import com.example.vankien.dating.Controllers.MapController;
-import com.example.vankien.dating.Controllers.MapControllerCallback;
+import com.example.vankien.dating.Controllers.MapDelegate;
 import com.example.vankien.dating.Models.PeopleAround;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Views.Adapter.AroundAdapter;
@@ -20,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class AroundFragment extends Fragment implements MapControllerCallback{
+public class AroundFragment extends Fragment implements MapDelegate {
     ListView listViewAround;
     ArrayList<PeopleAround> aroundModelArrayList;
     AroundAdapter aroundAdapter;
@@ -50,10 +47,10 @@ public class AroundFragment extends Fragment implements MapControllerCallback{
         super.setMenuVisibility(menuVisible);
         controller = MapController.getShareInstance();
         if (menuVisible){
-            controller.callback = this;
+            controller.delegate = this;
             requestData();
         }else{
-            controller.callback = null;
+            controller.delegate = null;
         }
     }
 
@@ -71,7 +68,7 @@ public class AroundFragment extends Fragment implements MapControllerCallback{
 
     @Override
     public void getAroundPeopleSuccess(ArrayList<PeopleAround> peopleArounds) {
-        Log.e("Around Screen","callback");
+        Log.e("Around Screen","delegate");
         this.aroundModelArrayList.clear();
         this.aroundModelArrayList.addAll(peopleArounds);
         aroundAdapter.notifyDataSetChanged();

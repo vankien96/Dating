@@ -8,6 +8,6 @@ import java.util.ArrayList;
  * Created by vanki on 3/21/2018.
  */
 
-public interface MapControllerCallback {
+public interface MapDelegate {
     void getAroundPeopleSuccess(ArrayList<PeopleAround> peopleArounds);
 }

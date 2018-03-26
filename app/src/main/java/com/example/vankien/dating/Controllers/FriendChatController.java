@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 public class FriendChatController {
     private static FriendChatController shareInstance = new FriendChatController();
-    public FriendChatControllerCallback callback;
+    public FriendChatDelegate delegate;
     private DatabaseReference mRef;
     private ValueEventListener listener;
 
@@ -60,7 +60,7 @@ public class FriendChatController {
                     friendChatModel.setRecentMessage((String) snapshot.getValue());
                     arrayList.add(friendChatModel);
                 }
-                callback.getAllFriendSuccess(arrayList);
+                delegate.getAllFriendSuccess(arrayList);
                 getAllInformation(arrayList);
             }
 
@@ -80,7 +80,7 @@ public class FriendChatController {
                     HashMap data = (HashMap) dataSnapshot.getValue();
                     item.setUrlAvatar((String) data.get("avatar"));
                     item.setName((String) data.get("name"));
-                    callback.getFullInformationSuccess(item);
+                    delegate.getFullInformationSuccess(item);
                 }
 
                 @Override

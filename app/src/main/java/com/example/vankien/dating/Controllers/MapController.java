@@ -1,15 +1,12 @@
 package com.example.vankien.dating.Controllers;
 
-import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.example.vankien.dating.Models.PeopleAround;
-import com.example.vankien.dating.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -23,7 +20,7 @@ import java.util.HashMap;
 
 public class MapController {
     private static MapController shareInstance = new MapController();
-    public static MapControllerCallback callback;
+    public MapDelegate delegate;
 
     public static MapController getShareInstance(){
         return shareInstance;
@@ -66,7 +63,7 @@ public class MapController {
                         arounds.add(model);
                     }
                 }
-                callback.getAroundPeopleSuccess(arounds);
+                delegate.getAroundPeopleSuccess(arounds);
             }
 
             @Override
