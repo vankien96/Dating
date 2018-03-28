@@ -49,10 +49,11 @@ public class SignUpActivity extends AppCompatActivity implements SignUpDelegate 
                 String email = edtEmailSignUp.getText().toString();
                 String password = edtPassSignUp.getText().toString();
                 if(email.isEmpty()|| password.isEmpty()) {
+                    indicatorView.hide();
                     Toast.makeText(SignUpActivity.this, "Email or Password wrong ! Please try again !", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    controller.sinUp(email,password,SignUpActivity.this);
+                    controller.signUp(email,password,SignUpActivity.this);
                 }
             }
         });
@@ -74,6 +75,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpDelegate 
 
     @Override
     public void signFailed() {
+        indicatorView.hide();
         Toast.makeText(SignUpActivity.this, "Email or Password wrong ! Please try again !", Toast.LENGTH_SHORT).show();
 
     }

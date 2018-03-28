@@ -139,7 +139,8 @@
         android:visibility="invisible"
         app:indicatorName="PacmanIndicator"
         app:indicatorColor="@color/yellow"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/imgv_logo"
+        android:layout_centerHorizontal="true"
     />
 
 </RelativeLayout>

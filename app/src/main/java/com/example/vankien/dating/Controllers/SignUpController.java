@@ -20,7 +20,7 @@ public class SignUpController {
     }
 
 
-    public void sinUp(final String email, final String password, Activity activity) {
+    public void signUp(final String email, final String password, Activity activity) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {

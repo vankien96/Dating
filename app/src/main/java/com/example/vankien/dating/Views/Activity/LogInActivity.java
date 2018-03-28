@@ -66,11 +66,20 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
                 String email = edtEmailLogIn.getText().toString();
                 String pass =edtPassLogIn.getText().toString();
                 if(email.isEmpty()|| pass.isEmpty()) {
+                    indicatorView.hide();
                     Toast.makeText(LogInActivity.this, "Email or Password wrong ! Please try again !", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     controller.logIn(email,pass,LogInActivity.this);
                 }
+            }
+        });
+
+        btnRecover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                indicatorView.show();
+                startActivity(new Intent(LogInActivity.this,ResetPasswordActivity.class));
             }
         });
 

@@ -42,13 +42,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.Activity.ChatActivity"/>
+        <activity android:name=".Views.Activity.ChatActivity" />
         <activity
             android:name=".Views.Activity.SettingActivity"
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".Views.Activity.SignUpActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Views.Activity.ResetPasswordActivity"></activity>
     </application>
 
 </manifest>
