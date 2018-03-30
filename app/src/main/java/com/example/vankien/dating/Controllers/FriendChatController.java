@@ -60,7 +60,9 @@ public class FriendChatController {
                     friendChatModel.setRecentMessage((String) snapshot.getValue());
                     arrayList.add(friendChatModel);
                 }
-                delegate.getAllFriendSuccess(arrayList);
+                if (delegate != null){
+                    delegate.getAllFriendSuccess(arrayList);
+                }
                 getAllInformation(arrayList);
             }
 
@@ -80,7 +82,9 @@ public class FriendChatController {
                     HashMap data = (HashMap) dataSnapshot.getValue();
                     item.setUrlAvatar((String) data.get("avatar"));
                     item.setName((String) data.get("name"));
-                    delegate.getFullInformationSuccess(item);
+                    if (delegate != null){
+                        delegate.getFullInformationSuccess(item);
+                    }
                 }
 
                 @Override

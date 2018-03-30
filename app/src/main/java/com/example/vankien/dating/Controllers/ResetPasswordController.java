@@ -25,9 +25,13 @@ public class ResetPasswordController {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            delegate.resetSuccess(email);
+                            if (delegate != null){
+                                delegate.resetSuccess(email);
+                            }
                         } else {
-                            delegate.resetFailed();
+                            if (delegate != null){
+                                delegate.resetFailed();
+                            }
                         }
 
                     }

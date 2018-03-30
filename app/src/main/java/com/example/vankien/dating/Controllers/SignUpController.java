@@ -27,10 +27,14 @@ public class SignUpController {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
-                            delegate.signupSuccess(email,password);
+                            if (delegate != null){
+                                delegate.signupSuccess(email,password);
+                            }
                         }
                         else {
-                           delegate.signFailed();
+                           if (delegate != null){
+                               delegate.signFailed();
+                           }
                         }
                     }
                 });

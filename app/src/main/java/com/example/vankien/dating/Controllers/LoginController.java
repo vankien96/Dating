@@ -34,10 +34,14 @@ public class LoginController {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
-                            delegate.loginSuccess(email,password);
+                            if (delegate != null){
+                                delegate.loginSuccess(email,password);
+                            }
                         }
                         else {
-                            delegate.loginFailed();
+                            if (delegate != null){
+                                delegate.loginFailed();
+                            }
                         }
                     }
                 });

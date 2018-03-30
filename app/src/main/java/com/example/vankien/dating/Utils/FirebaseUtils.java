@@ -39,14 +39,18 @@ public class FirebaseUtils {
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
                 exception.printStackTrace();
-                delegate.uploadImageFailed();
+                if (delegate != null){
+                    delegate.uploadImageFailed();
+                }
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                delegate.uploadImageSuccess(downloadUrl.toString());
+                if (delegate != null){
+                    delegate.uploadImageSuccess(downloadUrl.toString());
+                }
             }
         });
     }

@@ -63,7 +63,9 @@ public class MapController {
                         arounds.add(model);
                     }
                 }
-                delegate.getAroundPeopleSuccess(arounds);
+                if (delegate != null){
+                    delegate.getAroundPeopleSuccess(arounds);
+                }
             }
 
             @Override

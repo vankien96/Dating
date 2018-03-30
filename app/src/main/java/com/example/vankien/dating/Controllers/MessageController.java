@@ -63,7 +63,9 @@ public class MessageController {
                         messageModel.setMe(false);
                     }
                     messageModel.setMessage(message);
-                    delegate.newMessageAdded(messageModel);
+                    if (delegate != null){
+                        delegate.newMessageAdded(messageModel);
+                    }
                 }
             }
 

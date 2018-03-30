@@ -51,22 +51,33 @@
         android:dividerHeight="4dp"
         android:stackFromBottom="true"
         android:layout_below="@id/viewTop"
-        android:layout_above="@id/viewChatTextField"
+        android:layout_above="@id/view_below_lv"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="8dp">
     </ListView>
+    <View
+        android:id="@+id/view_below_lv"
+        android:layout_above="@id/viewChatTextField"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey"/>
     <RelativeLayout
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:id="@+id/viewChatTextField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
         <EditText
+            android:layout_marginLeft="8dp"
             android:id="@+id/txtMessage"
             android:layout_marginRight="60dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:hint="Write your message"
             />
 
