@@ -55,7 +55,9 @@ public class ProfileController {
                 profile.setmSex(Integer.parseInt(sexString));
                 profile.setmAddress(address);
 
-                delegate.getProfileSuccess(profile);
+                if(delegate != null){
+                    delegate.getProfileSuccess(profile);
+                }
             }
 
             @Override
