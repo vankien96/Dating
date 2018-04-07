@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import com.example.vankien.dating.Controllers.UploadImageDelegate;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -25,7 +26,8 @@ public class FirebaseUtils {
     }
 
 
-    public void uploadImage(Bitmap bitmap,String id){
+    public void uploadImage(Bitmap bitmap, final String id){
+        final String _id = id;
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference reference = storage.getReference().child("avatar").child(id+"jpg");
 
@@ -50,7 +52,9 @@ public class FirebaseUtils {
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 if (delegate != null){
                     delegate.uploadImageSuccess(downloadUrl.toString());
+
                 }
+                FirebaseDatabase.getInstance().getReference().child("Profile").child(_id).child("avatar").setValue(String.valueOf(downloadUrl));
             }
         });
     }
