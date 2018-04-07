@@ -139,7 +139,6 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         reference.child("Profile").child(id).child("name").setValue(name);
         reference.child("Profile").child(id).child("age").setValue(age);
         reference.child("Profile").child(id).child("about").setValue(about);
-
         Toast.makeText(this,"Upload successfully...",Toast.LENGTH_SHORT).show();
         finish();
     }
