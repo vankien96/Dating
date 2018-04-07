@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
@@ -33,6 +34,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -50,10 +53,12 @@ public class MapFragment extends Fragment implements MapDelegate {
     Location myLocation;
     LocationManager mLocationManager;
     HashMap<Marker,String> markers;
-
+    Marker myMarker;
     MapController controller;
     String id;
     View rootView;
+
+    Circle circleGoogleMap;
 
     ArrayList<PeopleAround> peopleArounds;
 
@@ -160,11 +165,31 @@ public class MapFragment extends Fragment implements MapDelegate {
         LatLng mylatlng = new LatLng(myLocation.getLatitude(),myLocation.getLongitude());
         CameraPosition position = new CameraPosition.Builder().target(mylatlng).zoom(15).bearing(19).build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(position));
+        if (myMarker != null){
+            myMarker.remove();
+        }
+        myMarker = googleMap.addMarker(new MarkerOptions().position(mylatlng).title("I'm here").snippet("Do you see me?"));
+        circleGoogleMap = googleMap.addCircle(new CircleOptions()
+                .center(mylatlng)
+                .radius(1000)
+                .strokeColor(Color.WHITE)
+                .strokeWidth(2)
+                .fillColor(0x5500ff00));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                circleGoogleMap.getCenter(), getZoomLevel(circleGoogleMap)));
 
-        googleMap.addMarker(new MarkerOptions().position(mylatlng).title("I'm here").snippet("Do you see me?"));
         if (peopleArounds.size()>0){
             loadImageIntoMap();
         }
+    }
+    public int getZoomLevel(Circle circle) {
+        int zoomLevel = 11;
+        if (circle != null) {
+            double radius = circle.getRadius() + circle.getRadius() / 2;
+            double scale = radius / 500;
+            zoomLevel = (int) (16 - Math.log(scale) / Math.log(2));
+        }
+        return zoomLevel;
     }
 
 
@@ -228,8 +253,18 @@ public class MapFragment extends Fragment implements MapDelegate {
                     BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(circle);
                     MarkerOptions markerOption = new MarkerOptions().icon(bitmapDescriptor).position(mylatlng).title(people.getName()).snippet(people.getAddress());
                     Log.e("Map Screen: id",people.getId());
-                    Marker marker = googleMap.addMarker(markerOption);
-                    markers.put(marker,people.getId());
+                    if (circleGoogleMap != null){
+                        float[] distance = new float[2];
+
+                        Location.distanceBetween(mylatlng.latitude, mylatlng.longitude, circleGoogleMap.getCenter().latitude,circleGoogleMap.getCenter().longitude,distance);
+
+                        if ( distance[0] <= circleGoogleMap.getRadius()) {
+                            Marker marker = googleMap.addMarker(markerOption);
+                            markers.put(marker,people.getId());
+                        } else {
+
+                        }
+                    }
                 }
                 @Override
                 public void onBitmapFailed(Drawable errorDrawable) {
@@ -259,11 +294,13 @@ public class MapFragment extends Fragment implements MapDelegate {
             googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                 @Override
                 public void onInfoWindowClick(Marker marker) {
-                    String id = markers.get(marker);
-                    Intent intent = new Intent(getActivity(),DetailActivity.class);
-                    Log.e("Map Screen",id);
-                    intent.putExtra("UserID",id);
-                    startActivity(intent);
+                    if (marker != myMarker){
+                        String id = markers.get(marker);
+                        Intent intent = new Intent(getActivity(),DetailActivity.class);
+                        Log.e("Map Screen",id);
+                        intent.putExtra("UserID",id);
+                        startActivity(intent);
+                    }
                 }
             });
         }

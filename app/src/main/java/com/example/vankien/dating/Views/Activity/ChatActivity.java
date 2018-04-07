@@ -117,6 +117,7 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate {
 
     private void showProfile() {
         Intent intent = new Intent(ChatActivity.this,DetailActivity.class);
+        intent.putExtra("UserID",idFriend);
         startActivity(intent);
     }
 
