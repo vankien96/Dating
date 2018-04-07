@@ -1,14 +1,16 @@
 package com.example.vankien.dating.Models;
 
+import java.io.Serializable;
+
 /**
  * Created by Luu Ngoc Lan on 11-Mar-18.
  */
 
-public class Profile {
+public class Profile implements Serializable {
 
     private String mName;
-    private int mAge;
-    private int mSex;
+    private String mAge;
+    private String mSex;
     private String mDescription;
     private String mImage;
     private String mLatitude;
@@ -20,7 +22,7 @@ public class Profile {
     public Profile() {
     }
 
-    public Profile(String mName, int mAge, int mSex, String mDescription, String mImage, String mLatitude, String mLongitude, int mNumOfFriends, String mRegion, String mAddress) {
+    public Profile(String mName, String mAge, String mSex, String mDescription, String mImage, String mLatitude, String mLongitude, int mNumOfFriends, String mRegion, String mAddress) {
         this.mName = mName;
         this.mAge = mAge;
         this.mSex = mSex;
@@ -33,14 +35,6 @@ public class Profile {
         this.mAddress = mAddress;
     }
 
-    public String getmAddress() {
-        return mAddress;
-    }
-
-    public void setmAddress(String mAddress) {
-        this.mAddress = mAddress;
-    }
-
     public String getmName() {
         return mName;
     }
@@ -49,19 +43,19 @@ public class Profile {
         this.mName = mName;
     }
 
-    public int getmAge() {
+    public String getmAge() {
         return mAge;
     }
 
-    public void setmAge(int mAge) {
+    public void setmAge(String mAge) {
         this.mAge = mAge;
     }
 
-    public int getmSex() {
+    public String getmSex() {
         return mSex;
     }
 
-    public void setmSex(int mSex) {
+    public void setmSex(String mSex) {
         this.mSex = mSex;
     }
 
@@ -111,5 +105,13 @@ public class Profile {
 
     public void setmRegion(String mRegion) {
         this.mRegion = mRegion;
+    }
+
+    public String getmAddress() {
+        return mAddress;
+    }
+
+    public void setmAddress(String mAddress) {
+        this.mAddress = mAddress;
     }
 }

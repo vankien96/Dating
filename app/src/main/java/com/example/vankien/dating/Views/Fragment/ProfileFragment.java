@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener,ProfileDelegate {
+    private static final int RESULT_OK = -1;
     private TextView tvName,tvAge,tvAbout,tvAddress,tvRegion,tvNumOfFriend;
     private ImageButton imgBtnEdit,imgBtnLogout;
     private ImageView imgAvatar;
@@ -77,7 +78,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         switch (view.getId()){
             case R.id.imgBtnEdit:
                 Intent intentToEdit = new Intent(getActivity(),EditProfileActivity.class);
-                startActivityForResult(intentToEdit,1000);
+                startActivity(intentToEdit);
                 break;
             case R.id.imgBtnLogout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -121,4 +122,5 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         Uri uri = Uri.parse(data.getmImage());
         Picasso.with(getContext()).load(uri).into(imgAvatar);
     }
+
 }

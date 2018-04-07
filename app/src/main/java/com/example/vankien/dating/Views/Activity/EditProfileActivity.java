@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,22 +15,27 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.vankien.dating.Controllers.ProfileController;
+import com.example.vankien.dating.Controllers.ProfileDelegate;
 import com.example.vankien.dating.Controllers.UploadImageDelegate;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Utils.FirebaseUtils;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class EditProfileActivity extends AppCompatActivity implements UploadImageDelegate {
+public class EditProfileActivity extends AppCompatActivity implements UploadImageDelegate,ProfileDelegate {
     private static final int REQUEST_IMAGE = 200;
     private ImageButton imgBtnBack,imgBtnSave;
     private EditText edtName, edtAge, edtSex, edtAbout;
     private ImageView imvAvatar;
     Profile profile;
+    ProfileController controller;
     Bitmap avatarBitmap;
     String id;
     FirebaseUtils utils;
@@ -38,12 +44,6 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-
-        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        utils = FirebaseUtils.getShareInstance();
-        utils.delegate = this;
-
-
         initControls();
         loadData();
         addEvents();
@@ -57,7 +57,12 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         edtSex = (EditText) findViewById(R.id.edtSex);
         edtAbout = (EditText) findViewById(R.id.edtAbout);
         imvAvatar = (ImageView) findViewById(R.id.imvAvatar);
-        profile = ProfileController.getsInstance().getProfile();
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        utils = FirebaseUtils.getShareInstance();
+        utils.delegate = this;
+        controller = ProfileController.getsInstance();
+        controller.delegate = this;
     }
 
     public void addEvents(){
@@ -70,7 +75,8 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         imgBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveYourProfile();
+                uploadProfileToFirebase();
+
             }
         });
         imvAvatar.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +91,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -107,16 +114,34 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
     }
 
     public void loadData(){
-        edtName.setText(profile.getmName());
-        edtAge.setText(String.valueOf(profile.getmAge()));
-        edtSex.setText(profile.getmSex()==0?"Nữ":"Nam");
-        edtAbout.setText(profile.getmDescription());
+        controller.requestProfile(id);
     }
-    private void saveYourProfile() {
-        //Toast.makeText(this, "Save successfully!", Toast.LENGTH_SHORT).show();
+    private void uploadProfileToFirebase() {
+        String name = edtName.getText().toString().trim();
+        String age = edtAge.getText().toString().trim();
+        String about = edtAbout.getText().toString().trim();
+
+        if(TextUtils.isEmpty(name)){
+            Toast.makeText(getApplicationContext(), "Enter your name!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(age)){
+            Toast.makeText(getApplicationContext(), "Enter your age!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if(avatarBitmap != null){
             utils.uploadImage(avatarBitmap,id);
         }
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference();
+        reference.child("Profile").child(id).child("name").setValue(name);
+        reference.child("Profile").child(id).child("age").setValue(age);
+        reference.child("Profile").child(id).child("about").setValue(about);
+
+        Toast.makeText(this,"Upload successfully...",Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override
@@ -128,4 +153,15 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
     public void uploadImageFailed() {
 
     }
+
+    @Override
+    public void getProfileSuccess(Profile data) {
+        edtName.setText(data.getmName());
+        edtAge.setText(data.getmAge()+"");
+        edtAbout.setText(data.getmDescription());
+        edtSex.setText(data.getmSex()=="1"?"Nam":"Nữ");
+        Uri uri = Uri.parse(data.getmImage());
+        Picasso.with(getBaseContext()).load(uri).into(imvAvatar);
+    }
+
 }
