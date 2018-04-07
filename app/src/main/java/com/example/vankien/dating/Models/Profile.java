@@ -9,8 +9,8 @@ import java.io.Serializable;
 public class Profile implements Serializable {
 
     private String mName;
-    private String mAge;
-    private String mSex;
+    private int mAge;
+    private int mSex;
     private String mDescription;
     private String mImage;
     private String mLatitude;
@@ -22,19 +22,6 @@ public class Profile implements Serializable {
     public Profile() {
     }
 
-    public Profile(String mName, String mAge, String mSex, String mDescription, String mImage, String mLatitude, String mLongitude, int mNumOfFriends, String mRegion, String mAddress) {
-        this.mName = mName;
-        this.mAge = mAge;
-        this.mSex = mSex;
-        this.mDescription = mDescription;
-        this.mImage = mImage;
-        this.mLatitude = mLatitude;
-        this.mLongitude = mLongitude;
-        this.mNumOfFriends = mNumOfFriends;
-        this.mRegion = mRegion;
-        this.mAddress = mAddress;
-    }
-
     public String getmName() {
         return mName;
     }
@@ -43,19 +30,19 @@ public class Profile implements Serializable {
         this.mName = mName;
     }
 
-    public String getmAge() {
+    public int getmAge() {
         return mAge;
     }
 
-    public void setmAge(String mAge) {
+    public void setmAge(int mAge) {
         this.mAge = mAge;
     }
 
-    public String getmSex() {
+    public int getmSex() {
         return mSex;
     }
 
-    public void setmSex(String mSex) {
+    public void setmSex(int mSex) {
         this.mSex = mSex;
     }
 
@@ -112,6 +99,19 @@ public class Profile implements Serializable {
     }
 
     public void setmAddress(String mAddress) {
+        this.mAddress = mAddress;
+    }
+
+    public Profile(String mName, int age, int sex, String mDescription, String mImage, String mLatitude, String mLongitude, int mNumOfFriends, String mRegion, String mAddress) {
+        this.mName = mName;
+        this.mAge = age;
+        this.mSex = sex;
+        this.mDescription = mDescription;
+        this.mImage = mImage;
+        this.mLatitude = mLatitude;
+        this.mLongitude = mLongitude;
+        this.mNumOfFriends = mNumOfFriends;
+        this.mRegion = mRegion;
         this.mAddress = mAddress;
     }
 }

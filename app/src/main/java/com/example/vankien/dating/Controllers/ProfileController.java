@@ -31,7 +31,7 @@ public class ProfileController {
                 HashMap data = (HashMap) dataSnapshot.getValue();
                 String about = (String) data.get("about");
                 String address = (String) data.get("address");
-                String age = (String) data.get("age");
+                Long age = (Long) data.get("age");
                 String ageString = age+"";
                 String avatar = (String) data.get("avatar");
  //               float latitude = (float) data.get("latitude");
@@ -44,7 +44,7 @@ public class ProfileController {
                 Long sex = (Long) data.get("sex");
                 String sexString = sex+"";
 
-                profile.setmAge(age);
+                profile.setmAge(Integer.parseInt(ageString));
                 profile.setmDescription(about);
                 profile.setmImage(avatar);
 
@@ -53,7 +53,7 @@ public class ProfileController {
                 profile.setmName(name);
                 profile.setmRegion(region);
                 profile.setmNumOfFriends(Integer.parseInt(numOfFriendString));
-                profile.setmSex(sexString);
+                profile.setmSex(Integer.parseInt(sexString));
                 profile.setmAddress(address);
 
                 if(delegate != null){

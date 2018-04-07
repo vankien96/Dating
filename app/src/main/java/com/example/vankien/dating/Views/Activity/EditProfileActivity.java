@@ -137,7 +137,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference();
         reference.child("Profile").child(id).child("name").setValue(name);
-        reference.child("Profile").child(id).child("age").setValue(age);
+        reference.child("Profile").child(id).child("age").setValue(23);
         reference.child("Profile").child(id).child("about").setValue(about);
         Toast.makeText(this,"Upload successfully...",Toast.LENGTH_SHORT).show();
         finish();
@@ -155,12 +155,15 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
 
     @Override
     public void getProfileSuccess(Profile data) {
-        edtName.setText(data.getmName());
-        edtAge.setText(data.getmAge()+"");
-        edtAbout.setText(data.getmDescription());
-        edtSex.setText(data.getmSex()=="1"?"Nam":"Nữ");
-        Uri uri = Uri.parse(data.getmImage());
-        Picasso.with(getBaseContext()).load(uri).into(imvAvatar);
+        if(data!=null){
+            edtName.setText(data.getmName());
+            edtAge.setText(data.getmAge()+"");
+            edtAbout.setText(data.getmDescription());
+            edtSex.setText(data.getmSex()==1?"Nam":"Nữ");
+            Uri uri = Uri.parse(data.getmImage());
+            Picasso.with(getBaseContext()).load(uri).into(imvAvatar);
+        } else return;
+
     }
 
 }
