@@ -47,6 +47,7 @@ public class ProfileController {
                 profile.setmAge(age);
                 profile.setmDescription(about);
                 profile.setmImage(avatar);
+
 //                profile.setmLatitude(latitude);
 //                profile.setmLongitude(longitude);
                 profile.setmName(name);
