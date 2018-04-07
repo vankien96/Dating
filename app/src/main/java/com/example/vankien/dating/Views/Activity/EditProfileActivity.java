@@ -21,8 +21,6 @@ import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Utils.FirebaseUtils;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -134,11 +132,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         if(avatarBitmap != null){
             utils.uploadImage(avatarBitmap,id);
         }
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference();
-        reference.child("Profile").child(id).child("name").setValue(name);
-        reference.child("Profile").child(id).child("age").setValue(23);
-        reference.child("Profile").child(id).child("about").setValue(about);
+        ProfileController.getsInstance().uploadProfile(id,name,age,about);
         Toast.makeText(this,"Upload successfully...",Toast.LENGTH_SHORT).show();
         finish();
     }

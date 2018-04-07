@@ -3,6 +3,7 @@ package com.example.vankien.dating.Controllers;
 import com.example.vankien.dating.Models.Profile;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -67,6 +68,12 @@ public class ProfileController {
             }
         });
     }
-
+    public void uploadProfile(String id,String name,String age,String about){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference();
+        reference.child("Profile").child(id).child("name").setValue(name);
+        reference.child("Profile").child(id).child("age").setValue(Integer.parseInt(age));
+        reference.child("Profile").child(id).child("about").setValue(about);
+    }
 
 }
