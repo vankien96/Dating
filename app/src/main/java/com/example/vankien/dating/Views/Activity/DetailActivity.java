@@ -57,6 +57,12 @@ public class DetailActivity extends AppCompatActivity implements ProfileDelegate
                 }
             }
         });
+        btnReject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void requestData() {
