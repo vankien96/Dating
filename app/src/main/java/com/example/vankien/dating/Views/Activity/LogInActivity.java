@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.example.vankien.dating.Controllers.LoginDelegate;
 import com.example.vankien.dating.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.wang.avi.AVLoadingIndicatorView;
+
 
 public class LogInActivity extends AppCompatActivity implements LoginDelegate {
 
