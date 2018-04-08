@@ -50,11 +50,9 @@ public class FirebaseUtils {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                if (delegate != null){
+                if (delegate != null) {
                     delegate.uploadImageSuccess(downloadUrl.toString());
-
                 }
-                FirebaseDatabase.getInstance().getReference().child("Profile").child(_id).child("avatar").setValue(String.valueOf(downloadUrl));
             }
         });
     }

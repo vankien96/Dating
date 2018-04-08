@@ -61,7 +61,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         tvNumOfFriend = view.findViewById(R.id.tvNumOfFriend);
         btnDiscoverySetting = (Button) view.findViewById(R.id.btnDiscoverySetting);
 
-        profile = ProfileController.getsInstance().getProfile();
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         controller = ProfileController.getsInstance();
         controller.delegate = this;
@@ -78,7 +77,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         switch (view.getId()){
             case R.id.imgBtnEdit:
                 Intent intentToEdit = new Intent(getActivity(),EditProfileActivity.class);
-                startActivity(intentToEdit);
+                intentToEdit.putExtra("isEdit",true);
+                if (profile != null) {
+                    intentToEdit.putExtra("Profile",profile);
+                }
+                startActivityForResult(intentToEdit,200);
                 break;
             case R.id.imgBtnLogout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -112,6 +115,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
 
     @Override
     public void getProfileSuccess(Profile data) {
+        profile = data;
         tvAge.setText(data.getmAge()+"");
         tvNumOfFriend.setText(data.getmNumOfFriends()+"");
         tvName.setText(data.getmName());
@@ -122,4 +126,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         Picasso.with(getContext()).load(uri).into(imgAvatar);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 200 && resultCode == RESULT_OK){
+            controller.requestProfile(id);
+        }
+    }
 }
