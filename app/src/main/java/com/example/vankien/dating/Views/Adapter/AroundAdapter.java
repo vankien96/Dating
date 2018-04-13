@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.vankien.dating.Models.PeopleAround;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Views.Activity.DetailActivity;
@@ -90,7 +91,8 @@ public class AroundAdapter extends BaseAdapter {
         PeopleAround mAroundModel = aroundModelList.get(position);
         String avatar = mAroundModel.getAvatarUrl();
         Uri uri = Uri.parse(avatar);
-        Picasso.with(context).load(uri).into(viewHolder.imgHinh);
+        //Picasso.with(context).load(uri).into(viewHolder.imgHinh);
+        Glide.with(context).load(uri).into(viewHolder.imgHinh);
 
         return convertView;
     }

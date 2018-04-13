@@ -28,10 +28,10 @@ public class FirebaseUtils {
 
     public void uploadAvatar(Bitmap bitmap, final String id){
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference reference = storage.getReference().child("avatar").child(id+"jpg");
+        StorageReference reference = storage.getReference().child("avatar").child(id+".jpg");
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = reference.putBytes(data);
@@ -58,10 +58,11 @@ public class FirebaseUtils {
 
     public void uploadImage(Bitmap bitmap, final String id) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference reference = storage.getReference().child("imageChat").child(id+TimeUtils.getShareInstance().getDateString(new Date())+"jpg");
+        StorageReference reference = storage.getReference().child("imageChat").child(id+TimeUtils.getShareInstance().getDateString(new Date())+".jpg");
+
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = reference.putBytes(data);

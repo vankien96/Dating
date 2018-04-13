@@ -11,7 +11,9 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -20,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.vankien.dating.Controllers.MapController;
 import com.example.vankien.dating.Interface.MapDelegate;
 import com.example.vankien.dating.Models.PeopleAround;
@@ -243,8 +246,8 @@ public class MapFragment extends Fragment implements MapDelegate {
         if (!people.getId().equals(id)){
             final LatLng mylatlng = people.getAddressLatLng();
             String avatar = people.getAvatarUrl();
-            Uri uri = Uri.parse(avatar);
-            Picasso.with(getContext()).load(uri).into(new Target() {
+            final Uri uri = Uri.parse(avatar);
+            Picasso.with(getContext()).load(uri).resize(100,100).into(new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     Bitmap squareBitmap = ImageUtils.cropToSquare(bitmap);

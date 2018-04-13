@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -121,6 +122,17 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
                 Uri data = Uri.parse(pictureDirectoryPath);
                 photoPickerIntent.setDataAndType(data,"image/*");
                 startActivityForResult(photoPickerIntent,REQUEST_IMAGE);
+            }
+        });
+        lvChat.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+
             }
         });
     }
