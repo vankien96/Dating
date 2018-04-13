@@ -6,10 +6,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.storage.StorageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,8 +16,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.vankien.dating.Controllers.ProfileController;
-import com.example.vankien.dating.Controllers.ProfileDelegate;
-import com.example.vankien.dating.Controllers.UploadImageDelegate;
+import com.example.vankien.dating.Interface.UploadImageDelegate;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Utils.FirebaseUtils;
@@ -89,7 +86,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
                 if (isEdit) {
                     if (avatarBitmap != null) {
                         imgBtnSave.setActivated(false);
-                        utils.uploadImage(avatarBitmap, id);
+                        utils.uploadAvatar(avatarBitmap, id);
                     } else {
                         uploadProfileToFirebase();
                     }
@@ -98,7 +95,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
                     profile.setmNumOfFriends(0);
                     if (avatarBitmap != null) {
                         imgBtnSave.setActivated(false);
-                        utils.uploadImage(avatarBitmap, id);
+                        utils.uploadAvatar(avatarBitmap, id);
                     } else {
                         String defaultAvatar = getResources().getString(R.string.default_avatar);
                         defaultAvatar = defaultAvatar.replaceAll("^^^","&");

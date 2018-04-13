@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/bg_cell_receiver_message">
-        <TextView
+        <hani.momanii.supernova_emoji_library.Helper.EmojiconTextView
             android:id="@+id/txtMessage"
             android:textColor="@color/white"
             android:layout_width="match_parent"

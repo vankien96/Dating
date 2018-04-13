@@ -7,15 +7,25 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.example.vankien.dating.Models.Constant;
 import com.example.vankien.dating.Models.MessageModel;
 import com.example.vankien.dating.R;
+import com.example.vankien.dating.Utils.Validate;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import hani.momanii.supernova_emoji_library.Helper.EmojiconTextView;
 
 /**
  * Created by vanki on 3/8/2018.
@@ -39,16 +49,27 @@ public class MessageAdapter extends ArrayAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         MessageModel messageModel = arrMessage.get(position);
 
-        MessageHolder viewHolder;
+        final MessageHolder viewHolder;
         if (convertView == null){
             viewHolder = new MessageHolder();
             if(messageModel.getMe()){
-                convertView = LayoutInflater.from(context).inflate(R.layout.cell_my_message,null);
-                viewHolder.txtMessage = convertView.findViewById(R.id.txtMessage);
+                if (Constant.typeImage.equals(messageModel.getType())) {
+                    convertView = LayoutInflater.from(context).inflate(R.layout.cell_message_img_right,null);
+                    viewHolder.image = convertView.findViewById(R.id.img_chat);
+                } else {
+                    convertView = LayoutInflater.from(context).inflate(R.layout.cell_my_message,null);
+                    viewHolder.txtMessage = convertView.findViewById(R.id.txtMessage);
+                }
             }else{
-                convertView = LayoutInflater.from(context).inflate(R.layout.cell_receive_message,null);
-                viewHolder.imgAvatar = convertView.findViewById(R.id.imgAvatar);
-                viewHolder.txtMessage = convertView.findViewById(R.id.txtMessage);
+                if (Constant.typeImage.equals(messageModel.getType())) {
+                    convertView = LayoutInflater.from(context).inflate(R.layout.cell_message_img_left,null);
+                    viewHolder.imgAvatar = convertView.findViewById(R.id.imgAvatar);
+                    viewHolder.image = convertView.findViewById(R.id.img_chat);
+                } else {
+                    convertView = LayoutInflater.from(context).inflate(R.layout.cell_receive_message,null);
+                    viewHolder.imgAvatar = convertView.findViewById(R.id.imgAvatar);
+                    viewHolder.txtMessage = convertView.findViewById(R.id.txtMessage);
+                }
             }
             convertView.setTag(viewHolder);
         }else{
@@ -63,15 +84,24 @@ public class MessageAdapter extends ArrayAdapter {
                     viewHolder.imgAvatar.setVisibility(View.VISIBLE);
                 }
             }
-            Uri uriAvatar = Uri.parse(avatar);
-            Picasso.with(context).load(uriAvatar).into(viewHolder.imgAvatar);
+            //final Uri uriAvatar = Uri.parse(avatar);
+            //Picasso.with(context).load(uriAvatar).into(viewHolder.imgAvatar);
+            Glide.with(context)
+                    .load(avatar)
+                    .into(viewHolder.imgAvatar);
         }
-        viewHolder.txtMessage.setText(messageModel.getMessage());
+        if (Constant.typeImage.equals(messageModel.getType())) {
+            Uri uri = Uri.parse(messageModel.getMessage());
+            Picasso.with(context).load(uri).into(viewHolder.image);
+        } else {
+            viewHolder.txtMessage.setText(messageModel.getMessage());
+        }
         return convertView;
     }
     public class MessageHolder {
         ImageView imgAvatar;
-        TextView txtMessage;
+        EmojiconTextView txtMessage;
+        ImageView image;
     }
     @Override
     public int getViewTypeCount() {

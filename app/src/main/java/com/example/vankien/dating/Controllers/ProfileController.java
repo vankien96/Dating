@@ -1,5 +1,6 @@
 package com.example.vankien.dating.Controllers;
 
+import com.example.vankien.dating.Interface.ProfileDelegate;
 import com.example.vankien.dating.Models.Profile;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

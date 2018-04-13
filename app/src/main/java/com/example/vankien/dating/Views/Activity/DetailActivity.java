@@ -5,14 +5,13 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vankien.dating.Controllers.ProfileController;
-import com.example.vankien.dating.Controllers.ProfileDelegate;
+import com.example.vankien.dating.Interface.ProfileDelegate;
 import com.example.vankien.dating.Models.FriendChatModel;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;

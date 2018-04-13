@@ -2,6 +2,7 @@ package com.example.vankien.dating.Controllers;
 
 import android.util.Log;
 
+import com.example.vankien.dating.Interface.MapDelegate;
 import com.example.vankien.dating.Models.PeopleAround;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;

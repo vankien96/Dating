@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vankien.dating.Controllers.ProfileController;
-import com.example.vankien.dating.Controllers.ProfileDelegate;
+import com.example.vankien.dating.Interface.ProfileDelegate;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Views.Activity.EditProfileActivity;

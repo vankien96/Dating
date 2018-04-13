@@ -2,7 +2,10 @@ package com.example.vankien.dating.Controllers;
 
 import android.app.Activity;
 import android.util.Log;
+import android.webkit.URLUtil;
 
+import com.example.vankien.dating.Interface.MessageDelegate;
+import com.example.vankien.dating.Models.Constant;
 import com.example.vankien.dating.Models.MessageModel;
 import com.example.vankien.dating.Utils.TimeUtils;
 import com.google.firebase.database.ChildEventListener;
@@ -55,6 +58,7 @@ public class MessageController {
                 HashMap mapMessage = (HashMap) dataSnapshot.getValue();
                 String idSender = (String) mapMessage.get("idSender");
                 String message = (String) mapMessage.get("message");
+                String type = (String) mapMessage.get("type");
                 Log.e("Message screen",idSender+" "+message);
                 if (idSender != null && message != null){
                     if(idSender.equals(idMe)){
@@ -63,6 +67,7 @@ public class MessageController {
                         messageModel.setMe(false);
                     }
                     messageModel.setMessage(message);
+                    messageModel.setType(type);
                     if (delegate != null){
                         delegate.newMessageAdded(messageModel);
                     }
@@ -101,7 +106,7 @@ public class MessageController {
         return roomID;
     }
 
-    public void sendMessage(String idUser, String idFriend,String message){
+    public void sendMessage(String idUser, String idFriend,String message,String type){
         String roomID = this.createRoomID(idUser,idFriend);
         Date current = new Date();
         String dateString = TimeUtils.getShareInstance().getDateString(current);
@@ -111,9 +116,14 @@ public class MessageController {
         HashMap hashMap = new HashMap();
         hashMap.put("idSender",idUser);
         hashMap.put("message",message);
+        hashMap.put("type",type);
         myRef.setValue(hashMap);
-
-        database.getReference().child("Friend").child(idUser).child(idFriend).setValue(message);
-        database.getReference().child("Friend").child(idFriend).child(idUser).setValue(message);
+        if (Constant.typeImage.equals(type)) {
+            database.getReference().child("Friend").child(idUser).child(idFriend).setValue("Image");
+            database.getReference().child("Friend").child(idFriend).child(idUser).setValue("Image");
+        } else {
+            database.getReference().child("Friend").child(idUser).child(idFriend).setValue(message);
+            database.getReference().child("Friend").child(idFriend).child(idUser).setValue(message);
+        }
     }
 }

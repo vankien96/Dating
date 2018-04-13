@@ -1,5 +1,6 @@
 package com.example.vankien.dating.Controllers;
 
+import com.example.vankien.dating.Interface.FriendChatDelegate;
 import com.example.vankien.dating.Models.FriendChatModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

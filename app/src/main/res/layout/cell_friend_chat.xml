@@ -30,7 +30,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             />
-        <TextView
+        <hani.momanii.supernova_emoji_library.Helper.EmojiconTextView
             android:id="@+id/txtLatestMessage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
