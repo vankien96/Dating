@@ -77,10 +77,10 @@
         android:textSize="@dimen/text_size_large"
          />
 
-    <Button
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/btn_login_fb"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_below="@+id/btn_login"
         android:layout_marginLeft="@dimen/edt_margin_left"
         android:layout_marginRight="@dimen/edt_margin_right"
