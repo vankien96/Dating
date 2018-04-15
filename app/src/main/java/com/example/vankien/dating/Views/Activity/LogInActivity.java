@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.vankien.dating.Controllers.LoginController;
 import com.example.vankien.dating.Interface.LoginDelegate;
+import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -25,6 +26,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.Login;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,7 +35,12 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONObject;
@@ -85,8 +92,6 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Toast.makeText(LogInActivity.this,"Facebook:OnSuccess: "+loginResult,Toast.LENGTH_LONG).show();
-                resultLoginWithFacebook();
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
@@ -110,15 +115,34 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(LogInActivity.this,"signInWithCredential:success",Toast.LENGTH_LONG).show();
                             FirebaseUser user = mAuth.getCurrentUser();
+                            final String id = user.getUid();
+                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            database.getReference().child("Profile").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.hasChild(id)) {
+                                        Intent intent = new Intent(LogInActivity.this,MainActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        resultLoginWithFacebook();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(LogInActivity.this,"signInWithCredential:failure",Toast.LENGTH_LONG).show();
-                         task.getException();
+                            try {
+                               throw task.getException();
+                            } catch(FirebaseAuthUserCollisionException ex) {
+                                Toast.makeText(LogInActivity.this,"Your email already exist. Please login with email and pass",Toast.LENGTH_LONG).show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
-                        // ...
                     }
                 });
     }
@@ -127,21 +151,38 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
         GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
             @Override
             public void onCompleted(JSONObject object, GraphResponse response) {
-                Log.d("JSON",response.getJSONObject().toString());
                 Toast.makeText(LogInActivity.this,response.getJSONObject().toString(),Toast.LENGTH_LONG).show();
                 try{
                     String name = object.getString("name");
                     String email = object.getString("email");
                     int id = object.getInt("id");
                     String gender = object.getString("gender");
+                    String profilePicUrl = (String) response.getJSONObject().getJSONObject("picture").getJSONObject("data").get("url");
+                    Log.e("Login",response.getJSONObject().toString());
+                    Profile profile = new Profile();
+                    Log.e("Login",id+"");
+                    profile.setmImage(profilePicUrl);
+                    profile.setmName(name);
+                    if ("male".equals(gender)) {
+                        profile.setmSex(1);
+                    } else {
+                        profile.setmSex(0);
+                    }
+                    profile.setmAddress("");
+                    profile.setmDescription("");
+                    Intent intent = new Intent(LogInActivity.this,EditProfileActivity.class);
+                    intent.putExtra("Profile",profile);
+                    intent.putExtra("isEdit",true);
+                    intent.putExtra("Facebook",true);
+                    startActivity(intent);
                 }
                 catch(Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         });
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,email,first_name,gender,birthday");
+        parameters.putString("fields", "id,name,email,first_name,gender,birthday,picture.type(large)");
         graphRequest.setParameters(parameters);
         graphRequest.executeAsync();
     }

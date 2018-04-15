@@ -38,6 +38,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
     String id;
     FirebaseUtils utils;
     boolean isEdit = false;
+    boolean isFacebook = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +48,12 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         addEvents();
         Intent intent = getIntent();
         isEdit = intent.getBooleanExtra("isEdit",false);
+        isFacebook = intent.getBooleanExtra("Facebook",false);
         profile = (Profile) intent.getSerializableExtra("Profile");
         if (profile != null) {
             loadData();
         }
-        if(!isEdit) {
+        if(!isEdit || isFacebook) {
             imgBtnBack.setVisibility(View.INVISIBLE);
         }
     }
@@ -199,7 +201,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         ProfileController.getsInstance().uploadProfile(profile,id);
         Toast.makeText(this,"Upload successfully...",Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
-        if (isEdit) {
+        if (isEdit && !isFacebook) {
             finish();
         } else {
             Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
