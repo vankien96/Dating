@@ -6,11 +6,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.vankien.dating.Controllers.ResetPasswordController;
-import com.example.vankien.dating.Controllers.ResetPasswordDelegate;
+import com.example.vankien.dating.Interface.ResetPasswordDelegate;
 import com.example.vankien.dating.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.wang.avi.AVLoadingIndicatorView;

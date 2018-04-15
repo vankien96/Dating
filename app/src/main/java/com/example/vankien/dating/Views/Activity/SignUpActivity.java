@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.vankien.dating.Controllers.SignUpController;
-import com.example.vankien.dating.Controllers.SignUpDelegate;
+import com.example.vankien.dating.Interface.SignUpDelegate;
 import com.example.vankien.dating.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.wang.avi.AVLoadingIndicatorView;

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.vankien.dating.Controllers.MapController;
-import com.example.vankien.dating.Controllers.MapDelegate;
+import com.example.vankien.dating.Interface.MapDelegate;
 import com.example.vankien.dating.Models.PeopleAround;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Views.Adapter.AroundAdapter;

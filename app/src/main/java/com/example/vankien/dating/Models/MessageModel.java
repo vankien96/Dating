@@ -3,15 +3,25 @@ package com.example.vankien.dating.Models;
 /**
  * Created by vanki on 3/8/2018.
  */
-
 public class MessageModel {
     private Boolean isMe;
     private String message;
+    private String type;
 
-    public MessageModel(Boolean isMe, String message) {
+    public MessageModel(Boolean isMe, String message,String type) {
         this.isMe = isMe;
         this.message = message;
+        this.type = type;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public MessageModel() {}
 
     public Boolean getMe() {

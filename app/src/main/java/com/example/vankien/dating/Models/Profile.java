@@ -1,10 +1,12 @@
 package com.example.vankien.dating.Models;
 
+import java.io.Serializable;
+
 /**
  * Created by Luu Ngoc Lan on 11-Mar-18.
  */
 
-public class Profile {
+public class Profile implements Serializable {
 
     private String mName;
     private int mAge;
@@ -18,27 +20,6 @@ public class Profile {
     private String mAddress;
 
     public Profile() {
-    }
-
-    public Profile(String mName, int mAge, int mSex, String mDescription, String mImage, String mLatitude, String mLongitude, int mNumOfFriends, String mRegion, String mAddress) {
-        this.mName = mName;
-        this.mAge = mAge;
-        this.mSex = mSex;
-        this.mDescription = mDescription;
-        this.mImage = mImage;
-        this.mLatitude = mLatitude;
-        this.mLongitude = mLongitude;
-        this.mNumOfFriends = mNumOfFriends;
-        this.mRegion = mRegion;
-        this.mAddress = mAddress;
-    }
-
-    public String getmAddress() {
-        return mAddress;
-    }
-
-    public void setmAddress(String mAddress) {
-        this.mAddress = mAddress;
     }
 
     public String getmName() {
@@ -111,5 +92,26 @@ public class Profile {
 
     public void setmRegion(String mRegion) {
         this.mRegion = mRegion;
+    }
+
+    public String getmAddress() {
+        return mAddress;
+    }
+
+    public void setmAddress(String mAddress) {
+        this.mAddress = mAddress;
+    }
+
+    public Profile(String mName, int age, int sex, String mDescription, String mImage, String mLatitude, String mLongitude, int mNumOfFriends, String mRegion, String mAddress) {
+        this.mName = mName;
+        this.mAge = age;
+        this.mSex = sex;
+        this.mDescription = mDescription;
+        this.mImage = mImage;
+        this.mLatitude = mLatitude;
+        this.mLongitude = mLongitude;
+        this.mNumOfFriends = mNumOfFriends;
+        this.mRegion = mRegion;
+        this.mAddress = mAddress;
     }
 }

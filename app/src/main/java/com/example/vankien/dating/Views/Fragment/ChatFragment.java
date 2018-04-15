@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.vankien.dating.Controllers.FriendChatController;
-import com.example.vankien.dating.Controllers.FriendChatDelegate;
+import com.example.vankien.dating.Interface.FriendChatDelegate;
 import com.example.vankien.dating.Models.FriendChatModel;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Views.Activity.ChatActivity;
@@ -90,8 +90,8 @@ public class ChatFragment extends Fragment implements FriendChatDelegate {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
         controller.delegate = null;
         controller.removeListener();
     }

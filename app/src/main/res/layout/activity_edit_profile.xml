@@ -81,7 +81,7 @@
                 android:id="@+id/edtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="LINH KA"/>
+                android:hint="Your name"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,8 +101,49 @@
                 android:text="@string/textview.text.edit_profile_sex"
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/black"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:text="Male"
+                        android:id="@+id/radioMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioButton
+                        android:layout_marginLeft="32dp"
+                        android:id="@+id/radioFemale"
+                        android:text="Female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RadioGroup>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="Region*"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/black"/>
             <EditText
-                android:id="@+id/edtSex"
+                android:id="@+id/edtRegion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Female"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="Address*"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/edtAdress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Female"/>
@@ -113,11 +154,12 @@
                 android:text="@string/textview.text.edit_profile_about"
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/black"/>
+
             <EditText
                 android:id="@+id/edtAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Love pink color, hating betrayl. I'm a fan of Son Tung MTP, a responsibility skyer. I can sing, dance, speak everywhere, everything..."/>
+                android:hint="About my self"/>
 
         </LinearLayout>
     </ScrollView>

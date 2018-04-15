@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vankien.dating.Controllers.ProfileController;
-import com.example.vankien.dating.Controllers.ProfileDelegate;
+import com.example.vankien.dating.Interface.ProfileDelegate;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Views.Activity.EditProfileActivity;
@@ -28,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener,ProfileDelegate {
+    private static final int RESULT_OK = -1;
     private TextView tvName,tvAge,tvAbout,tvAddress,tvRegion,tvNumOfFriend;
     private ImageButton imgBtnEdit,imgBtnLogout;
     private ImageView imgAvatar;
@@ -39,9 +39,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile,container,false);
-        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        controller = ProfileController.getsInstance();
-        controller.delegate = this;
         initControls(view);
         addEvents();
         loadData();
@@ -63,7 +60,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         tvRegion = view.findViewById(R.id.tvRegion);
         tvNumOfFriend = view.findViewById(R.id.tvNumOfFriend);
         btnDiscoverySetting = (Button) view.findViewById(R.id.btnDiscoverySetting);
-        profile = ProfileController.getsInstance().getProfile();
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        controller = ProfileController.getsInstance();
+        controller.delegate = this;
 
     }
 
@@ -77,7 +77,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         switch (view.getId()){
             case R.id.imgBtnEdit:
                 Intent intentToEdit = new Intent(getActivity(),EditProfileActivity.class);
-                startActivityForResult(intentToEdit,1000);
+                intentToEdit.putExtra("isEdit",true);
+                if (profile != null) {
+                    intentToEdit.putExtra("Profile",profile);
+                }
+                startActivityForResult(intentToEdit,200);
                 break;
             case R.id.imgBtnLogout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -111,7 +115,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
 
     @Override
     public void getProfileSuccess(Profile data) {
-        Log.e("Profile Screen","delegate");
+        profile = data;
         tvAge.setText(data.getmAge()+"");
         tvNumOfFriend.setText(data.getmNumOfFriends()+"");
         tvName.setText(data.getmName());
@@ -120,5 +124,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         tvAddress.setText(data.getmAddress());
         Uri uri = Uri.parse(data.getmImage());
         Picasso.with(getContext()).load(uri).into(imgAvatar);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 200 && resultCode == RESULT_OK){
+            controller.requestProfile(id);
+        }
     }
 }

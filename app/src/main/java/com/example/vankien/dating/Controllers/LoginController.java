@@ -3,6 +3,7 @@ package com.example.vankien.dating.Controllers;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
+import com.example.vankien.dating.Interface.LoginDelegate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

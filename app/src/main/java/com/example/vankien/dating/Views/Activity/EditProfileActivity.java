@@ -7,46 +7,53 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.vankien.dating.Controllers.ProfileController;
-import com.example.vankien.dating.Controllers.UploadImageDelegate;
+import com.example.vankien.dating.Interface.UploadImageDelegate;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Utils.FirebaseUtils;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class EditProfileActivity extends AppCompatActivity implements UploadImageDelegate {
+public class EditProfileActivity extends AppCompatActivity implements UploadImageDelegate{
     private static final int REQUEST_IMAGE = 200;
     private ImageButton imgBtnBack,imgBtnSave;
-    private EditText edtName, edtAge, edtSex, edtAbout;
+    private EditText edtName, edtAge, edtAbout,edtRegion,edtAddress;
+    private RadioButton radioMale,radioFemale;
     private ImageView imvAvatar;
     Profile profile;
     Bitmap avatarBitmap;
     String id;
     FirebaseUtils utils;
+    boolean isEdit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-
-        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        utils = FirebaseUtils.getShareInstance();
-        utils.delegate = this;
-
-
         initControls();
-        loadData();
         addEvents();
+        Intent intent = getIntent();
+        isEdit = intent.getBooleanExtra("isEdit",false);
+        profile = (Profile) intent.getSerializableExtra("Profile");
+        if (profile != null) {
+            loadData();
+        }
+        if(!isEdit) {
+            imgBtnBack.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void initControls(){
@@ -54,10 +61,16 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         imgBtnSave = (ImageButton) findViewById(R.id.imgBtnSave);
         edtName = (EditText) findViewById(R.id.edtName);
         edtAge = (EditText) findViewById(R.id.edtAge);
-        edtSex = (EditText) findViewById(R.id.edtSex);
         edtAbout = (EditText) findViewById(R.id.edtAbout);
         imvAvatar = (ImageView) findViewById(R.id.imvAvatar);
-        profile = ProfileController.getsInstance().getProfile();
+        edtAddress = findViewById(R.id.edtAdress);
+        edtRegion = findViewById(R.id.edtRegion);
+        radioMale = findViewById(R.id.radioMale);
+        radioFemale = findViewById(R.id.radioFemale);
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        utils = FirebaseUtils.getShareInstance();
+        utils.delegate = this;
     }
 
     public void addEvents(){
@@ -70,7 +83,26 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         imgBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveYourProfile();
+                if (isEdit) {
+                    if (avatarBitmap != null) {
+                        imgBtnSave.setActivated(false);
+                        utils.uploadAvatar(avatarBitmap, id);
+                    } else {
+                        uploadProfileToFirebase();
+                    }
+                } else {
+                    profile = new Profile();
+                    profile.setmNumOfFriends(0);
+                    if (avatarBitmap != null) {
+                        imgBtnSave.setActivated(false);
+                        utils.uploadAvatar(avatarBitmap, id);
+                    } else {
+                        String defaultAvatar = getResources().getString(R.string.default_avatar);
+                        defaultAvatar = defaultAvatar.replaceAll("^^^","&");
+                        profile.setmImage(defaultAvatar);
+                        uploadProfileToFirebase();
+                    }
+                }
             }
         });
         imvAvatar.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +117,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -108,24 +141,83 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
 
     public void loadData(){
         edtName.setText(profile.getmName());
-        edtAge.setText(String.valueOf(profile.getmAge()));
-        edtSex.setText(profile.getmSex()==0?"Nữ":"Nam");
+        edtAge.setText(profile.getmAge()+"");
         edtAbout.setText(profile.getmDescription());
+        if (profile.getmSex() == 1) {
+            radioMale.setChecked(true);
+        } else {
+            radioFemale.setChecked(true);
+        }
+        edtRegion.setText(profile.getmRegion());
+        edtAddress.setText(profile.getmAddress());
+        Uri uri = Uri.parse(profile.getmImage());
+        Picasso.with(getBaseContext()).load(uri).into(imvAvatar);
     }
-    private void saveYourProfile() {
-        //Toast.makeText(this, "Save successfully!", Toast.LENGTH_SHORT).show();
-        if(avatarBitmap != null){
-            utils.uploadImage(avatarBitmap,id);
+    private void uploadProfileToFirebase() {
+        String name = edtName.getText().toString().trim();
+        String age = edtAge.getText().toString().trim();
+        String about = edtAbout.getText().toString().trim();
+        String region = edtRegion.getText().toString().trim();
+        String address = edtAddress.getText().toString().trim();
+        if(TextUtils.isEmpty(name)){
+            Toast.makeText(getApplicationContext(), "Enter your name!", Toast.LENGTH_SHORT).show();
+            imgBtnSave.setActivated(true);
+            return;
+        }
+
+        if(TextUtils.isEmpty(age)){
+            Toast.makeText(getApplicationContext(), "Enter your age!", Toast.LENGTH_SHORT).show();
+            imgBtnSave.setActivated(true);
+            return;
+        }
+        if (TextUtils.isEmpty(region)) {
+            Toast.makeText(getApplicationContext(), "Enter your region!", Toast.LENGTH_SHORT).show();
+            imgBtnSave.setActivated(true);
+            return;
+        }
+        if (TextUtils.isEmpty(about)) {
+            Toast.makeText(getApplicationContext(), "Enter your description!", Toast.LENGTH_SHORT).show();
+            imgBtnSave.setActivated(true);
+            return;
+        }
+        if (TextUtils.isEmpty(address)) {
+            Toast.makeText(getApplicationContext(), "Enter your address!", Toast.LENGTH_SHORT).show();
+            imgBtnSave.setActivated(true);
+            return;
+        }
+
+        profile.setmName(name);
+        profile.setmAge(Integer.parseInt(age));
+        profile.setmDescription(about);
+        profile.setmAddress(address);
+        profile.setmRegion(region);
+        if (radioMale.isChecked()) {
+            profile.setmSex(1);
+        } else {
+            profile.setmSex(0);
+        }
+        ProfileController.getsInstance().uploadProfile(profile,id);
+        Toast.makeText(this,"Upload successfully...",Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
+        if (isEdit) {
+            finish();
+        } else {
+            Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
     @Override
     public void uploadImageSuccess(String avatarUrl) {
-        
+        if (profile != null) {
+            profile.setmImage(avatarUrl);
+            uploadProfileToFirebase();
+        }
     }
 
     @Override
     public void uploadImageFailed() {
-
+        imgBtnSave.setActivated(true);
     }
 }
