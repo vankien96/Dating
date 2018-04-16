@@ -25,17 +25,18 @@
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
             android:layout_marginLeft="16dp"
-            android:background="@drawable/ic_back"/>
+            android:background="@drawable/ic_back_white"
+            />
 
         <ImageButton
             android:id="@+id/imgBtnShare"
             android:layout_width="30dp"
-            android:layout_height="25dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
             android:layout_marginRight="16dp"
-            android:background="@drawable/ic_check"/>
+            android:background="@drawable/ic_share_white"/>
     </RelativeLayout>
 
 </RelativeLayout>
