@@ -1,7 +1,9 @@
 package com.example.vankien.dating.Views.Fragment;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -17,6 +19,7 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,26 +54,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MapFragment extends Fragment implements MapDelegate {
+
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     MapView mMapView;
     GoogleMap googleMap;
     Location myLocation;
     LocationManager mLocationManager;
-    HashMap<Marker,String> markers;
+    HashMap<Marker, String> markers;
     Marker myMarker;
     MapController controller;
     String id;
     View rootView;
+    LocationListener locationListener;
 
     Circle circleGoogleMap;
 
     ArrayList<PeopleAround> peopleArounds;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.e("TAG","Map OnCreateView");
+        Log.e("TAG", "Map OnCreateView");
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_map, container, false);
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -81,20 +86,22 @@ public class MapFragment extends Fragment implements MapDelegate {
 
         return rootView;
     }
+
     @Override
     public void setMenuVisibility(final boolean visible) {
         super.setMenuVisibility(visible);
         controller = MapController.getShareInstance();
         if (visible) {
-            Log.e("Map Screen","load data");
+            Log.e("Map Screen", "load data");
             controller.delegate = this;
             controller.requestPeopleAround(id);
-        }else{
+            getLocation();
+        } else {
             controller.delegate = null;
         }
     }
 
-    void initMap(Bundle savedInstanceState){
+    void initMap(Bundle savedInstanceState) {
         mMapView = rootView.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume(); // needed to get the map to display immediately
@@ -109,7 +116,7 @@ public class MapFragment extends Fragment implements MapDelegate {
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
                 addActionWhenTapOnMarker();
-                if(myLocation != null){
+                if (myLocation != null) {
                     addMarkerMyLocationOnMap();
 
                 }
@@ -118,19 +125,23 @@ public class MapFragment extends Fragment implements MapDelegate {
     }
 
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("TAG","Map OnCreate");
+        Log.e("TAG", "Map OnCreate");
         mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        if (checkLocationPermission()) {
+            getLocation();
+        }
+    }
+
+    private void getLocation() {
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.e("TAG","Not have permission");
             return;
         }
         final Location loc = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if(loc == null){
-            final LocationListener locationListener = new LocationListener() {
+            locationListener = new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
                     myLocation = location;
@@ -251,7 +262,7 @@ public class MapFragment extends Fragment implements MapDelegate {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     Bitmap squareBitmap = ImageUtils.cropToSquare(bitmap);
-                    Bitmap resized = Bitmap.createScaledBitmap(squareBitmap, 50, 50, true);
+                    Bitmap resized = Bitmap.createScaledBitmap(squareBitmap, 80, 80, true);
                     Bitmap circle = ImageUtils.getCircleBitmap(resized,true);
                     BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(circle);
                     MarkerOptions markerOption = new MarkerOptions().icon(bitmapDescriptor).position(mylatlng).title(people.getName()).snippet(people.getAddress());
@@ -291,7 +302,6 @@ public class MapFragment extends Fragment implements MapDelegate {
         FirebaseDatabase.getInstance().getReference().child("Profile").child(id).child("longitude").setValue(myLocation.getLongitude());
     }
 
-
     private void addActionWhenTapOnMarker(){
         if(googleMap != null){
             googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -306,6 +316,64 @@ public class MapFragment extends Fragment implements MapDelegate {
                     }
                 }
             });
+        }
+    }
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Access your Location")
+                        .setMessage("Dating want to know your location. Are you agree?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //Prompt the user once explanation has been shown
+                                ActivityCompat.requestPermissions(getActivity(),
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_LOCATION);
+                            }
+                        })
+                        .create()
+                        .show();
+            } else {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(getActivity(),
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        getLocation();
+                    }
+                } else {
+
+                }
+                return;
+            }
+
         }
     }
 }

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vankien.dating.Controllers.ProfileController;
 import com.example.vankien.dating.Interface.ProfileDelegate;
@@ -26,6 +27,7 @@ import com.example.vankien.dating.Views.Activity.FullScreenImageActivity;
 import com.example.vankien.dating.Views.Activity.LogInActivity;
 import com.example.vankien.dating.Views.Activity.SettingActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserInfo;
 import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener,ProfileDelegate {
@@ -117,7 +119,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
                 break;
 
             case R.id.btnChangePassword:
-                startActivity(new Intent(getActivity(), ChangePasswordActivity.class));
+                boolean isSigninWithFacebook = false;
+                for (UserInfo user: FirebaseAuth.getInstance().getCurrentUser().getProviderData()) {
+                    if (user.getProviderId().equals("facebook.com")) {
+                        isSigninWithFacebook = true;
+                    }
+                }
+                if (isSigninWithFacebook) {
+                    Toast.makeText(getContext(),"Signing with facebook account can't change password",Toast.LENGTH_LONG).show();
+                } else {
+                    startActivity(new Intent(getActivity(), ChangePasswordActivity.class));
+                }
                 break;
 
             case R.id.imgAvatar:

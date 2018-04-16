@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import com.example.vankien.dating.Interface.ChangePassWordDelegate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -21,23 +24,33 @@ public class ChangePassWordController {
         return sInstance;
     }
 
-    public void updatePassword(final String password, Activity activity){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        user.updatePassword(password)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            if(delegate!=null)
-                                delegate.updateSucess(password);
-                        } else {
-                            if(delegate!=null){
-                                delegate.updateFailed();
+    public void updatePassword(String oldPassword,final String password, Activity activity){
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        AuthCredential authCredential = EmailAuthProvider.getCredential(user.getEmail(),oldPassword);
+        user.reauthenticate(authCredential).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                if(delegate!=null)
+                                    delegate.updateSucess(password);
+                            } else {
+                                if(delegate!=null){
+                                    delegate.updateFailed();
+                                }
                             }
                         }
+                    });
+                } else {
+                    if(delegate!=null){
+                        delegate.updateFailed();
                     }
-                });
+                }
+            }
+        });
 
     }
 }

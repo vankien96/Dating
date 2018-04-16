@@ -1,5 +1,6 @@
 package com.example.vankien.dating.Views.Activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -94,7 +95,10 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
         System.out.println(oldPassword);
         System.out.println(newPassword);
         System.out.println(newPasswordCompare);
-
+        SharedPreferences sharedPreferences = getSharedPreferences("dataLogIn",MODE_PRIVATE);
+        if (!oldPassword.equals(sharedPreferences.getString("passwordLogIn",""))) {
+            Toast.makeText(getApplicationContext(),"Oldpassword is wrong",Toast.LENGTH_SHORT).show();
+        }
         if(TextUtils.isEmpty(oldPassword)){
             Toast.makeText(getApplicationContext(),"Please enter your old password!",Toast.LENGTH_SHORT).show();
             return;
@@ -107,11 +111,11 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
             Toast.makeText(getApplicationContext(),"Please enter again your new password!",Toast.LENGTH_SHORT).show();
             return;
         }
-//        if(newPassword!=newPasswordCompare) {
-//            Toast.makeText(getApplicationContext(),"You enter again new password not true!",Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-        controller.updatePassword(newPassword,ChangePasswordActivity.this);
+        if(!newPassword.equals(newPasswordCompare)) {
+            Toast.makeText(getApplicationContext(),"You enter again new password not true!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        controller.updatePassword(oldPassword,newPassword,ChangePasswordActivity.this);
 
     }
 
