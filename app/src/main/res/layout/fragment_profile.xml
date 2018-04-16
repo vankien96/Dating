@@ -45,128 +45,131 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitleBar">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imgAvatar"
                 android:layout_width="match_parent"
                 android:layout_height="370dp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/img_avatar"
-                android:scaleType="fitCenter"/>
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_avatar" />
+
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imgAvatar"
                 android:hint="Your name"
+                android:padding="@dimen/text_padding"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_small"
-                android:padding="@dimen/text_padding"/>
+                android:textSize="@dimen/text_size_small" />
+
             <TextView
                 android:id="@+id/tvAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/tvName"
                 android:layout_alignBottom="@+id/tvName"
+                android:layout_toRightOf="@id/tvName"
                 android:hint="Age"
+                android:padding="@dimen/text_padding"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_small"
-                android:padding="@dimen/text_padding"/>
+                android:textSize="@dimen/text_size_small" />
+
             <TextView
                 android:id="@+id/tvAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvName"
                 android:hint="Da Nang"
-                android:textColor="@color/black"
                 android:paddingLeft="@dimen/text_padding"
-                />
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
             <TextView
                 android:id="@+id/tvRegion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/tvAddress"
                 android:layout_alignBottom="@+id/tvAddress"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
                 android:hint="Viet Nam"
                 android:textColor="@color/black"
-                android:paddingLeft="@dimen/text_padding"
-                />
+                android:textSize="@dimen/text_size_small" />
+
             <TextView
                 android:id="@+id/tvAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvAddress"
                 android:layout_marginTop="10dp"
-                android:hint="This is describle of you!!!"
-                android:textColor="@color/black"
+                android:hint="This is describle of you. It can be hobby, your favorite, activity you like such as sporty, playing game, reading book, talking with friends,...!!!"
+                android:lineSpacingExtra="8sp"
                 android:paddingLeft="@dimen/text_padding"
-                />
+                android:paddingRight="@dimen/text_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
             <LinearLayout
                 android:id="@+id/llFriend"
-                android:layout_below="@+id/tvAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/tvAbout"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/text_padding"
+                android:padding="@dimen/text_padding"
                 android:weightSum="5">
+
                 <TextView
                     android:id="@+id/tvFriendLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/textview.text.profile_friend"
                     android:textColor="@color/black"
-                    android:layout_weight="1"
-                    />
+                    android:textSize="@dimen/text_size_small" />
+
                 <TextView
                     android:id="@+id/tvNumOfFriend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="4"
                     android:gravity="end"
                     android:hint="0"
-                    android:textColor="@color/black"
                     android:padding="@dimen/text_padding"
-                    android:layout_weight="4"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llAverage"
-                android:layout_below="@+id/llFriend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/text_padding"
-                android:weightSum="5">
-                <TextView
-                    android:id="@+id/tvAverageLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/textview.text.profile_average"
                     android:textColor="@color/black"
-                    android:layout_weight="1"
-                    />
-                <TextView
-                    android:id="@+id/tvAverageValue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:hint="6.9"
-                    android:textColor="@color/black"
-                    android:padding="@dimen/text_padding"
-                    android:layout_weight="4"
-                    />
+                    android:textSize="@dimen/text_size_small" />
             </LinearLayout>
+
             <Button
                 android:id="@+id/btnDiscoverySetting"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_button"
+                android:layout_below="@id/llFriend"
                 android:layout_margin="@dimen/activity_horizontal_margin"
-                android:layout_below="@id/llAverage"
                 android:background="@drawable/shape_button_login"
-                android:text="@string/button.text.profile_discovery_setting"
-                android:textAllCaps="false"/>
+                android:text="@string/button.text.profile_discovery_setting" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_below="@+id/btnDiscoverySetting"
+                android:background="@android:color/darker_gray"/>
+            <Button
+                android:id="@+id/btnChangePassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_button"
+                android:layout_below="@id/btnDiscoverySetting"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:background="@null"
+                android:text="@string/button.text.profile_change_password"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
         </RelativeLayout>
 
     </ScrollView>

@@ -20,7 +20,9 @@ import com.example.vankien.dating.Controllers.ProfileController;
 import com.example.vankien.dating.Interface.ProfileDelegate;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
+import com.example.vankien.dating.Views.Activity.ChangePasswordActivity;
 import com.example.vankien.dating.Views.Activity.EditProfileActivity;
+import com.example.vankien.dating.Views.Activity.FullScreenImageActivity;
 import com.example.vankien.dating.Views.Activity.LogInActivity;
 import com.example.vankien.dating.Views.Activity.SettingActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,10 +33,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
     private TextView tvName,tvAge,tvAbout,tvAddress,tvRegion,tvNumOfFriend;
     private ImageButton imgBtnEdit,imgBtnLogout;
     private ImageView imgAvatar;
-    private Button btnDiscoverySetting;
+    private Button btnDiscoverySetting, btnChangePassword;
     Profile profile;
     ProfileController controller;
     String id;
+    String uriImage;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         tvRegion = view.findViewById(R.id.tvRegion);
         tvNumOfFriend = view.findViewById(R.id.tvNumOfFriend);
         btnDiscoverySetting = (Button) view.findViewById(R.id.btnDiscoverySetting);
+        btnChangePassword = (Button) view.findViewById(R.id.btnChangePassword);
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         controller = ProfileController.getsInstance();
@@ -71,6 +75,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         imgBtnEdit.setOnClickListener(this);
         imgBtnLogout.setOnClickListener(this);
         btnDiscoverySetting.setOnClickListener(this);
+        btnChangePassword.setOnClickListener(this);
+        imgAvatar.setOnClickListener(this);
     }
     @Override
     public void onClick(View view) {
@@ -109,6 +115,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
                 Intent intentToSetting = new Intent(getActivity(),SettingActivity.class);
                 startActivity(intentToSetting);
                 break;
+
+            case R.id.btnChangePassword:
+                startActivity(new Intent(getActivity(), ChangePasswordActivity.class));
+                break;
+
+            case R.id.imgAvatar:
+                Intent intent = new Intent(getActivity(), FullScreenImageActivity.class);
+                intent.putExtra("uriImage",uriImage);
+                startActivity(intent);
+                break;
         }
 
     }
@@ -122,6 +138,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         tvAbout.setText(data.getmDescription());
         tvRegion.setText(data.getmRegion());
         tvAddress.setText(data.getmAddress());
+        uriImage = data.getmImage();
         Uri uri = Uri.parse(data.getmImage());
         Picasso.with(getContext()).load(uri).into(imgAvatar);
     }

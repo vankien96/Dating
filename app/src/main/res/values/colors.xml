@@ -14,4 +14,5 @@
     <color name="green">#0dff00</color>
     <color name="brightGrey">#e1e1e1</color>
     <color name="colorBlueLight">#00bcd4</color>
+    <color name="colorOpacity">#da161b1d</color>
 </resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.vankien.dating.Views.Activity.FullScreenImageActivity">
+    <com.example.vankien.dating.helpers.TouchImageView
+        android:id="@+id/imvAvatar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/splash"
+        android:background="@android:color/black"/>
+    <RelativeLayout
+        android:id="@+id/rlTitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorOpacity"
+        >
+        <ImageButton
+            android:id="@+id/imgBtnBack"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/ic_back"/>
+
+        <ImageButton
+            android:id="@+id/imgBtnShare"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ic_check"/>
+    </RelativeLayout>
+
+</RelativeLayout>
