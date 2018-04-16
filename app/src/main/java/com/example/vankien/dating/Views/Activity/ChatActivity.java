@@ -1,5 +1,6 @@
 package com.example.vankien.dating.Views.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -177,12 +179,24 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
         txtName.setText(name);
         lvChat = findViewById(R.id.lvChat);
         txtMessage = findViewById(R.id.txtMessage);
+        txtMessage.setEmojiconSize(80);
         btnSend = findViewById(R.id.btnSend);
         btnBack = findViewById(R.id.btnBack);
         btnMenu = findViewById(R.id.btnMenu);
         btnEmoji = findViewById(R.id.buttonEmoji);
         emojIcon = new EmojIconActions(this,contentRoot,txtMessage,btnEmoji);
         emojIcon.ShowEmojIcon();
+        emojIcon.setKeyboardListener(new EmojIconActions.KeyboardListener() {
+            @Override
+            public void onKeyboardOpen() {
+
+            }
+
+            @Override
+            public void onKeyboardClose() {
+
+            }
+        });
         btnImage = findViewById(R.id.btnImage);
 
         arrMessage = new ArrayList<>();

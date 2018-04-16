@@ -97,18 +97,18 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
 
             @Override
             public void onCancel() {
-                Toast.makeText(LogInActivity.this,"Facebook:OnCancel",Toast.LENGTH_LONG).show();
+                Toast.makeText(LogInActivity.this,"Cancel login",Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(FacebookException error) {
-                Toast.makeText(LogInActivity.this,"Facebook:OnError "+error,Toast.LENGTH_LONG).show();
+                Toast.makeText(LogInActivity.this,"Error",Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void handleFacebookAccessToken(AccessToken accessToken) {
-        Toast.makeText(LogInActivity.this,"handleFacebookAccessToken "+accessToken,Toast.LENGTH_LONG).show();
+        indicatorView.show();
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -124,6 +124,7 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
                                     if (dataSnapshot.hasChild(id)) {
                                         Intent intent = new Intent(LogInActivity.this,MainActivity.class);
                                         startActivity(intent);
+                                        indicatorView.hide();
                                     } else {
                                         resultLoginWithFacebook();
                                     }
@@ -151,7 +152,6 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
         GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
             @Override
             public void onCompleted(JSONObject object, GraphResponse response) {
-                Toast.makeText(LogInActivity.this,response.getJSONObject().toString(),Toast.LENGTH_LONG).show();
                 try{
                     String name = object.getString("name");
                     String email = object.getString("email");
@@ -175,8 +175,10 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
                     intent.putExtra("isEdit",true);
                     intent.putExtra("Facebook",true);
                     startActivity(intent);
+                    finish();
                 }
                 catch(Exception e) {
+                    indicatorView.hide();
                     e.printStackTrace();
                 }
             }

@@ -84,8 +84,6 @@ public class MessageAdapter extends ArrayAdapter {
                     viewHolder.imgAvatar.setVisibility(View.VISIBLE);
                 }
             }
-            //final Uri uriAvatar = Uri.parse(avatar);
-            //Picasso.with(context).load(uriAvatar).into(viewHolder.imgAvatar);
             Glide.with(context)
                     .load(avatar)
                     .into(viewHolder.imgAvatar);
@@ -94,27 +92,38 @@ public class MessageAdapter extends ArrayAdapter {
             Uri uri = Uri.parse(messageModel.getMessage());
             Picasso.with(context).load(uri).into(viewHolder.image);
         } else {
+            viewHolder.txtMessage.setEmojiconSize(80);
             viewHolder.txtMessage.setText(messageModel.getMessage());
         }
         return convertView;
     }
+
     public class MessageHolder {
         ImageView imgAvatar;
         EmojiconTextView txtMessage;
         ImageView image;
     }
+
     @Override
     public int getViewTypeCount() {
-        return 2;
+        return 4;
     }
 
     @Override
     public int getItemViewType(int position) {
         MessageModel messageModel = arrMessage.get(position);
         if(messageModel.getMe()){
-            return 0;
-        }else{
-            return 1;
+            if (Constant.typeImage.equals(messageModel.getType())) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } else {
+            if (Constant.typeImage.equals(messageModel.getType())) {
+                return 2;
+            } else {
+                return 3;
+            }
         }
     }
 }

@@ -134,7 +134,7 @@
                 android:id="@+id/edtRegion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Female"/>
+                android:hint="Region"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
                 android:id="@+id/edtAdress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Female"/>
+                android:hint="Address"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

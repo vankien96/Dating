@@ -222,4 +222,15 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
     public void uploadImageFailed() {
         imgBtnSave.setActivated(true);
     }
+
+    @Override
+    public void onBackPressed() {
+        if (isEdit && isFacebook) {
+
+        } else if (!isEdit) {
+
+        } else {
+            finish();
+        }
+    }
 }
