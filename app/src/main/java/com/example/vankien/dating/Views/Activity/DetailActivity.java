@@ -20,7 +20,7 @@ import com.squareup.picasso.Picasso;
 public class DetailActivity extends AppCompatActivity implements ProfileDelegate {
     ImageView imgDetail;
     ImageButton btnMessage,btnReject;
-    TextView txtName, txtAdress, txtInformation, txtFriend, txtAverage;
+    TextView txtName, txtAdress, txtInformation, txtFriend, txtSex;
     Profile profile;
     String id;
 
@@ -75,17 +75,22 @@ public class DetailActivity extends AppCompatActivity implements ProfileDelegate
         txtInformation = findViewById(R.id.txtInfomation);
         txtInformation.setMovementMethod(new ScrollingMovementMethod());
         txtFriend = findViewById(R.id.txtFriend);
-        txtAverage = findViewById(R.id.txtAverage);
+        txtSex = findViewById(R.id.txtSex);
 
         btnReject = findViewById(R.id.btn_reject);
         btnMessage = findViewById(R.id.btn_mesage);
     }
     private void setDataIntoView(){
-        txtName.setText(profile.getmName()+" - "+profile.getmAge());
+        txtName.setText(profile.getmName());
         txtAdress.setText(profile.getmAddress()+" - "+profile.getmRegion());
         txtInformation.setText(profile.getmDescription());
         txtFriend.setText(profile.getmNumOfFriends()+"");
-
+        if(profile.getmSex()==1) {
+            txtSex.setText("Man" +" - "+profile.getmAge());;
+        }
+        if(profile.getmSex()==0) {
+            txtSex.setText("Woman" +" - "+profile.getmAge());;
+        }
         Uri uri = Uri.parse(profile.getmImage());
         Picasso.with(getBaseContext()).load(uri).into(imgDetail);
     }
