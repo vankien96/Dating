@@ -217,7 +217,6 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
         btnRecover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                indicatorView.show();
                 startActivity(new Intent(LogInActivity.this,ResetPasswordActivity.class));
             }
         });
