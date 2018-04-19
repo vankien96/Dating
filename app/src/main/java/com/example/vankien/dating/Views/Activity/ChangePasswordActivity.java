@@ -1,12 +1,14 @@
 package com.example.vankien.dating.Views.Activity;
 
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -52,8 +54,35 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
     }
 
     public void addEvent(){
-            tgBtnOldPass.setOnClickListener(this);
-            tgBtnNewPass.setOnClickListener(this);
+            tgBtnOldPass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
+                        edtOldPass.setInputType(InputType.TYPE_CLASS_TEXT |
+                                InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        edtOldPass.setTypeface(Typeface.DEFAULT);
+                    } else {
+                        edtOldPass.setInputType(InputType.TYPE_CLASS_TEXT);
+                    }
+                }
+            });
+            tgBtnNewPass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
+                        edtNewPass.setInputType(InputType.TYPE_CLASS_TEXT |
+                                InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        edtNewPass.setTypeface(Typeface.DEFAULT);
+                        edtNewPassCompare.setInputType(InputType.TYPE_CLASS_TEXT |
+                                InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        edtNewPassCompare.setTypeface(Typeface.DEFAULT);
+
+                    } else {
+                        edtNewPass.setInputType(InputType.TYPE_CLASS_TEXT);
+                        edtNewPassCompare.setInputType(InputType.TYPE_CLASS_TEXT);
+                    }
+                }
+            });
             btnUpdatePass.setOnClickListener(this);
             imgBtnBack.setOnClickListener(this);
 
@@ -62,12 +91,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tgBtnOldPass:
-                changeTypeDisplayOldPassword();
-                break;
-            case R.id.tgBtnNewPass:
-                changeTypeDisplayNewPassword();
-                break;
             case R.id.btnUpdatePass:
                 changePassword();
                 break;
@@ -77,25 +100,14 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
         }
     }
 
-    private void changeTypeDisplayNewPassword() {
-
-    }
-
-    private void changeTypeDisplayOldPassword() {
-        if(tgBtnOldPass.getText().toString().equals("Show")){
-            edtOldPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        } else edtOldPass.setInputType(InputType.TYPE_CLASS_TEXT);
-    }
 
     public void changePassword(){
         String oldPassword = edtOldPass.getText().toString().trim();
         String newPassword = edtNewPass.getText().toString().trim();
         String newPasswordCompare = edtNewPassCompare.getText().toString().trim();
 
-        System.out.println(oldPassword);
-        System.out.println(newPassword);
-        System.out.println(newPasswordCompare);
         SharedPreferences sharedPreferences = getSharedPreferences("dataLogIn",MODE_PRIVATE);
+
         if (!oldPassword.equals(sharedPreferences.getString("passwordLogIn",""))) {
             Toast.makeText(getApplicationContext(),"Oldpassword is wrong",Toast.LENGTH_SHORT).show();
         }

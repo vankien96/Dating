@@ -58,7 +58,7 @@
     <string name="textview.text.new_password">New Password</string>
     <string name="textview.text.confirm_new_password">Confirm New Password</string>
     <string name="toggle.texton">Show</string>
-    <string name="toggle.textoff">Show</string>
+    <string name="toggle.textoff">Hide</string>
     <string name="button.text.update_password">Update Password</string>
 
     <!-- replace ^^^ = & before use -->
