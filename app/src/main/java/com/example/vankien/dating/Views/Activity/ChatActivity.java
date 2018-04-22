@@ -272,20 +272,6 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(resultCode==RESULT_OK){
-//            if(requestCode == REQUEST_IMAGE){
-//                Uri imageUri = data.getData();
-//                InputStream inputStream;
-//                try {
-//                    inputStream = getContentResolver().openInputStream(imageUri);
-//                    Bitmap image = BitmapFactory.decodeStream(inputStream);
-//
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getApplicationContext(),"Image not found",Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
             Image image = ImagePicker.getFirstImageOrNull(data);
             Uri imageUri = Uri.fromFile(new File(image.getPath()));
