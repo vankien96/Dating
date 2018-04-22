@@ -93,7 +93,7 @@ public class MapFragment extends Fragment implements MapDelegate {
         if (visible) {
             Log.e("Map Screen", "load data");
             controller.delegate = this;
-            controller.requestPeopleAround(id);
+            controller.requestPeopleAround(id,true);
             getLocation();
         } else {
             controller.delegate = null;

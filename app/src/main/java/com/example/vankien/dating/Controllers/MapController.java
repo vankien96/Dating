@@ -31,7 +31,7 @@ public class MapController {
         return shareInstance;
     }
 
-    public void requestPeopleAround(final String id){
+    public void requestPeopleAround(final String id, final boolean isMap){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         Query mRef = database.getReference().child("Profile");
         arounds = new ArrayList<>();
@@ -69,7 +69,13 @@ public class MapController {
                     }
                 }
                 String anotherId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                filterPeople(anotherId);
+                if (isMap) {
+                    if (delegate != null) {
+                        delegate.getAroundPeopleSuccess(arounds);
+                    }
+                } else {
+                    filterPeople(anotherId);
+                }
             }
 
             @Override

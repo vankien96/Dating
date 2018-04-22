@@ -58,7 +58,7 @@ public class AroundFragment extends Fragment implements MapDelegate {
     }
 
     private void requestData() {
-        controller.requestPeopleAround(id);
+        controller.requestPeopleAround(id,false);
     }
 
     private void addControls() {
