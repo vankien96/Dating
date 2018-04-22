@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.example.vankien.dating.Controllers.MapController;
@@ -24,6 +25,8 @@ public class AroundFragment extends Fragment implements MapDelegate {
     View rootView;
     MapController controller;
     String id;
+    View footerView;
+    boolean isloading = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,10 +63,23 @@ public class AroundFragment extends Fragment implements MapDelegate {
 
     private void addControls() {
         listViewAround = rootView.findViewById(R.id.lvAround);
+        footerView = LayoutInflater.from(getContext()).inflate(R.layout.footer_view,null);
     }
 
     private void addEvents() {
+        listViewAround.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
 
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int firstItem, int visibleItemCount, int totalItemCount) {
+                if (absListView.getLastVisiblePosition() == totalItemCount - 1 && !isloading) {
+
+                }
+            }
+        });
     }
 
     @Override

@@ -33,6 +33,11 @@ public class DetailActivity extends AppCompatActivity implements ProfileDelegate
         addEvents();
         Intent intent = getIntent();
         id = intent.getStringExtra("UserID");
+        boolean fromChat = intent.getBooleanExtra("FromChat",false);
+        if (fromChat) {
+          btnReject.setVisibility(View.GONE);
+          btnMessage.setVisibility(View.GONE);
+        }
 
         controller = ProfileController.getsInstance();
         controller.delegate = this;

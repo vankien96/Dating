@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.vankien.dating.Controllers.LoginController;
 import com.example.vankien.dating.Controllers.ProfileController;
 import com.example.vankien.dating.Interface.ProfileDelegate;
 import com.example.vankien.dating.Models.Profile;
@@ -26,6 +27,8 @@ import com.example.vankien.dating.Views.Activity.EditProfileActivity;
 import com.example.vankien.dating.Views.Activity.FullScreenImageActivity;
 import com.example.vankien.dating.Views.Activity.LogInActivity;
 import com.example.vankien.dating.Views.Activity.SettingActivity;
+import com.facebook.login.Login;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserInfo;
 import com.squareup.picasso.Picasso;
@@ -98,6 +101,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if (LoginController.getShareInstance().isFacebookLogin()) {
+                            LoginManager.getInstance().logOut();
+                        }
                         FirebaseAuth.getInstance().signOut();
                         Intent intent = new Intent(getActivity(), LogInActivity.class);
                         startActivity(intent);
@@ -119,13 +125,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
                 break;
 
             case R.id.btnChangePassword:
-                boolean isSigninWithFacebook = false;
-                for (UserInfo user: FirebaseAuth.getInstance().getCurrentUser().getProviderData()) {
-                    if (user.getProviderId().equals("facebook.com")) {
-                        isSigninWithFacebook = true;
-                    }
-                }
-                if (isSigninWithFacebook) {
+                if (LoginController.getShareInstance().isFacebookLogin()) {
                     Toast.makeText(getContext(),"Signing with facebook account can't change password",Toast.LENGTH_LONG).show();
                 } else {
                     startActivity(new Intent(getActivity(), ChangePasswordActivity.class));

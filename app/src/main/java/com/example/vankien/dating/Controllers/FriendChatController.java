@@ -1,5 +1,6 @@
 package com.example.vankien.dating.Controllers;
 
+import com.example.vankien.dating.Interface.CheckFriendDelegate;
 import com.example.vankien.dating.Interface.FriendChatDelegate;
 import com.example.vankien.dating.Models.FriendChatModel;
 import com.google.firebase.database.DataSnapshot;
@@ -26,19 +27,6 @@ public class FriendChatController {
         return shareInstance;
     }
 
-
-    public ArrayList<FriendChatModel> getExampleData(){
-        ArrayList<FriendChatModel> arrayList = new ArrayList<>();
-
-
-        arrayList.add(new FriendChatModel("Trương Văn Kiên","https://ombink.files.wordpress.com/2013/01/artworks-000024414007-6rlgdh-crop.jpg?w=700","Hello cưng","7cS7e8ihSrMvLgGBC5AepbOI1G13"));
-        arrayList.add(new FriendChatModel("Trần Thông Thành Luân","https://znews-photo-td.zadn.vn/w660/Uploaded/ohunua2/2018_02_24/14504835_310918849274454_2855615938546368512_n.jpg","Em học CNTT phải không?","DINvcEFdWHeU9Gi929lMUoy0SFF3"));
-        arrayList.add(new FriendChatModel("Lưu Ngọc Lan","http://img1.blogtamsu.vn/2017/07/linh-ka-1-blogtamsu1.jpg","Tối nay đi chơi nhé em","lu55hzmDx1cICJ45CAvEh7se3gr1"));
-        arrayList.add(new FriendChatModel("Trần Đức Long","https://sv.1phut.mobi/uploads/2017/01/rong-pika-hai-phong-1.jpg","Bạn ơi sao bạn mập dzậy!!!","Uo1qv5GWXgWAojpjNcGL56lRnXy1"));
-
-        return arrayList;
-    }
-
     public void removeListener(){
         if(mRef != null && listener != null){
             mRef.removeEventListener(listener);
@@ -58,7 +46,9 @@ public class FriendChatController {
                     friendChatModel.setId(snapshot.getKey());
                     friendChatModel.setName("");
                     friendChatModel.setUrlAvatar("");
-                    friendChatModel.setRecentMessage((String) snapshot.getValue());
+                    HashMap<String, String> hashMap = (HashMap<String, String>) snapshot.getValue();
+                    friendChatModel.setRecentMessage(hashMap.get("recentMessage"));
+                    friendChatModel.setType(hashMap.get("type"));
                     arrayList.add(friendChatModel);
                 }
                 if (delegate != null){
@@ -72,6 +62,33 @@ public class FriendChatController {
 
             }
         });
+    }
+
+    public void getAllFriend(String id, final FriendChatDelegate callback) {
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        mDatabase.getReference().child("Friend").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<FriendChatModel> arrayList = new ArrayList<>();
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    FriendChatModel friendChatModel = new FriendChatModel();
+                    friendChatModel.setId(snapshot.getKey());
+                    friendChatModel.setName("");
+                    friendChatModel.setUrlAvatar("");
+                    HashMap<String, String> hashMap = (HashMap<String, String>) snapshot.getValue();
+                    friendChatModel.setRecentMessage(hashMap.get("recentMessage"));
+                    friendChatModel.setType(hashMap.get("type"));
+                    arrayList.add(friendChatModel);
+                }
+                callback.getAllFriendSuccess(arrayList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void getAllInformation(ArrayList<FriendChatModel> arrayList){
@@ -94,5 +111,19 @@ public class FriendChatController {
                 }
             });
         }
+    }
+
+    public void checkFriend(String idMe, final String idUser, final CheckFriendDelegate delegate) {
+        FirebaseDatabase.getInstance().getReference().child("Friend").child(idMe).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                delegate.checkFriendSuccess(dataSnapshot.hasChild(idUser));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

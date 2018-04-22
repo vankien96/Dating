@@ -55,7 +55,6 @@ import java.util.HashMap;
 
 public class MapFragment extends Fragment implements MapDelegate {
 
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     MapView mMapView;
     GoogleMap googleMap;
     Location myLocation;
@@ -130,9 +129,7 @@ public class MapFragment extends Fragment implements MapDelegate {
         super.onCreate(savedInstanceState);
         Log.e("TAG", "Map OnCreate");
         mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        if (checkLocationPermission()) {
-            getLocation();
-        }
+        getLocation();
     }
 
     private void getLocation() {
@@ -319,61 +316,5 @@ public class MapFragment extends Fragment implements MapDelegate {
         }
     }
 
-    public boolean checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Access your Location")
-                        .setMessage("Dating want to know your location. Are you agree?")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(getActivity(),
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_LOCATION);
-                            }
-                        })
-                        .create()
-                        .show();
-            } else {
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-            }
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (ContextCompat.checkSelfPermission(getActivity(),
-                            Manifest.permission.ACCESS_FINE_LOCATION)
-                            == PackageManager.PERMISSION_GRANTED) {
-                        getLocation();
-                    }
-                } else {
-
-                }
-                return;
-            }
-
-        }
-    }
 }

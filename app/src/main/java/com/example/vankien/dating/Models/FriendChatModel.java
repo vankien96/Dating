@@ -11,6 +11,7 @@ public class FriendChatModel implements Serializable{
     private String id;
     private String urlAvatar;
     private String recentMessage;
+    private String type;
 
     public String getId(){
         return this.id;
@@ -44,12 +45,22 @@ public class FriendChatModel implements Serializable{
         this.recentMessage = recentMessage;
     }
 
-    public FriendChatModel(String name, String urlAvatar, String recentMessage,String id) {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public FriendChatModel(String name, String urlAvatar, String recentMessage, String id, String type) {
         this.name = name;
         this.urlAvatar = urlAvatar;
         this.recentMessage = recentMessage;
         this.id = id;
+        this.type = type;
     }
+
     public FriendChatModel() {
 
     }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:gravity="center"
+    android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp">
+
+    android:layout_marginBottom="8dp"
+    android:id="@+id/viewContain">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgAvatar"
@@ -15,18 +15,22 @@
         android:src="@mipmap/ic_launcher"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_alignParentLeft="true"
         app:civ_border_width="2dp"
         app:civ_border_color="#FF000000"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@id/imgAvatar"
+        android:layout_toLeftOf="@id/point_new">
         <TextView
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Link ka"
+            android:text="Name"
             android:textColor="@color/black"
             android:textStyle="bold"
             />
@@ -37,8 +41,23 @@
             android:text="Chào em"
             android:textStyle="normal"
             android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/point_new"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:visibility="gone">
+        <View
+            android:background="@drawable/bg_point_newmessage"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            />
 
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

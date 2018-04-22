@@ -1,11 +1,9 @@
 package com.example.vankien.dating.Views.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -13,9 +11,8 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,6 +22,7 @@ import android.widget.Toast;
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.features.ReturnMode;
 import com.esafirm.imagepicker.model.Image;
+import com.example.vankien.dating.Controllers.BlockController;
 import com.example.vankien.dating.Controllers.MessageController;
 import com.example.vankien.dating.Interface.MessageDelegate;
 import com.example.vankien.dating.Interface.UploadImageDelegate;
@@ -34,13 +32,11 @@ import com.example.vankien.dating.Models.MessageModel;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Utils.FirebaseUtils;
 import com.example.vankien.dating.Views.Adapter.MessageAdapter;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
@@ -53,6 +49,7 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
     String idUser;
     String avatar;
     MessageController controller;
+    LinearLayout progressLayout;
 
     private static final int REQUEST_IMAGE = 69;
 
@@ -62,6 +59,7 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
     private EmojIconActions emojIcon;
     View contentRoot;
     FirebaseUtils utils;
+    boolean isBlock;
 
     ArrayList<MessageModel> arrMessage;
     MessageAdapter adapter;
@@ -71,6 +69,7 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
         setContentView(R.layout.activity_chat);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
+        isBlock = b.getBoolean("isBlock",false);
         FriendChatModel model = (FriendChatModel) b.getSerializable("FriendData");
         name = model.getName();
         idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -94,38 +93,45 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String message = txtMessage.getText().toString().trim();
-                if (!message.equals("")){
-                    adapter.notifyDataSetChanged();
-                    txtMessage.setText("");
-                    lvChat.setAdapter(adapter);
-                    controller.sendMessage(idUser,idFriend,message, Constant.typeText);
+                if (!isBlock) {
+                    String message = txtMessage.getText().toString().trim();
+                    if (!message.equals("")){
+                        adapter.notifyDataSetChanged();
+                        txtMessage.setText("");
+                        lvChat.setAdapter(adapter);
+                        controller.sendMessage(idUser,idFriend,message, Constant.typeText);
+                    }
+                } else {
+                    Toast.makeText(ChatActivity.this,"You can send message while you are blocking this user",Toast.LENGTH_LONG).show();
                 }
             }
         });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPopup(view);
             }
         });
+
         btnImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                File pictureDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                String pictureDirectoryPath = pictureDirectory.getPath();
-                Uri data = Uri.parse(pictureDirectoryPath);
-                photoPickerIntent.setDataAndType(data,"image/*");
-                startActivityForResult(photoPickerIntent,REQUEST_IMAGE);
+                if (isBlock) {
+                    Toast.makeText(ChatActivity.this,"You can send message while you are blocking this user",Toast.LENGTH_LONG).show();
+                } else {
+                    openImagePicker();
+                }
             }
         });
+
         lvChat.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int i) {
@@ -133,15 +139,29 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
             }
 
             @Override
-            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+            public void onScroll(AbsListView absListView, int firstItem, int VisibleItemCount, int totalItem) {
 
             }
         });
     }
+
+    private void openImagePicker() {
+        ImagePicker.create(this)
+                .returnMode(ReturnMode.GALLERY_ONLY)
+                .single()
+                .start();
+    }
+
     public void showPopup(View v) {
         PopupMenu popup = new PopupMenu(this,v);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_chat_screen, popup.getMenu());
+        MenuItem liveitem = popup.getMenu().getItem(1);
+        if (isBlock) {
+            liveitem.setTitle("Unblock");
+        } else {
+            liveitem.setTitle("Block");
+        }
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -151,7 +171,11 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
                         return true;
                     }
                     case R.id.menuBlock:{
-                        blockUser();
+                        if (isBlock) {
+                            unblockUser();
+                        } else {
+                            blockUser();
+                        }
                         return true;
                     }
                     default:{
@@ -163,13 +187,21 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
         popup.show();
     }
 
-    private void blockUser() {
+    private void unblockUser() {
+        BlockController.getShareInstance().unblock(idFriend);
+        this.isBlock = false;
+        Toast.makeText(this,"Unblock successfully",Toast.LENGTH_LONG).show();
+    }
 
+    private void blockUser() {
+        BlockController.getShareInstance().blockPeople(idFriend);
+        finish();
     }
 
     private void showProfile() {
         Intent intent = new Intent(ChatActivity.this,DetailActivity.class);
         intent.putExtra("UserID",idFriend);
+        intent.putExtra("FromChat",true);
         startActivity(intent);
     }
 
@@ -183,6 +215,7 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
         btnSend = findViewById(R.id.btnSend);
         btnBack = findViewById(R.id.btnBack);
         btnMenu = findViewById(R.id.btnMenu);
+        progressLayout = findViewById(R.id.viewProgress);
         btnEmoji = findViewById(R.id.buttonEmoji);
         emojIcon = new EmojIconActions(this,contentRoot,txtMessage,btnEmoji);
         emojIcon.ShowEmojIcon();
@@ -239,19 +272,32 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode==RESULT_OK){
-            if(requestCode == REQUEST_IMAGE){
-                Toast.makeText(this,"Sending image",Toast.LENGTH_LONG).show();
-                Uri imageUri = data.getData();
-                InputStream inputStream;
-                try {
-                    inputStream = getContentResolver().openInputStream(imageUri);
-                    Bitmap image = BitmapFactory.decodeStream(inputStream);
-                    utils.uploadImage(image,idUser);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),"Image not found",Toast.LENGTH_SHORT).show();
-                }
+//        if(resultCode==RESULT_OK){
+//            if(requestCode == REQUEST_IMAGE){
+//                Uri imageUri = data.getData();
+//                InputStream inputStream;
+//                try {
+//                    inputStream = getContentResolver().openInputStream(imageUri);
+//                    Bitmap image = BitmapFactory.decodeStream(inputStream);
+//
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(getApplicationContext(),"Image not found",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        }
+        if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
+            Image image = ImagePicker.getFirstImageOrNull(data);
+            Uri imageUri = Uri.fromFile(new File(image.getPath()));
+            InputStream inputStream;
+            try {
+                inputStream = getContentResolver().openInputStream(imageUri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                progressLayout.setVisibility(View.VISIBLE);
+                utils.uploadImage(bitmap,idUser);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(),"Image not found",Toast.LENGTH_SHORT).show();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -259,7 +305,7 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
 
     @Override
     public void uploadImageSuccess(String image) {
-        Toast.makeText(this,"Send image successfully",Toast.LENGTH_LONG).show();
+        progressLayout.setVisibility(View.GONE);
         controller.sendMessage(idUser,idFriend,image,Constant.typeImage);
     }
 

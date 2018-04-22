@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.vankien.dating.Controllers.FriendChatController;
 import com.example.vankien.dating.Interface.FriendChatDelegate;
+import com.example.vankien.dating.Models.Constant;
 import com.example.vankien.dating.Models.FriendChatModel;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.Views.Activity.ChatActivity;
@@ -49,12 +51,20 @@ public class ChatFragment extends Fragment implements FriendChatDelegate {
         this.lvChat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), ChatActivity.class);
-                Bundle b = new Bundle();
-                b.putSerializable("FriendData",mFriendChat.get(i));
-                intent.putExtras(b);
-                lvChat.setAdapter(adapter);
-                startActivity(intent);
+                FriendChatModel model = mFriendChat.get(i);
+                if(Constant.blocked.equals(model.getType())) {
+                    Toast.makeText(getActivity(),"This user blocked you",Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(getActivity(), ChatActivity.class);
+                    Bundle b = new Bundle();
+                    if (Constant.block.equals(model.getType())) {
+                        b.putBoolean("isBlock",true);
+                    }
+                    b.putSerializable("FriendData",model);
+                    intent.putExtras(b);
+                    lvChat.setAdapter(adapter);
+                    startActivity(intent);
+                }
             }
         });
     }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.util.Log;
 import android.webkit.URLUtil;
 
+import com.example.vankien.dating.Interface.CheckFriendDelegate;
 import com.example.vankien.dating.Interface.MessageDelegate;
 import com.example.vankien.dating.Models.Constant;
 import com.example.vankien.dating.Models.MessageModel;
@@ -94,11 +95,11 @@ public class MessageController {
         return roomID;
     }
 
-    public void sendMessage(String idUser, String idFriend,String message,String type){
+    public void sendMessage(final String idUser, final String idFriend, final String message, String type){
         String roomID = this.createRoomID(idUser,idFriend);
         Date current = new Date();
         String dateString = TimeUtils.getShareInstance().getDateString(current);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("Chat").child(roomID).child(dateString);
 
         HashMap hashMap = new HashMap();
@@ -107,11 +108,23 @@ public class MessageController {
         hashMap.put("type",type);
         myRef.setValue(hashMap);
         if (Constant.typeImage.equals(type)) {
-            database.getReference().child("Friend").child(idUser).child(idFriend).setValue("Image");
-            database.getReference().child("Friend").child(idFriend).child(idUser).setValue("Image");
+            database.getReference().child("Friend").child(idUser).child(idFriend).child("recentMessage").setValue("Image");
+            database.getReference().child("Friend").child(idFriend).child(idUser).child("recentMessage").setValue("Image");
         } else {
-            database.getReference().child("Friend").child(idUser).child(idFriend).setValue(message);
-            database.getReference().child("Friend").child(idFriend).child(idUser).setValue(message);
+            database.getReference().child("Friend").child(idUser).child(idFriend).child("recentMessage").setValue(message);
+            database.getReference().child("Friend").child(idFriend).child(idUser).child("recentMessage").setValue(message);
         }
+        FriendChatController.getInstance().checkFriend(idUser, idFriend, new CheckFriendDelegate() {
+            @Override
+            public void checkFriendSuccess(boolean isFriend) {
+                if (!isFriend) {
+                    database.getReference().child("Friend").child(idUser).child(idFriend).child("type").setValue(Constant.friend);
+                    database.getReference().child("Friend").child(idFriend).child(idUser).child("type").setValue(Constant.stranger);
+                } else {
+                    database.getReference().child("Friend").child(idUser).child(idFriend).child("type").setValue(Constant.friend);
+                    database.getReference().child("Friend").child(idFriend).child(idUser).child("type").setValue(Constant.friend);
+                }
+            }
+        });
     }
 }

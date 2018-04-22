@@ -226,6 +226,15 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
 
     protected void saveStatusLogIn(String email, String pass) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        /**
+         * XXX:
+         *  + Save token of user, example: md5(emailLogin + md5(pass))
+         *  + Save info of user, example: emailLogIn
+         *  + In the next login, get emailLogIn from SharedPreferences then get info of that email from database
+         *   md5(email{DB} + md5(pass{DB}) === user_token {SharedPrefences}
+         *  + Dont save pass
+         */
         editor.putString("emailLogIn", email);
         editor.putString("passwordLogIn",pass);
         editor.commit();
@@ -234,7 +243,6 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
     public void getSharedPreferences() {
         edtEmailLogIn.setText(sharedPreferences.getString("emailLogIn",""));
         edtPassLogIn.setText(sharedPreferences.getString("passwordLogIn",""));
-
     }
 
     @Override
@@ -252,6 +260,7 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
 
     @Override
     public void loginFailed() {
+        indicatorView.hide();
         Toast.makeText(LogInActivity.this, "Email or Password wrong ! Please try again !", Toast.LENGTH_SHORT).show();
     }
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
     FirebaseUtils utils;
     boolean isEdit = false;
     boolean isFacebook = false;
+    LinearLayout viewProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         edtRegion = findViewById(R.id.edtRegion);
         radioMale = findViewById(R.id.radioMale);
         radioFemale = findViewById(R.id.radioFemale);
+        viewProgress = findViewById(R.id.viewProgress);
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         utils = FirebaseUtils.getShareInstance();
@@ -88,8 +91,10 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
                 if (isEdit) {
                     if (avatarBitmap != null) {
                         imgBtnSave.setActivated(false);
+                        viewProgress.setVisibility(View.VISIBLE);
                         utils.uploadAvatar(avatarBitmap, id);
                     } else {
+                        viewProgress.setVisibility(View.VISIBLE);
                         uploadProfileToFirebase();
                     }
                 } else {
@@ -97,11 +102,13 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
                     profile.setmNumOfFriends(0);
                     if (avatarBitmap != null) {
                         imgBtnSave.setActivated(false);
+                        viewProgress.setVisibility(View.VISIBLE);
                         utils.uploadAvatar(avatarBitmap, id);
                     } else {
                         String defaultAvatar = getResources().getString(R.string.default_avatar);
                         defaultAvatar = defaultAvatar.replaceAll("^^^","&");
                         profile.setmImage(defaultAvatar);
+                        viewProgress.setVisibility(View.VISIBLE);
                         uploadProfileToFirebase();
                     }
                 }
@@ -199,6 +206,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
             profile.setmSex(0);
         }
         ProfileController.getsInstance().uploadProfile(profile,id);
+        viewProgress.setVisibility(View.GONE);
         Toast.makeText(this,"Upload successfully...",Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
         if (isEdit && !isFacebook) {
@@ -220,6 +228,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
 
     @Override
     public void uploadImageFailed() {
+        viewProgress.setVisibility(View.GONE);
         imgBtnSave.setActivated(true);
     }
 
