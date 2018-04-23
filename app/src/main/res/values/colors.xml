@@ -15,4 +15,5 @@
     <color name="brightGrey">#e1e1e1</color>
     <color name="colorBlueLight">#00bcd4</color>
     <color name="colorOpacity">#da161b1d</color>
+    <color name="greenCircle">#780dff00</color>
 </resources>

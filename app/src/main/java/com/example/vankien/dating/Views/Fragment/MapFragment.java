@@ -183,7 +183,7 @@ public class MapFragment extends Fragment implements MapDelegate {
         circleGoogleMap = googleMap.addCircle(new CircleOptions()
                 .center(mylatlng)
                 .radius(1000)
-                .strokeColor(Color.WHITE)
+                .strokeColor(getActivity().getResources().getColor(R.color.greenCircle))
                 .strokeWidth(2)
                 .fillColor(0x5500ff00));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
