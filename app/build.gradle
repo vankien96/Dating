@@ -45,5 +45,6 @@ dependencies {
     implementation 'hani.momanii.supernova_emoji_library:supernova-emoji-library:0.0.2'
     implementation 'me.himanshusoni.chatmessageview:chat-message-view:1.0.3'
     implementation 'com.github.esafirm.android-image-picker:imagepicker:1.12.0'
+    implementation 'com.google.firebase:firebase-messaging:15.0.0'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -24,6 +24,7 @@ import com.esafirm.imagepicker.features.ReturnMode;
 import com.esafirm.imagepicker.model.Image;
 import com.example.vankien.dating.Controllers.BlockController;
 import com.example.vankien.dating.Controllers.MessageController;
+import com.example.vankien.dating.Interface.BlockDelegate;
 import com.example.vankien.dating.Interface.MessageDelegate;
 import com.example.vankien.dating.Interface.UploadImageDelegate;
 import com.example.vankien.dating.Models.Constant;
@@ -82,6 +83,7 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
 
         addControls();
         addEvents();
+        checkBlockThread();
         requestData();
     }
 
@@ -268,6 +270,7 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
         super.onDestroy();
         controller.delegate = null;
         controller.removeListener();
+        BlockController.getShareInstance().removeListener();
     }
 
     @Override
@@ -298,5 +301,32 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
     @Override
     public void uploadImageFailed() {
         Toast.makeText(this,"Send image failed",Toast.LENGTH_LONG).show();
+    }
+
+    public void checkBlockThread() {
+        BlockController.getShareInstance().checkBlockListener(idFriend, new BlockDelegate() {
+            @Override
+            public void blockSuccess() {
+
+            }
+
+            @Override
+            public void blockFailed() {
+
+            }
+
+            @Override
+            public void checkBlock(String block) {
+                if (Constant.blocked.equals(block)) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ChatActivity.this,"This user blocked you",Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+                    });
+                }
+            }
+        });
     }
 }

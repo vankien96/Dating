@@ -9,9 +9,13 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.vankien.dating.Controllers.BlockController;
 import com.example.vankien.dating.Controllers.ProfileController;
+import com.example.vankien.dating.Interface.BlockDelegate;
 import com.example.vankien.dating.Interface.ProfileDelegate;
+import com.example.vankien.dating.Models.Constant;
 import com.example.vankien.dating.Models.FriendChatModel;
 import com.example.vankien.dating.Models.Profile;
 import com.example.vankien.dating.R;
@@ -49,15 +53,41 @@ public class DetailActivity extends AppCompatActivity implements ProfileDelegate
             @Override
             public void onClick(View view) {
                 if (profile != null){
-                    Intent intent = new Intent(DetailActivity.this,ChatActivity.class);
-                    FriendChatModel model = new FriendChatModel();
-                    model.setId(id);
-                    model.setUrlAvatar(profile.getmImage());
-                    model.setName(profile.getmName());
-                    Bundle b = new Bundle();
-                    b.putSerializable("FriendData",model);
-                    intent.putExtras(b);
-                    startActivity(intent);
+                    BlockController.getShareInstance().checkBlock(id, new BlockDelegate() {
+                        @Override
+                        public void blockSuccess() {
+
+                        }
+
+                        @Override
+                        public void blockFailed() {
+
+                        }
+                        @Override
+                        public void checkBlock(String block) {
+                            if (Constant.blocked.equals(block)) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(DetailActivity.this,"This user blocked you.",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            } else {
+                                Intent intent = new Intent(DetailActivity.this,ChatActivity.class);
+                                FriendChatModel model = new FriendChatModel();
+                                model.setId(id);
+                                model.setUrlAvatar(profile.getmImage());
+                                model.setName(profile.getmName());
+                                Bundle b = new Bundle();
+                                b.putSerializable("FriendData",model);
+                                if (Constant.block.equals(block)) {
+                                    b.putBoolean("isBlock",true);
+                                }
+                                intent.putExtras(b);
+                                startActivity(intent);
+                            }
+                        }
+                    });
                 }
             }
         });

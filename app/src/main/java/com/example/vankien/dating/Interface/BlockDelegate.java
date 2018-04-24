@@ -7,4 +7,5 @@ package com.example.vankien.dating.Interface;
 public interface BlockDelegate {
     void blockSuccess();
     void blockFailed();
+    void checkBlock(String block);
 }

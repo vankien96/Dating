@@ -40,7 +40,7 @@ public class MessageController {
         String roomID = this.createRoomID(idMe, idFriend);
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference().child("Chat").child(roomID);
-        listener = mRef.addChildEventListener(new ChildEventListener() {
+        listener = mRef.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 MessageModel messageModel = new MessageModel();
