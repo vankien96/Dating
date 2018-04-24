@@ -43,29 +43,58 @@ public class MapController {
                     if(!snapshot.getKey().equals(idUser)){
                         Log.e("Map screen",snapshot.getKey());
                         HashMap hashMap = (HashMap) snapshot.getValue();
-                        PeopleAround model = new PeopleAround();
+                        if (hashMap.get("invisible") != null) {
+                            if ((boolean) hashMap.get("invisible")) {
+                                PeopleAround model = new PeopleAround();
 
-                        model.setId(snapshot.getKey());
-                        model.setAddress((String) hashMap.get("address"));
-                        model.setAvatarUrl((String) hashMap.get("avatar"));
-                        model.setName((String) hashMap.get("name"));
-                        Long age = (Long) hashMap.get("age");
-                        String ageString = ""+age;
-                        model.setAge(Integer.parseInt(ageString));
-                        Long sex = (Long) hashMap.get("sex");
-                        String sexString = ""+sex;
-                        model.setGender(Integer.parseInt(sexString));
+                                model.setId(snapshot.getKey());
+                                model.setAddress((String) hashMap.get("address"));
+                                model.setAvatarUrl((String) hashMap.get("avatar"));
+                                model.setName((String) hashMap.get("name"));
+                                Long age = (Long) hashMap.get("age");
+                                String ageString = ""+age;
+                                model.setAge(Integer.parseInt(ageString));
+                                Long sex = (Long) hashMap.get("sex");
+                                String sexString = ""+sex;
+                                model.setGender(Integer.parseInt(sexString));
 
-                        Double latitude = (Double) hashMap.get("latitude");
-                        String latString = ""+latitude;
-                        float lat = Float.parseFloat(latString);
-                        Double longitude = (Double) hashMap.get("longitude");
-                        String longString = ""+longitude;
-                        float lon = Float.parseFloat(longString);
+                                Double latitude = (Double) hashMap.get("latitude");
+                                String latString = ""+latitude;
+                                float lat = Float.parseFloat(latString);
+                                Double longitude = (Double) hashMap.get("longitude");
+                                String longString = ""+longitude;
+                                float lon = Float.parseFloat(longString);
 
-                        LatLng latLng = new LatLng(lat,lon);
-                        model.setAddressLatLng(latLng);
-                        arounds.add(model);
+                                LatLng latLng = new LatLng(lat,lon);
+                                model.setAddressLatLng(latLng);
+                                arounds.add(model);
+                            }
+                        } else {
+                            PeopleAround model = new PeopleAround();
+
+                            model.setId(snapshot.getKey());
+                            model.setAddress((String) hashMap.get("address"));
+                            model.setAvatarUrl((String) hashMap.get("avatar"));
+                            model.setName((String) hashMap.get("name"));
+                            Long age = (Long) hashMap.get("age");
+                            String ageString = ""+age;
+                            model.setAge(Integer.parseInt(ageString));
+                            Long sex = (Long) hashMap.get("sex");
+                            String sexString = ""+sex;
+                            model.setGender(Integer.parseInt(sexString));
+
+                            Double latitude = (Double) hashMap.get("latitude");
+                            String latString = ""+latitude;
+                            float lat = Float.parseFloat(latString);
+                            Double longitude = (Double) hashMap.get("longitude");
+                            String longString = ""+longitude;
+                            float lon = Float.parseFloat(longString);
+
+                            LatLng latLng = new LatLng(lat,lon);
+                            model.setAddressLatLng(latLng);
+                            arounds.add(model);
+                        }
+
                     }
                 }
                 String anotherId = FirebaseAuth.getInstance().getCurrentUser().getUid();

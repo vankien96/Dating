@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vankien.dating.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener{
     private ImageButton imgBtnBack, imgBtnSave;
@@ -116,7 +118,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         editor.putInt("age_from",ageFrom);
         editor.putInt("age_to",ageTo);
         editor.commit();
+        saveDataToFirebase();
     }
+
     public void getDataFromSharedPreference(){
         SharedPreferences sharedPreferences = getSharedPreferences("MySetting",MODE_PRIVATE);
         isPrivacy = sharedPreferences.getBoolean("isPrivacy",true);
@@ -149,5 +153,10 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 finish();
                 break;
         }
+    }
+
+    public void saveDataToFirebase() {
+        String myId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("Profile").child(myId).child("invisible").setValue(swPrivacy.isChecked());
     }
 }

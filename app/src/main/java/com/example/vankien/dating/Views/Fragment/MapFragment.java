@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -52,6 +53,8 @@ import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MapFragment extends Fragment implements MapDelegate {
 
@@ -180,9 +183,14 @@ public class MapFragment extends Fragment implements MapDelegate {
             myMarker.remove();
         }
         myMarker = googleMap.addMarker(new MarkerOptions().position(mylatlng).title("I'm here").snippet("Do you see me?"));
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySetting",MODE_PRIVATE);
+        int radius = sharedPreferences.getInt("distance",0);
+        if (circleGoogleMap != null) {
+            circleGoogleMap.remove();
+        }
         circleGoogleMap = googleMap.addCircle(new CircleOptions()
                 .center(mylatlng)
-                .radius(1000)
+                .radius(radius*1000)
                 .strokeColor(getActivity().getResources().getColor(R.color.greenCircle))
                 .strokeWidth(2)
                 .fillColor(0x5500ff00));
