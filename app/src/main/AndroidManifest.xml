@@ -22,10 +22,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Views.Activity.LogInActivity" />
-        <activity android:name=".Views.Activity.DetailActivity" />
-        <activity android:name=".Views.Activity.MainActivity" />
-        <activity android:name=".Views.Activity.EditProfileActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -36,6 +32,9 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+        <provider android:authorities="com.facebook.app.FacebookContentProvider437725400015055"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -44,7 +43,6 @@
         <activity android:name=".Views.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -58,6 +56,10 @@
         <activity android:name=".Views.Activity.ResetPasswordActivity" />
         <activity android:name=".Views.Activity.ChangePasswordActivity" />
         <activity android:name=".Views.Activity.FullScreenImageActivity"></activity>
+        <activity android:name=".Views.Activity.LogInActivity" />
+        <activity android:name=".Views.Activity.DetailActivity" />
+        <activity android:name=".Views.Activity.MainActivity" />
+        <activity android:name=".Views.Activity.EditProfileActivity" />
     </application>
 
 </manifest>
