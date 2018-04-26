@@ -83,7 +83,8 @@ public class MapFragment extends Fragment implements MapDelegate {
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         markers = new HashMap<>();
         peopleArounds = new ArrayList<>();
-
+        controller = MapController.getShareInstance();
+        controller.context = getContext();
         initMap(savedInstanceState);
 
         return rootView;
@@ -182,6 +183,8 @@ public class MapFragment extends Fragment implements MapDelegate {
         if (myMarker != null){
             myMarker.remove();
         }
+        googleMap.clear();
+        markers.clear();
         myMarker = googleMap.addMarker(new MarkerOptions().position(mylatlng).title("I'm here").snippet("Do you see me?"));
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySetting",MODE_PRIVATE);
         int radius = sharedPreferences.getInt("distance",0);

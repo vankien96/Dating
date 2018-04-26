@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 
 import com.example.vankien.dating.Controllers.LoginController;
 import com.example.vankien.dating.R;
+import com.facebook.share.Share;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -24,6 +26,22 @@ public class SplashActivity extends AppCompatActivity {
         if (checkLocationPermission()) {
             CheckThread checkThread = new CheckThread();
             checkThread.start();
+        }
+        checkSharePreference();
+    }
+
+    private void checkSharePreference() {
+        SharedPreferences sharedPrefs = getSharedPreferences("MySetting", MODE_PRIVATE);
+        SharedPreferences.Editor editor;
+        if(!sharedPrefs.contains("initialized")){
+            editor = sharedPrefs.edit();
+            editor.putBoolean("isPrivacy",true);
+            editor.putBoolean("isLookingMen",true);
+            editor.putBoolean("isLookingWomen",true);
+            editor.putInt("distance",1);
+            editor.putInt("age_from",0);
+            editor.putInt("age_to",100);
+            editor.commit();
         }
     }
 

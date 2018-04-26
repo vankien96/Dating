@@ -1,5 +1,6 @@
 package com.example.vankien.dating.Views.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -40,7 +41,8 @@ public class AroundFragment extends Fragment implements MapDelegate {
         aroundAdapter.notifyDataSetChanged();
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+        controller = MapController.getShareInstance();
+        controller.context = getContext();
         addEvents();
         return rootView;
     }
