@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.vankien.dating.Views.Fragment.AroundFragment;
+import com.example.vankien.dating.Views.Fragment.AroundTestFragment;
 import com.example.vankien.dating.Views.Fragment.ChatFragment;
 import com.example.vankien.dating.Views.Fragment.MapFragment;
 import com.example.vankien.dating.Views.Fragment.ProfileFragment;
@@ -23,7 +24,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new AroundFragment();
+                return new AroundTestFragment();
             case 1:
                 return new MapFragment();
             case 2:

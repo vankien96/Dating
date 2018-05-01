@@ -75,6 +75,7 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
         addEvents();
         getSharedPreferences();
         setLoginFacebook();
+        getKeyHash();
     }
 
     private void addControls() {
@@ -268,5 +269,20 @@ public class LogInActivity extends AppCompatActivity implements LoginDelegate {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void getKeyHash() {
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.example.vankien.dating",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

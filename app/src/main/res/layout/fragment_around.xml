@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.vankien.dating.Views.Fragment.AroundFragment">
 
-    <!-- TODO: Update blank fragment layout -->
    <ListView
        android:id="@+id/lvAround"
        android:layout_width="match_parent"
