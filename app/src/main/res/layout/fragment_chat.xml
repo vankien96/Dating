@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.vankien.dating.Views.Fragment.ChatFragment">
+    tools:context="com.example.vankien.dating.views.fragment.ChatFragment">
 
     <TextView
         android:layout_width="match_parent"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.vankien.dating.Views.Activity.FullScreenImageActivity">
+    tools:context="com.example.vankien.dating.views.activity.FullScreenImageActivity">
     <com.example.vankien.dating.helpers.TouchImageView
         android:id="@+id/imvAvatar"
         android:layout_width="match_parent"

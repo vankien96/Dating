@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/contentRoot"
-    tools:context="com.example.vankien.dating.Views.Activity.ChatActivity">
+    tools:context="com.example.vankien.dating.views.activity.ChatActivity">
 
     <RelativeLayout
         android:id="@+id/viewTop"
