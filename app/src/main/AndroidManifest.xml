@@ -41,26 +41,27 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-        <activity android:name=".Views.Activity.SplashActivity">
+        <activity android:name=".views.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.Activity.ChatActivity" />
+        <activity android:name=".views.activity.ChatActivity" />
         <activity
-            android:name=".Views.Activity.SettingActivity"
+            android:name=".views.activity.SettingActivity"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".Views.Activity.SignUpActivity"
+            android:name=".views.activity.SignUpActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Views.Activity.ResetPasswordActivity" />
-        <activity android:name=".Views.Activity.ChangePasswordActivity" />
-        <activity android:name=".Views.Activity.FullScreenImageActivity"></activity>
-        <activity android:name=".Views.Activity.LogInActivity" />
-        <activity android:name=".Views.Activity.DetailActivity" />
-        <activity android:name=".Views.Activity.MainActivity" />
-        <activity android:name=".Views.Activity.EditProfileActivity" />
+        <activity android:name=".views.activity.ResetPasswordActivity" />
+        <activity android:name=".views.activity.ChangePasswordActivity" />
+        <activity android:name=".views.activity.FullScreenImageActivity"></activity>
+        <activity android:name=".views.activity.LogInActivity" />
+        <activity android:name=".views.activity.DetailActivity" />
+        <activity android:name=".views.activity.MainActivity" />
+        <activity android:name=".views.activity.EditProfileActivity" />
+        <activity android:name=".views.activity.NotificationsActivity"/>
     </application>
 
 </manifest>

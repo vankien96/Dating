@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.vankien.dating.controllers.BlockController;
 import com.example.vankien.dating.models.PeopleAround;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.views.activity.DetailActivity;
@@ -85,6 +86,8 @@ public class AroundAdapter extends BaseAdapter {
         viewHolder.btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                PeopleAround model = aroundModelList.get(position);
+                BlockController.getShareInstance().rejectPeople(model.getId());
                 aroundModelList.remove(position);
                 notifyDataSetChanged();
             }
