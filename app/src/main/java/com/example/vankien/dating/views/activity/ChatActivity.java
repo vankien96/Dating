@@ -305,12 +305,7 @@ public class ChatActivity extends AppCompatActivity implements MessageDelegate, 
     public void checkBlockThread() {
         BlockController.getShareInstance().checkBlockListener(idFriend, new BlockDelegate() {
             @Override
-            public void blockSuccess() {
-
-            }
-
-            @Override
-            public void blockFailed() {
+            public void getRejectListSuccess(ArrayList<String> rejectedPeople) {
 
             }
 

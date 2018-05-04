@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.vankien.dating.delegate.BlockDelegate;
 import com.example.vankien.dating.delegate.FriendChatDelegate;
 import com.example.vankien.dating.delegate.MapDelegate;
 import com.example.vankien.dating.models.FriendChatModel;
@@ -142,13 +143,35 @@ public class MapController {
     }
 
     private void filterPeopleIsFriend(String id) {
-        FriendChatController.getInstance().getAllFriend(id, new FriendChatDelegate() {
+//        FriendChatController.getInstance().getAllFriend(id, new FriendChatDelegate() {
+//            @Override
+//            public void getAllFriendSuccess(ArrayList<FriendChatModel> dataFriends) {
+//                ArrayList<PeopleAround> aroundArrayList = (ArrayList<PeopleAround>) arounds.clone();
+//                for(PeopleAround peo: arounds) {
+//                    for(FriendChatModel model: dataFriends) {
+//                        if (peo.getId().equals(model.getId())) {
+//                            aroundArrayList.remove(peo);
+//                            break;
+//                        }
+//                    }
+//                }
+//                if (delegate != null) {
+//                    delegate.getAroundPeopleSuccess(aroundArrayList);
+//                }
+//            }
+//
+//            @Override
+//            public void getFullInformationSuccess(FriendChatModel friendChatModel) {
+//
+//            }
+//        });
+        BlockController.getShareInstance().getRejectList(new BlockDelegate() {
             @Override
-            public void getAllFriendSuccess(ArrayList<FriendChatModel> dataFriends) {
+            public void getRejectListSuccess(ArrayList<String> rejectedPeople) {
                 ArrayList<PeopleAround> aroundArrayList = (ArrayList<PeopleAround>) arounds.clone();
                 for(PeopleAround peo: arounds) {
-                    for(FriendChatModel model: dataFriends) {
-                        if (peo.getId().equals(model.getId())) {
+                    for(String id: rejectedPeople) {
+                        if (peo.getId().equals(id)) {
                             aroundArrayList.remove(peo);
                             break;
                         }
@@ -160,7 +183,7 @@ public class MapController {
             }
 
             @Override
-            public void getFullInformationSuccess(FriendChatModel friendChatModel) {
+            public void checkBlock(String block) {
 
             }
         });

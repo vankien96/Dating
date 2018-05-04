@@ -21,6 +21,8 @@ import com.example.vankien.dating.models.Profile;
 import com.example.vankien.dating.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 public class DetailActivity extends AppCompatActivity implements ProfileDelegate {
     ImageView imgDetail;
     ImageButton btnMessage,btnReject;
@@ -55,14 +57,10 @@ public class DetailActivity extends AppCompatActivity implements ProfileDelegate
                 if (profile != null){
                     BlockController.getShareInstance().checkBlock(id, new BlockDelegate() {
                         @Override
-                        public void blockSuccess() {
+                        public void getRejectListSuccess(ArrayList<String> rejectedPeople) {
 
                         }
 
-                        @Override
-                        public void blockFailed() {
-
-                        }
                         @Override
                         public void checkBlock(String block) {
                             if (Constant.blocked.equals(block)) {
@@ -94,7 +92,8 @@ public class DetailActivity extends AppCompatActivity implements ProfileDelegate
         btnReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                BlockController.getShareInstance().rejectPeople(id);
+                finish();
             }
         });
     }

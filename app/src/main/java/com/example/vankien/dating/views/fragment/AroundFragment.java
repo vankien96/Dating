@@ -58,6 +58,12 @@ public class AroundFragment extends Fragment implements MapDelegate {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestData();
+    }
+
     private void requestData() {
         controller.requestPeopleAround(id,false);
     }

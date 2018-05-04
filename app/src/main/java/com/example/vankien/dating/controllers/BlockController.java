@@ -9,6 +9,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 /**
  * Created by vanki on 4/21/2018.
  */
@@ -44,6 +46,32 @@ public class BlockController {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String type = (String) dataSnapshot.getValue();
                 delegate.checkBlock(type);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void rejectPeople(String id) {
+        String myId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("Reject").child(myId).child(id).setValue("rejected");
+    }
+
+    public void getRejectList(final BlockDelegate delegate) {
+        String myId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference()
+                .child("Reject").child(myId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> rejected = new ArrayList<>();
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                    String id = snapshot.getKey();
+                    rejected.add(id);
+                }
+                delegate.getRejectListSuccess(rejected);
             }
 
             @Override
