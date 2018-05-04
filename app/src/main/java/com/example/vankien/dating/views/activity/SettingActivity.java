@@ -132,7 +132,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void settingView(){
-        seekBarDistance.setMax(10);
+        seekBarDistance.setMax(5);
         swPrivacy.setChecked(isPrivacy);
         swMen.setChecked(isLookingMen);
         swWomen.setChecked(isLookingWomen);

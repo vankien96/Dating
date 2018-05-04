@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.example.vankien.dating.views.activity.ChangePasswordActivity;
 import com.example.vankien.dating.views.activity.EditProfileActivity;
 import com.example.vankien.dating.views.activity.FullScreenImageActivity;
 import com.example.vankien.dating.views.activity.LogInActivity;
+import com.example.vankien.dating.views.activity.NotificationsActivity;
 import com.example.vankien.dating.views.activity.SettingActivity;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +38,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
     private TextView tvName,tvAge,tvAbout,tvAddress,tvRegion,tvNumOfFriend;
     private ImageButton imgBtnEdit,imgBtnLogout;
     private ImageView imgAvatar;
-    private Button btnDiscoverySetting, btnChangePassword;
+    private Button btnDiscoverySetting, btnChangePassword, btnNotificationsSetting;
+    private ProgressBar progressBar;
     Profile profile;
     ProfileController controller;
     String id;
@@ -67,6 +70,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         tvNumOfFriend = view.findViewById(R.id.tvNumOfFriend);
         btnDiscoverySetting = (Button) view.findViewById(R.id.btnDiscoverySetting);
         btnChangePassword = (Button) view.findViewById(R.id.btnChangePassword);
+        btnNotificationsSetting = (Button) view.findViewById(R.id.btnNotificationsSetting);
+        progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         controller = ProfileController.getsInstance();
@@ -79,6 +84,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         imgBtnLogout.setOnClickListener(this);
         btnDiscoverySetting.setOnClickListener(this);
         btnChangePassword.setOnClickListener(this);
+        btnNotificationsSetting.setOnClickListener(this);
         imgAvatar.setOnClickListener(this);
     }
     @Override
@@ -134,6 +140,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
                 Intent intent = new Intent(getActivity(), FullScreenImageActivity.class);
                 intent.putExtra("uriImage",uriImage);
                 startActivity(intent);
+                break;
+            case R.id.btnNotificationsSetting:
+                Intent notificationIntent = new Intent(getActivity(), NotificationsActivity.class);
+                startActivity(notificationIntent);
                 break;
         }
 

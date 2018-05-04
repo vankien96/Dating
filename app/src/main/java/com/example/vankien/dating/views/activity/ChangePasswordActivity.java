@@ -20,7 +20,7 @@ import com.example.vankien.dating.delegate.ChangePassWordDelegate;
 import com.example.vankien.dating.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ChangePasswordActivity extends AppCompatActivity implements ChangePassWordDelegate,View.OnClickListener{
+public class ChangePasswordActivity extends AppCompatActivity implements Runnable,ChangePassWordDelegate,View.OnClickListener{
 
     private ImageButton imgBtnBack;
     private TextView edtOldPass, edtNewPass, edtNewPassCompare;
@@ -35,6 +35,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         init();
+        Thread thread = new Thread(this);
         addEvent();
     }
 
@@ -48,6 +49,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
         btnUpdatePass = (Button) findViewById(R.id.btnUpdatePass);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        btnUpdatePass.setEnabled(true);
         auth = FirebaseAuth.getInstance();
         controller = ChangePassWordController.getsInstance();
         controller.delegate = this;
@@ -141,5 +143,12 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
     public void updateFailed() {
         Toast.makeText(getApplicationContext(), "Failed to update password!", Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void run() {
+        if(!"".equals(edtOldPass.getText().toString()) &&    !"".equals(edtNewPass.getText().toString()) &&!"".equals(edtOldPass.getText().toString())){
+            btnUpdatePass.setEnabled(false);
+        }
     }
 }

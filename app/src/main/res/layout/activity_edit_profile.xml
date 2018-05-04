@@ -131,6 +131,7 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:text="Region*"
                 android:textSize="@dimen/text_size_small"
+
                 android:textColor="@color/black"/>
             <EditText
                 android:id="@+id/edtRegion"
@@ -192,6 +193,5 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
-
 
 </RelativeLayout>

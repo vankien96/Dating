@@ -9,7 +9,6 @@
         android:id="@+id/imvAvatar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/splash"
         android:background="@android:color/black"/>
     <RelativeLayout
         android:id="@+id/rlTitleBar"
