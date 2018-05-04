@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.example.vankien.dating.views.activity.NotificationsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@color/white"
+            android:text="@string/textview.text.notification_title"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/imgBtnBack"
+            android:layout_width="@dimen/button_image_width"
+            android:layout_height="@dimen/button_image_height"
+            android:paddingRight="@dimen/button_image_padding"
+            android:paddingBottom="@dimen/button_image_padding"
+            android:paddingTop="@dimen/button_image_padding"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:background="@android:color/white"
+            android:src="@drawable/ic_back"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/imgBtnSave"
+            android:layout_width="@dimen/button_image_width"
+            android:layout_height="@dimen/button_image_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/button_image_padding"
+            android:layout_marginRight="16dp"
+            android:background="@null"
+            android:src="@drawable/ic_check"
+            android:scaleType="centerInside" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="@string/textview.text.notification_general"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_large" />
+
+            <Switch
+                android:id="@+id/swRing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/brightGrey"
+                android:checked="true"
+                android:padding="@dimen/text_padding"
+                android:text="@string/switch.text.notification_general_ring"
+                android:textSize="@dimen/text_size_small" />
+            <Switch
+                android:id="@+id/swVibrate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/brightGrey"
+                android:checked="true"
+                android:padding="@dimen/text_padding"
+                android:text="@string/switch.text.notification_general_vibrate"
+                android:textSize="@dimen/text_size_small" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="@string/textview.text.notification_message"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_large" />
+
+            <Switch
+                android:id="@+id/swNotifyNewMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/brightGrey"
+                android:checked="true"
+                android:padding="@dimen/text_padding"
+                android:text="@string/switch.text.notification_message_new"
+                android:textSize="@dimen/text_size_small" />
+
+            <Switch
+                android:id="@+id/swNotifyNewFriend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/brightGrey"
+                android:checked="true"
+                android:padding="@dimen/text_padding"
+                android:text="@string/switch.text.notification_message_new_friend"
+                android:textSize="@dimen/text_size_small" />
+            <Switch
+                android:id="@+id/swReadLockScreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/brightGrey"
+                android:checked="true"
+                android:padding="@dimen/text_padding"
+                android:text="@string/switch.text.notification_read_at_lock_screen"
+                android:textSize="@dimen/text_size_small" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
