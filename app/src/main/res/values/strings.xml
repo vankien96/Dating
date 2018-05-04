@@ -31,6 +31,7 @@
     <string name="textview.text.profile_average">AVERAGE</string>
     <string name="button.text.profile_discovery_setting">Discovery Settings</string>
     <string name="button.text.profile_change_password">Change Password</string>
+    <string name="button.text.profile_notifications_setting">Notifications Setting</string>
 
     <!-- Edit Profile -->
     <string name="textview.text.edit_profile_title">Edit Profile</string>
@@ -60,6 +61,16 @@
     <string name="toggle.texton">Show</string>
     <string name="toggle.textoff">Hide</string>
     <string name="button.text.update_password">Update Password</string>
+
+    <!-- notification setting -->
+    <string name="textview.text.notification_title">Notifications Setting</string>
+    <string name="textview.text.notification_general">General</string>
+    <string name="switch.text.notification_general_ring">Ring</string>
+    <string name="switch.text.notification_general_vibrate">Vibrate</string>
+    <string name="textview.text.notification_message">Message</string>
+    <string name="switch.text.notification_message_new">Notify  when have new message</string>
+    <string name="switch.text.notification_message_new_friend">Notify when a new friend connect to you</string>
+    <string name="switch.text.notification_read_at_lock_screen">Allow read message at lock screen</string>
 
     <!-- replace ^^^ = & before use -->
     <string name="default_avatar">https://firebasestorage.googleapis.com/v0/b/dating-8e616.appspot.com/o/avatar%2F112906retath5h9lxn0roi.jpg?alt=media^^^token=2389ec92-4979-48d8-966b-0b7391bbd05c</string>

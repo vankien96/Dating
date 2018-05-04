@@ -62,6 +62,7 @@ public class AroundTestFragment extends Fragment implements MapDelegate{
     public void setMenuVisibility(final boolean menuVisible) {
         super.setMenuVisibility(menuVisible);
         controller = MapController.getShareInstance();
+        Log.e("TAGG",menuVisible+"  ;");
         if (menuVisible){
             controller.delegate = this;
             requestData();

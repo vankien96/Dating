@@ -170,8 +170,33 @@
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_small" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_below="@+id/btnChangePassword"
+                android:background="@android:color/darker_gray"/>
+            <Button
+                android:id="@+id/btnNotificationsSetting"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_button"
+                android:layout_below="@id/btnChangePassword"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:background="@null"
+                android:text="@string/button.text.profile_notifications_setting"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
         </RelativeLayout>
 
     </ScrollView>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
