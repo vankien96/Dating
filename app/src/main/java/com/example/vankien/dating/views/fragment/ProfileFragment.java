@@ -71,7 +71,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         btnDiscoverySetting = (Button) view.findViewById(R.id.btnDiscoverySetting);
         btnChangePassword = (Button) view.findViewById(R.id.btnChangePassword);
         btnNotificationsSetting = (Button) view.findViewById(R.id.btnNotificationsSetting);
-        progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         controller = ProfileController.getsInstance();
@@ -161,6 +161,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Pr
         uriImage = data.getmImage();
         Uri uri = Uri.parse(data.getmImage());
         Picasso.with(getContext()).load(uri).into(imgAvatar);
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override

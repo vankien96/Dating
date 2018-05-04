@@ -9,15 +9,33 @@
     <dimen name="edt_margin_bottom">15dp</dimen>
     <dimen name="logo_w_h">100dp</dimen>
     <dimen name="btn_dang_dki">20sp</dimen>
-    <dimen name="text_padding">10dp</dimen>
 
+    <dimen name="text_padding">10dp</dimen>
+    <dimen name="text_line_spacing">8sp</dimen>
     <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_medium">17sp</dimen>
     <dimen name="text_size_small">15sp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="width_button">100dp</dimen>
     <dimen name="height_button">50dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
     <dimen name="button_image_padding">5dp</dimen>
     <dimen name="button_image_height">40dp</dimen>
     <dimen name="button_image_width">40dp</dimen>
+    <dimen name="toggle_height">25dp</dimen>
+    <dimen name="toggle_width">50dp</dimen>
+    <dimen name="progressbar_size">40dp</dimen>
+
+    <dimen name="image_height_large">370dp</dimen>
+    <dimen name="image_width_large">370dp</dimen>
+    <dimen name="image_width_medium">250dp</dimen>
+    <dimen name="image_height_medium">250dp</dimen>
+
+    <dimen name="bolder_width">2dp</dimen>
+
+
+
+
+
 </resources>

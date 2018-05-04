@@ -29,6 +29,13 @@
     <string name="textview.text.profile_title">Your Profile</string>
     <string name="textview.text.profile_friend">Friend</string>
     <string name="textview.text.profile_average">AVERAGE</string>
+    <string name="textview.hint.profile_name">Your Name</string>
+    <string name="textview.hint.profile_age">Age</string>
+    <string name="textview.hint.profile_addr">Address</string>
+    <string name="textview.hint.profile_region">Region</string>
+    <string name="textview.hint.profile_about">This is describle of you. It can be hobby, your favorite, activity you like such as sporty, playing game, reading book, talking with friends,...!!!</string>
+    <string name="textview.hint.profile_numfriends">0</string>
+
     <string name="button.text.profile_discovery_setting">Discovery Settings</string>
     <string name="button.text.profile_change_password">Change Password</string>
     <string name="button.text.profile_notifications_setting">Notifications Setting</string>

@@ -17,10 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.vankien.dating.R;
 import com.example.vankien.dating.controllers.ProfileController;
 import com.example.vankien.dating.delegate.UploadImageDelegate;
 import com.example.vankien.dating.models.Profile;
-import com.example.vankien.dating.R;
 import com.example.vankien.dating.utils.FirebaseUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
@@ -30,7 +30,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class EditProfileActivity extends AppCompatActivity implements UploadImageDelegate{
+public class EditProfileActivity extends AppCompatActivity implements UploadImageDelegate {
     private static final int REQUEST_IMAGE = 200;
     private ImageButton imgBtnBack,imgBtnSave;
     private EditText edtName, edtAge, edtAbout,edtRegion,edtAddress;

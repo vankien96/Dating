@@ -70,7 +70,7 @@
             <Switch
                 android:id="@+id/swRing"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
                 android:background="@color/brightGrey"
                 android:checked="true"
                 android:padding="@dimen/text_padding"
@@ -79,7 +79,7 @@
             <Switch
                 android:id="@+id/swVibrate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
                 android:background="@color/brightGrey"
                 android:checked="true"
                 android:padding="@dimen/text_padding"
@@ -97,7 +97,7 @@
             <Switch
                 android:id="@+id/swNotifyNewMessage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
                 android:background="@color/brightGrey"
                 android:checked="true"
                 android:padding="@dimen/text_padding"
@@ -107,7 +107,7 @@
             <Switch
                 android:id="@+id/swNotifyNewFriend"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
                 android:background="@color/brightGrey"
                 android:checked="true"
                 android:padding="@dimen/text_padding"
@@ -116,7 +116,7 @@
             <Switch
                 android:id="@+id/swReadLockScreen"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
                 android:background="@color/brightGrey"
                 android:checked="true"
                 android:padding="@dimen/text_padding"
