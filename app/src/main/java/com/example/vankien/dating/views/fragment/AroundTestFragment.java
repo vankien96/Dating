@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
+import com.example.vankien.dating.R;
 import com.example.vankien.dating.controllers.MapController;
 import com.example.vankien.dating.delegate.MapDelegate;
 import com.example.vankien.dating.models.PeopleAround;
-import com.example.vankien.dating.R;
 import com.example.vankien.dating.views.activity.DetailActivity;
 import com.example.vankien.dating.views.adapter.AroundAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,7 +62,6 @@ public class AroundTestFragment extends Fragment implements MapDelegate{
     public void setMenuVisibility(final boolean menuVisible) {
         super.setMenuVisibility(menuVisible);
         controller = MapController.getShareInstance();
-        Log.e("TAGG",menuVisible+"  ;");
         if (menuVisible){
             controller.delegate = this;
             requestData();
