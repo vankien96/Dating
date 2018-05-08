@@ -19,7 +19,7 @@
             android:id="@+id/txtMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Chat message here"
+            android:text="@string/textview.text.cell_my_message"
             android:textColor="@color/white" />
     </LinearLayout>
 

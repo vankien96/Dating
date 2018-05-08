@@ -57,7 +57,7 @@
             <ImageView
                 android:id="@+id/imgAvatar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/image_height"
+                android:layout_height="@dimen/image_height_large"
                 android:layout_centerHorizontal="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/img_avatar" />

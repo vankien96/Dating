@@ -30,7 +30,7 @@
             android:layout_height="60dp"
             android:layout_toRightOf="@+id/btnBack"
             android:layout_toLeftOf="@+id/btnMenu"
-            android:text="Trương Văn Kiên"
+            android:text="@string/textview.text.chat_name"
             android:textSize="@dimen/text_size_large"
             android:textStyle="normal"
             android:gravity="center"/>
@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content" >
             </ProgressBar>
             <TextView
-                android:text="Sending image"
+                android:text="@string/textview.text.chat_sending_image"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textStyle="bold"

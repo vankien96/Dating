@@ -8,7 +8,7 @@
         android:id="@+id/viewTop"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:text="Detail"
+        android:text="@string/textview.text.detail_title"
         android:textSize="25sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="@dimen/text_size_large"
-                android:text="Name"
+                android:text="@string/textview.text.detail_name"
                 android:layout_below="@+id/imgDetail"
                 android:layout_marginRight="@dimen/edt_margin_right"
                 android:layout_marginLeft="@dimen/edt_margin_left"
@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_small"
-                android:text="Sex"
+                android:text="@string/textview.text.detail_sex"
                 android:layout_below="@+id/txtName"
                 android:layout_marginRight="@dimen/edt_margin_right"
                 android:layout_marginLeft="@dimen/edt_margin_left"
@@ -96,7 +96,7 @@
 
             <TextView
                 android:id="@+id/txtAdress"
-                android:text="Address"
+                android:text="@string/textview.text.detail_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="italic"
@@ -108,7 +108,7 @@
                />
             <TextView
                 android:id="@+id/txtAboutme"
-                android:text="About me: "
+                android:text="@string/textview.text.detail_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtAdress"
@@ -120,7 +120,7 @@
                 />
             <TextView
                 android:id="@+id/txtInfomation"
-                android:text="Description"
+                android:text="@string/textview.text.detail_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtAboutme"
@@ -134,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="@string/text_friend"
+                android:text="@string/textview.text.detail_friend"
                 android:textStyle="bold"
                 android:layout_marginLeft="@dimen/edt_margin_left"
                 android:layout_marginBottom="@dimen/edt_margin_bottom"

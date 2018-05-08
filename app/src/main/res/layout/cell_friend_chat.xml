@@ -30,7 +30,7 @@
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Name"
+            android:text="@string/textview.text.cell_friend_chat_name"
             android:textColor="@color/black"
             android:textStyle="bold"
             />
@@ -38,7 +38,7 @@
             android:id="@+id/txtLatestMessage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Chào em"
+            android:text="@string/textview.text.cell_friend_chat_lastmessage"
             android:textStyle="normal"
             android:textColor="@color/black"/>
     </LinearLayout>

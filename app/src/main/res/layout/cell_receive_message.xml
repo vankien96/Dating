@@ -25,7 +25,7 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Chat message here"
+            android:text="@string/textview.text.cell_my_message"
             android:padding="8dp"/>
     </LinearLayout>
 </LinearLayout>

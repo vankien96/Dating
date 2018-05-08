@@ -78,7 +78,26 @@
     <string name="switch.text.notification_message_new">Notify  when have new message</string>
     <string name="switch.text.notification_message_new_friend">Notify when a new friend connect to you</string>
     <string name="switch.text.notification_read_at_lock_screen">Allow read message at lock screen</string>
-
+	
+	<!-- activity chat -->
+	<string name="textview.text.chat_name">Your friend</string>
+	<string name="textview.text.chat_sending_image">Sending image</string>
+	
+	<!-- activity detail -->
+	<string name="textview.text.detail_title">Detail</string>
+	<string name="textview.text.detail_name">Name</string>
+	<string name="textview.text.detail_sex">Sex</string>
+	<string name="textview.text.detail_address">Address</string>
+	<string name="textview.text.detail_about">About me: </string>
+	<string name="textview.text.detail_description">Description </string>
+	<string name="textview.text.detail_friend">Friend</string>
+	
+	<!-- cell friend chat  -->
+	<string name="textview.text.cell_friend_chat_name">Name</string>
+	<string name="textview.text.cell_friend_chat_lastmessage">Hi girl!</string>
+	<!-- cell my message -->
+	<string name="textview.text.cell_my_message">Chat message here</string>
+	
     <!-- replace ^^^ = & before use -->
     <string name="default_avatar">https://firebasestorage.googleapis.com/v0/b/dating-8e616.appspot.com/o/avatar%2F112906retath5h9lxn0roi.jpg?alt=media^^^token=2389ec92-4979-48d8-966b-0b7391bbd05c</string>
 
