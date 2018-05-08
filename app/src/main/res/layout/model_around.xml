@@ -31,7 +31,7 @@
         android:layout_height="50dp"
         android:src="@drawable/female"
         android:scaleType="centerInside"
-        android:padding="8dp"
+        android:padding="@dimen/button_image_padding"
         android:layout_below="@id/imgAround"
         android:layout_alignParentRight="true"
         android:background="@color/white"/>

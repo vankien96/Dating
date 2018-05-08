@@ -25,22 +25,28 @@
 
         <ImageButton
             android:id="@+id/imgBtnBack"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/button_image_width"
+            android:layout_height="@dimen/button_image_height"
+            android:paddingRight="@dimen/button_image_padding"
+            android:paddingTop="@dimen/button_image_padding"
+            android:paddingBottom="@dimen/button_image_padding"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:background="@drawable/ic_back"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:background="@null"
+            android:src="@drawable/ic_back"
             android:scaleType="centerInside" />
 
         <ImageButton
             android:id="@+id/imgBtnSave"
-            android:layout_width="30dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/button_image_width"
+            android:layout_height="@dimen/button_image_height"
+            android:padding="@dimen/button_image_padding"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/ic_check"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:background="@null"
+            android:src="@drawable/ic_check"
             android:scaleType="centerInside" />
     </RelativeLayout>
 
@@ -131,7 +137,7 @@
             <android.support.v7.widget.AppCompatSeekBar
                 android:id="@+id/seekBarDistance"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/seekbar_height"
                 android:background="@color/brightGrey"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin" />
@@ -163,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:padding="16dp"
+                    android:padding="@dimen/activity_horizontal_margin"
                     android:text="18"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_large" />
@@ -188,7 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:padding="16dp"
+                    android:padding="@dimen/activity_horizontal_margin"
                     android:text="30"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_large" />

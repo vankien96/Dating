@@ -15,7 +15,7 @@
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/edt_margin_bottom"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="?attr/actionBarSize"
             android:adjustViewBounds="false"
             android:scaleType="fitCenter"
             android:src="@drawable/logo" />
@@ -118,8 +118,8 @@
             />
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/avi"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/logo_w_h"
+            android:layout_height="@dimen/logo_w_h"
             style="@style/AVLoadingIndicatorView"
             android:visibility="invisible"
             app:indicatorName="PacmanIndicator"

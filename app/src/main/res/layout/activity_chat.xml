@@ -11,15 +11,18 @@
     <RelativeLayout
         android:id="@+id/viewTop"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="?attr/actionBarSize">
 
         <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="40dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/button_image_width"
+            android:layout_height="@dimen/button_image_height"
+            android:paddingRight="@dimen/button_image_padding"
+            android:paddingBottom="@dimen/button_image_padding"
+            android:paddingTop="@dimen/button_image_padding"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:adjustViewBounds="true"
             android:background="@android:color/transparent"
             android:scaleType="centerInside"
@@ -27,7 +30,7 @@
         <TextView
             android:id="@+id/txtName"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="?attr/actionBarSize"
             android:layout_toRightOf="@+id/btnBack"
             android:layout_toLeftOf="@+id/btnMenu"
             android:text="@string/textview.text.chat_name"
@@ -36,11 +39,13 @@
             android:gravity="center"/>
         <ImageButton
             android:id="@+id/btnMenu"
-            android:layout_width="40dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/button_image_width"
+            android:layout_height="@dimen/button_image_height"
+            android:paddingTop="@dimen/button_image_padding"
+            android:paddingBottom="@dimen/button_image_padding"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:adjustViewBounds="true"
             android:background="@android:color/transparent"
             android:scaleType="centerInside"
@@ -49,15 +54,15 @@
     <ListView
         android:id="@+id/lvChat"
         android:divider="@null"
-        android:dividerHeight="4dp"
+        android:dividerHeight="@dimen/listview_dividerHeight"
         android:stackFromBottom="true"
         android:layout_below="@id/viewTop"
         android:layout_above="@id/view_below_lv"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
+        android:paddingLeft="@dimen/listview_padding"
+        android:paddingRight="@dimen/listview_padding"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:paddingBottom="8dp">
+        android:paddingBottom="@dimen/listview_padding">
     </ListView>
     <View
         android:id="@+id/view_below_lv"
@@ -75,8 +80,8 @@
         android:padding="2dp">
         <ImageButton
             android:id="@+id/buttonEmoji"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/button_image_width"
+            android:layout_height="@dimen/button_image_height"
             android:padding="4dp"
             android:src="@drawable/smiley"
             android:layout_alignParentLeft="true"
@@ -87,8 +92,8 @@
             />
         <ImageButton
             android:id="@+id/btnImage"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/button_image_width"
+            android:layout_height="@dimen/button_image_height"
             android:layout_toRightOf="@+id/buttonEmoji"
             android:layout_alignBottom="@+id/txtMessage"
             android:background="@android:color/transparent"
@@ -103,12 +108,12 @@
             android:layout_toStartOf="@+id/btnSend"
             android:layout_toRightOf="@+id/btnImage"
             android:layout_toEndOf="@+id/btnImage"
-            app:emojiconSize="28sp"/>
+            app:emojiconSize="@dimen/emoji_size"/>
         <ImageButton
             android:id="@+id/btnSend"
             android:src="@android:drawable/ic_menu_send"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/button_image_width"
+            android:layout_height="@dimen/button_image_height"
             android:padding="4dp"
             android:layout_alignBottom="@+id/txtMessage"
             android:layout_alignParentRight="true"
@@ -125,10 +130,10 @@
         android:orientation="vertical"
         android:visibility="gone">
         <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/progress_text_width"
+            android:layout_height="@dimen/progress_text_height"
             android:background="@drawable/bg_pop_up"
-            android:padding="16dp"
+            android:padding="@dimen/progress_text_padding"
             >
             <ProgressBar
                 android:id="@+id/pbHeaderProgress"
