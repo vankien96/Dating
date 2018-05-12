@@ -19,8 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.features.ReturnMode;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.controllers.ProfileController;
 import com.example.vankien.dating.delegate.UploadImageDelegate;
@@ -165,7 +163,6 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
                 String pictureDirectoryPath = pictureDirectory.getPath();
                 Uri data = Uri.parse(pictureDirectoryPath);
                 photoPickerIntent.setDataAndType(data,"image/*");
-                openImagePicker();
                 startActivityForResult(photoPickerIntent,REQUEST_IMAGE);
             }
         });
@@ -176,12 +173,6 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
                 showDialogCountry();
             }
         });
-    }
-    private void openImagePicker() {
-        ImagePicker.create(this)
-                .returnMode(ReturnMode.GALLERY_ONLY)
-                .single()
-                .start();
     }
     private void showDialogCountry() {
         final String [] countries = getResources().getStringArray(R.array.countries);
