@@ -87,7 +87,7 @@
                 android:id="@+id/edtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Your name"/>
+                android:hint="@string/textview.hint.edit_profile_name"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                 android:id="@+id/edtAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="23"/>
+                android:hint="@string/textview.hint.edit_profile_age"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,14 +117,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <RadioButton
-                        android:text="Male"
+                        android:text="@string/textview.text.edit_profile_sex_male"
                         android:id="@+id/radioMale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <RadioButton
                         android:layout_marginLeft="32dp"
                         android:id="@+id/radioFemale"
-                        android:text="Female"
+                        android:text="@string/textview.text.edit_profile_sex_female"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </RadioGroup>
@@ -133,27 +133,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="Region*"
+                android:text="@string/textview.text.edit_profile_country"
                 android:textSize="@dimen/text_size_small"
 
                 android:textColor="@color/black"/>
             <EditText
-                android:id="@+id/edtRegion"
+                android:id="@+id/edtCountry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Region"/>
+                />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="Address*"
+                android:text="@string/textview.text.edit_profile_address"
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/black"/>
             <EditText
                 android:id="@+id/edtAdress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Address"/>
+                android:hint="@string/textview.hint.edit_profile_address"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
                 android:id="@+id/edtAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="About my self"/>
+                android:hint="@string/textview.hint.edit_profile_about"/>
 
         </LinearLayout>
     </ScrollView>

@@ -43,11 +43,26 @@
     <!-- Edit Profile -->
     <string name="textview.text.edit_profile_title">Edit Profile</string>
     <string name="textview.text.edit_profile_name">NAME*</string>
+    <string name="textview.hint.edit_profile_name">Your name</string>
     <string name="textview.text.edit_profile_age">AGE*</string>
+    <string name="textview.hint.edit_profile_age">23</string>
     <string name="textview.text.edit_profile_sex">SEX*</string>
+    <string name="textview.text.edit_profile_sex_male">Male</string>
+    <string name="textview.text.edit_profile_sex_female">Female</string>
+    <string name="textview.text.edit_profile_country">COUNTRY*</string>
+    <string name="textview.text.edit_profile_address">ADDRESS*</string>
+    <string name="textview.hint.edit_profile_address">Your Address</string>
     <string name="textview.text.edit_profile_about">ABOUT*</string>
     <string name="textview.text.edit_profile_photo">PHOTO</string>
+    <string name="textview.hint.edit_profile_about">Write something about you</string>
     <string name="title_activity_settings">Discovery Settings</string>
+    <string name="vietnam">Việt Nam</string>
+    <string name="endland">England</string>
+    <string name="laos">Laos</string>
+    <string name="thailand">Thailand</string>
+    <string name="china">China</string>
+    <string name="america">America</string>
+    <string name="france">France</string>
 
     <!-- Strings related to Settings -->
     <string name="textview.text.setting_title">Discovery Settings</string>

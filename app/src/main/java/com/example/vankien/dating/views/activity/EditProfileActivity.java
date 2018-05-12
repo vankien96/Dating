@@ -1,5 +1,6 @@
 package com.example.vankien.dating.views.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.esafirm.imagepicker.features.ImagePicker;
+import com.esafirm.imagepicker.features.ReturnMode;
 import com.example.vankien.dating.R;
 import com.example.vankien.dating.controllers.ProfileController;
 import com.example.vankien.dating.delegate.UploadImageDelegate;
@@ -33,7 +37,7 @@ import java.io.InputStream;
 public class EditProfileActivity extends AppCompatActivity implements UploadImageDelegate {
     private static final int REQUEST_IMAGE = 200;
     private ImageButton imgBtnBack,imgBtnSave;
-    private EditText edtName, edtAge, edtAbout,edtRegion,edtAddress;
+    private EditText edtName, edtAge, edtAbout, edtCountry,edtAddress;
     private RadioButton radioMale,radioFemale;
     private ImageView imvAvatar;
     Profile profile;
@@ -70,7 +74,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         edtAbout = (EditText) findViewById(R.id.edtAbout);
         imvAvatar = (ImageView) findViewById(R.id.imvAvatar);
         edtAddress = findViewById(R.id.edtAdress);
-        edtRegion = findViewById(R.id.edtRegion);
+        edtCountry = findViewById(R.id.edtCountry);
         radioMale = findViewById(R.id.radioMale);
         radioFemale = findViewById(R.id.radioFemale);
         viewProgress = findViewById(R.id.viewProgress);
@@ -84,7 +88,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         String name = edtName.getText().toString().trim();
         String age = edtAge.getText().toString().trim();
         String about = edtAbout.getText().toString().trim();
-        String region = edtRegion.getText().toString().trim();
+        String region = edtCountry.getText().toString().trim();
         String address = edtAddress.getText().toString().trim();
         if(TextUtils.isEmpty(name)){
             Toast.makeText(getApplicationContext(), "Enter your name!", Toast.LENGTH_SHORT).show();
@@ -161,9 +165,35 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
                 String pictureDirectoryPath = pictureDirectory.getPath();
                 Uri data = Uri.parse(pictureDirectoryPath);
                 photoPickerIntent.setDataAndType(data,"image/*");
+                openImagePicker();
                 startActivityForResult(photoPickerIntent,REQUEST_IMAGE);
             }
         });
+
+        edtCountry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogCountry();
+            }
+        });
+    }
+    private void openImagePicker() {
+        ImagePicker.create(this)
+                .returnMode(ReturnMode.GALLERY_ONLY)
+                .single()
+                .start();
+    }
+    private void showDialogCountry() {
+        final String [] countries = getResources().getStringArray(R.array.countries);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose your country");
+        builder.setItems(countries, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                edtCountry.setText(countries[which]);
+            }
+        });
+        builder.create().show();
     }
 
 
@@ -195,7 +225,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         } else {
             radioFemale.setChecked(true);
         }
-        edtRegion.setText(profile.getmRegion());
+        edtCountry.setText(profile.getmRegion());
         edtAddress.setText(profile.getmAddress());
         Uri uri = Uri.parse(profile.getmImage());
         if (isFacebook) {
@@ -224,7 +254,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadImag
         String name = edtName.getText().toString().trim();
         String age = edtAge.getText().toString().trim();
         String about = edtAbout.getText().toString().trim();
-        String region = edtRegion.getText().toString().trim();
+        String region = edtCountry.getText().toString().trim();
         String address = edtAddress.getText().toString().trim();
 
         profile.setmName(name);
